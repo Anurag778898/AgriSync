@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_blank" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-fixed":"#002107","surface-dim":"#cdded5","primary":"#003421","surface-tint":"#366850","on-error":"#ffffff","error-container":"#ffdad6","surface":"#ecfdf4","on-surface-variant":"#404943","error":"#ba1a1a","on-secondary":"#ffffff","outline-variant":"#c0c9c1","surface-container-highest":"#d5e7dd","secondary-container":"#aff3b0","on-primary":"#ffffff","on-tertiary-container":"#99ba44","on-tertiary":"#ffffff","surface-variant":"#d5e7dd","inverse-surface":"#25332e","tertiary-container":"#364800","secondary-fixed":"#aff3b0","surface-bright":"#ecfdf4","primary-container":"#174b35","tertiary-fixed":"#ccf073","secondary":"#2d6b36","surface-container":"#e1f2e9","on-secondary-fixed-variant":"#105220","primary-fixed-dim":"#9dd2b5","on-primary-fixed":"#002113","on-tertiary-fixed-variant":"#3a4d00","on-primary-fixed-variant":"#1c5039","secondary-fixed-dim":"#94d696","on-tertiary-fixed":"#151f00","on-error-container":"#93000a","on-primary-container":"#86ba9e","surface-container-high":"#dbece3","on-surface":"#101e19","on-secondary-container":"#33713b","on-background":"#101e19","surface-container-low":"#e6f8ee","inverse-primary":"#9dd2b5","primary-fixed":"#b8efd0","tertiary-fixed-dim":"#b1d35a","background":"#ecfdf4","outline":"#717973","tertiary":"#233000","inverse-on-surface":"#e3f5ec","surface-container-lowest":"#ffffff"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"gutter-desktop":"1.5rem","margin-tablet":"1.5rem","space-lg":"1.5rem","margin-desktop":"2rem","space-xl":"2rem","space-sm":"0.5rem",gutter:"1rem","space-md":"1rem","space-xs":"0.25rem",margin:"1rem"},fontFamily:{"headline-lg":["Manrope"],"title-md":["Inter"],"data-tabular-md":["JetBrains Mono"],"body-sm":["Inter"],"body-lg":["Inter"],"data-tabular-sm":["JetBrains Mono"],"headline-lg-mobile":["Manrope"],"display-lg":["Manrope"],"body-md":["Inter"],"data-tabular-lg":["JetBrains Mono"],"display-md":["Manrope"],"label-md":["Inter"],"headline-sm":["Manrope"],"label-sm":["Inter"]},fontSize:{"headline-lg":["28px",{lineHeight:"36px",letterSpacing:"-0.01em",fontWeight:"600"}],"title-md":["16px",{lineHeight:"24px",fontWeight:"600"}],"data-tabular-md":["14px",{lineHeight:"20px",fontWeight:"500"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"data-tabular-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"headline-lg-mobile":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],"display-lg":["48px",{lineHeight:"56px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"data-tabular-lg":["22px",{lineHeight:"28px",fontWeight:"600"}],"display-md":["36px",{lineHeight:"44px",letterSpacing:"-0.015em",fontWeight:"700"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}],"headline-sm":["20px",{lineHeight:"28px",letterSpacing:"-0.005em",fontWeight:"600"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"600"}]}}}};</script></head><body class="bg-background text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-secondary-container selection:text-on-secondary-container relative overflow-x-hidden"><div class="pointer-events-none absolute inset-0 opacity-[0.035] bg-[radial-gradient(#174b35_1px,transparent_1px)] [background-size:24px_24px]"></div><div class="pointer-events-none absolute inset-0 opacity-[0.06] [background:radial-gradient(circle_at_20%_20%,#364800_0%,transparent_50%),radial-gradient(circle_at_80%_80%,#174b35_0%,transparent_50%)]"></div><header class="relative z-10 w-full px-margin-desktop py-space-md flex items-center justify-between border-b border-outline-variant/30 backdrop-blur-sm"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-tertiary-fixed shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined text-[20px]">eco</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">AgriSync</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">Telemetry Auth</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container border border-outline-variant/40"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface-variant">TLS 1.3 256-bit Secure Node</span></div><div class="flex items-center gap-space-xs text-on-surface-variant cursor-pointer hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">language</span><span class="font-label-md text-label-md">EN-US</span></div></div></header><main class="relative z-10 flex-1 flex items-center justify-center px-gutter-desktop py-space-xl"><div class="flex flex-col w-full max-w-6xl mx-auto py-space-sm">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-stretch">
+<!-- Left Column: Context, Field Metrics & Live Telemetry Panel -->
+<div class="hidden lg:flex lg:col-span-5 flex-col justify-between p-space-xl bg-surface-container-low rounded-xl shadow-sm relative overflow-hidden">
+<!-- Decorative radial ambient blur -->
+<div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-secondary-container/40 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-primary-fixed/30 blur-3xl pointer-events-none"></div>
+<!-- Top Agronomic Platform Badge & Context -->
+<div class="relative z-10 flex flex-col gap-space-md">
+<div class="inline-flex items-center gap-space-xs self-start px-3 py-1 rounded-full bg-surface-container-highest text-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+<span>Agronomic Intelligence Platform v3.4</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Precision Farm Operations &amp; AI Telemetry</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Secure, real-time node authentication for farm enterprises, field agronomists, and distributed IoT sensor arrays.</p>
+</div>
+<!-- Real-time Live Sensor Feed Preview Widget -->
+<div class="mt-space-sm p-space-md rounded-lg bg-surface-container-lowest shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary font-semibold uppercase tracking-wider">Field Grid 04-NW • Active Node</span>
+</div>
+<span class="font-data-tabular-sm text-data-tabular-sm text-on-surface-variant">Live: 0.4s ago</span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs pt-space-xs">
+<div class="p-2 rounded bg-surface-container flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Soil Moisture</span>
+<span class="font-data-tabular-md text-data-tabular-md text-primary font-semibold">28.4 %</span>
+<span class="font-label-sm text-[10px] text-secondary">Optimal</span>
+</div>
+<div class="p-2 rounded bg-surface-container flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">NDVI Canopy</span>
+<span class="font-data-tabular-md text-data-tabular-md text-primary font-semibold">0.82</span>
+<span class="font-label-sm text-[10px] text-secondary">Peak Vigor</span>
+</div>
+<div class="p-2 rounded bg-surface-container flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Evapotransp.</span>
+<span class="font-data-tabular-md text-data-tabular-md text-primary font-semibold">4.1 mm/d</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant">Steady</span>
+</div>
+</div>
+<!-- NDVI Ramp Indicator Bar -->
+<div class="flex flex-col gap-1 mt-1">
+<div class="flex justify-between items-center text-[10px] font-label-sm text-on-surface-variant">
+<span>Sensor Health Index</span>
+<span class="text-secondary font-semibold">Score: 98/100</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container overflow-hidden flex">
+<div class="w-[8%] bg-error"></div>
+<div class="w-[12%] bg-tertiary"></div>
+<div class="w-[20%] bg-tertiary-fixed-dim"></div>
+<div class="w-[30%] bg-secondary"></div>
+<div class="w-[30%] bg-primary"></div>
+</div>
+</div>
+</div>
+<!-- Telemetry Field Photo Visual Widget -->
+<div class="relative rounded-lg overflow-hidden shadow-sm h-36 mt-space-xs group">
+<img class="w-full h-full object-cover" data-alt="High angle cinematic drone view of lush green wheat fields with precise tractor navigation grid lines and IoT meteorological solar stations under warm sunrise light with deep rich earth tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwDmOfyzPWw81bdfzuZ6DRnRnu3N71N7dQLRcucki9N12pP6SwzB4CFmkH0g3BiBneql01ukFs1GsMZsAcg9MZabjT80R0iQ9LxDtawcXOrV7LZV3XAUxNfNHGFAmBWNHWM1a2ClYUn59cPg-EUUSnKKaQDyrKQkNxIoFc7q_KON0EV9_YJtHAQ0IMgdBYRunGbYNaS-RjDfJAKjxVVZBKP1no0Ly5H_bg8WNNByFHlhOklaeiXricuw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent flex flex-col justify-end p-space-sm text-on-primary">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-tertiary-fixed font-semibold tracking-wide uppercase">Western Agro-Cluster 12</span>
+<span class="font-data-tabular-sm text-data-tabular-sm text-on-primary/90">14,280 Hectares Synced</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Trust Badges & Verified Infrastructure -->
+<div class="relative z-10 pt-space-lg flex flex-col gap-space-sm">
+<div class="p-space-sm rounded-lg bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">cloud_sync</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-primary font-semibold">IMD &amp; ICAR Certified Grid</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Agrometeorology Telemetry Hub</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-data-tabular-sm text-data-tabular-sm text-secondary font-semibold">99.98%</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase">SLA Uptime</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant px-1 font-label-sm text-label-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-secondary">verified</span>
+            ISO 27001 Data Certified
+          </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-secondary">lock</span>
+            Encrypted Endpoints
+          </span>
+</div>
+</div>
+</div>
+<!-- Right Column: Authentication Card Form -->
+<div class="col-span-1 lg:col-span-7 flex flex-col justify-center">
+<div class="bg-surface-container-lowest rounded-xl p-space-lg md:p-space-xl shadow-md flex flex-col">
+<!-- Auth Header: Brand Presentation & Mobile Badge -->
+<div class="flex items-start justify-between pb-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-11 h-11 rounded-lg bg-primary flex items-center justify-center text-tertiary-fixed shadow-sm">
+<span class="material-symbols-outlined text-[24px]">potted_plant</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">AgriSync Identity</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1">Autonomous Farm Gateway • Session Node</span>
+</div>
+</div>
+<div class="hidden sm:inline-flex px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+            Node: IN-DL-02
+          </div>
+</div>
+<!-- Mode Toggle Segmented Control (Sign In / Register) -->
+<div class="w-full p-1 bg-surface-container rounded-lg flex mb-space-lg" role="tablist">
+<button aria-selected="true" class="flex-1 py-2 px-space-md rounded-md font-title-md text-title-md text-center transition-all bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center gap-space-xs" id="tab-signin" onclick="switchAuthTab('signin')" role="tab" type="button">
+<span class="material-symbols-outlined text-[18px]">login</span>
+<span>Sign In</span>
+</button>
+<button aria-selected="false" class="flex-1 py-2 px-space-md rounded-md font-title-md text-title-md text-center transition-all text-on-surface-variant hover:text-primary flex items-center justify-center gap-space-xs" id="tab-signup" onclick="switchAuthTab('signup')" role="tab" type="button">
+<span class="material-symbols-outlined text-[18px]">app_registration</span>
+<span>Create Account</span>
+</button>
+</div>
+<!-- Quick Role Switcher / Demo Credentials Helper Bar -->
+<div class="mb-space-lg p-space-sm rounded-lg bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">vpn_key</span>
+              Quick Demo Access Credentials:
+            </span>
+<span class="font-label-sm text-[11px] text-secondary font-medium">Click to populate</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container-high transition-colors font-data-tabular-sm text-data-tabular-sm text-primary flex items-center gap-1 shadow-sm" onclick="fillCredentials('sunita.sharma@agrisync.io', 'Agronomy#2025Secure')" type="button">
+<span class="material-symbols-outlined text-[13px] text-secondary">psychology</span>
+<span>Agronomist: sunita.sharma@agrisync.io</span>
+</button>
+<button ,="" class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container-high transition-colors font-data-tabular-sm text-data-tabular-sm text-primary flex items-center gap-1 shadow-sm" onclick="fillCredentials('lead@greenvalley.ag', 'ClusterManager$99')" type="button">
+<span class="material-symbols-outlined text-[13px] text-secondary">agriculture</span>
+<span>Farm Enterprise: lead@greenvalley.ag</span>
+</button>
+</div>
+</div>
+<!-- Interactive Form Section -->
+<form class="flex flex-col gap-space-md" id="auth-form" onsubmit="event.preventDefault(); handleAuthSubmit();">
+<!-- Hidden register field (toggled via JS) -->
+<div class="hidden flex-col gap-1.5" id="field-name-group">
+<label class="font-title-md text-body-md text-primary" for="full-name">Agronomist / Enterprise Full Name</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[20px] pointer-events-none">person</span>
+<input class="w-full pl-10 pr-4 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant/60 focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" id="full-name" placeholder="Dr. Sunita Sharma" type="text"/>
+</div>
+</div>
+<!-- Email Input Field -->
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between items-center">
+<label class="font-title-md text-body-md text-primary" for="work-email">Work / Farm Email Address</label>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Institutional / LDAP</span>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[20px] pointer-events-none">alternate_email</span>
+<input class="w-full pl-10 pr-4 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant/60 focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" id="work-email" placeholder="e.g. sunita.sharma@agrisync.io" required="" type="email" value="sunita.sharma@agrisync.io"/>
+</div>
+</div>
+<!-- Password Input Field -->
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between items-center">
+<label class="font-title-md text-body-md text-primary" for="password-input">Security Passkey / Password</label>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:underline" href="#">Forgot password?</a>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[20px] pointer-events-none">lock</span>
+<input class="w-full pl-10 pr-10 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant/60 focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" id="password-input" placeholder="••••••••••••" required="" type="password" value="Agronomy#2025Secure"/>
+<button aria-label="Toggle password view" class="absolute right-3 text-on-surface-variant hover:text-primary transition-colors focus:outline-none" onclick="togglePasswordVisibility()" type="button">
+<span class="material-symbols-outlined text-[20px]" id="eye-icon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Session Checkbox & Encryption Badge -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pt-1">
+<label class="flex items-center gap-space-xs cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary cursor-pointer" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface">Remember this workstation for 30 days</span>
+</label>
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm self-start sm:self-auto">
+<span class="material-symbols-outlined text-[15px] text-secondary">lock_clock</span>
+<span>256-bit SSL encrypted</span>
+</div>
+</div>
+<!-- Primary Submit Button -->
+<button class="mt-space-xs w-full py-3 px-space-lg rounded-xl bg-primary text-on-primary font-title-md text-title-md flex items-center justify-center gap-space-sm shadow-md hover:bg-primary-container active:scale-[0.99] transition-all" id="submit-btn" type="submit">
+<span id="btn-text">Sign In to AgriSync Workspace</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="relative my-space-lg flex items-center justify-center">
+<div class="w-full h-px bg-surface-container-high"></div>
+<span class="absolute bg-surface-container-lowest px-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">or continue with authorized provider</span>
+</div>
+<!-- Federated / Enterprise SSO Buttons -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<!-- e-NAM / Govt Farmer ID Provider -->
+<button class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-all flex items-center gap-space-sm text-left shadow-sm" onclick="simulateSSO('e-NAM Agmarknet ID')" type="button">
+<div class="w-9 h-9 rounded-md bg-surface-container-highest text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-body-md text-primary truncate">Govt. e-NAM / Agmarknet</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate">Farmer Registry ID SSO</span>
+</div>
+</button>
+<!-- Google Workspace / Corporate Azure SSO -->
+<button class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-all flex items-center gap-space-sm text-left shadow-sm" onclick="simulateSSO('Google Workspace / Azure AD')" type="button">
+<div class="w-9 h-9 rounded-md bg-surface-container-highest text-primary flex items-center justify-center shrink-0">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.05h3.9c2.28-2.1 3.64-5.2 3.64-9.14z" fill="#4285F4"></path>
+<path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.9-3.05c-1.08.72-2.45 1.16-4.03 1.16-3.1 0-5.73-2.1-6.68-4.94H1.28v3.15C3.3 21.36 7.37 24 12 24z" fill="#34A853"></path>
+<path d="M5.32 14.26c-.24-.73-.38-1.5-.38-2.26s.14-1.53.38-2.26V6.59H1.28C.46 8.21 0 10.05 0 12c0 1.95.46 3.79 1.28 5.41l4.04-3.15z" fill="#FBBC05"></path>
+<path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.37 0 3.3 2.64 1.28 6.59l4.04 3.15c.95-2.84 3.58-4.99 6.68-4.99z" fill="#EA4335"></path>
+</svg>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-body-md text-primary truncate">Google Workspace SSO</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate">Enterprise Federated Token</span>
+</div>
+</button>
+</div>
+<!-- Specialized Persona Portals Link -->
+<div class="mt-space-md pt-space-sm flex flex-wrap items-center justify-between text-on-surface-variant font-label-sm text-label-sm gap-2">
+<span>Looking for field client portals?</span>
+<div class="flex items-center gap-space-md">
+<a class="text-secondary hover:text-primary transition-colors underline font-medium" href="#" onclick="alert('Redirecting to Field Technician Offline Sync Terminal...'); return false;">Field Technician Desk</a>
+<span class="text-outline-variant">•</span>
+<a class="text-secondary hover:text-primary transition-colors underline font-medium" href="#" onclick="alert('Redirecting to APMC Mandi Trader Clearing Engine...'); return false;">APMC Mandi Trader Node</a>
+</div>
+</div>
+<!-- Authentication Terminal Feedback Notification -->
+<div class="hidden mt-space-md p-space-sm rounded-lg bg-secondary-container text-on-secondary-container font-label-md text-label-md flex items-center justify-between" id="auth-alert">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span id="auth-alert-message">Node session authenticated. Redirecting to Telemetry Dashboard...</span>
+</div>
+<span class="font-data-tabular-sm text-data-tabular-sm">HTTP 200 OK</span>
+</div>
+</div>
+<!-- Security Guarantee & Assistance Footer Note -->
+<div class="mt-space-md px-2 flex flex-col sm:flex-row items-center justify-between text-on-surface-variant font-label-sm text-label-sm gap-2 text-center sm:text-left">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">security_update_good</span>
+<span>Protected by enterprise biometric &amp; hardware token MFA.</span>
+</div>
+<div class="flex items-center gap-1">
+<span>Need assistance?</span>
+<a class="text-primary font-semibold hover:underline" href="#">Contact 24/7 Agronomy Desk</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  let currentAuthMode = 'signin';
+
+  function switchAuthTab(mode) {
+    currentAuthMode = mode;
+    const tabSignin = document.getElementById('tab-signin');
+    const tabSignup = document.getElementById('tab-signup');
+    const nameGroup = document.getElementById('field-name-group');
+    const btnText = document.getElementById('btn-text');
+
+    if (mode === 'signup') {
+      tabSignup.className = "flex-1 py-2 px-space-md rounded-md font-title-md text-title-md text-center transition-all bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center gap-space-xs";
+      tabSignup.setAttribute('aria-selected', 'true');
+
+      tabSignin.className = "flex-1 py-2 px-space-md rounded-md font-title-md text-title-md text-center transition-all text-on-surface-variant hover:text-primary flex items-center justify-center gap-space-xs";
+      tabSignin.setAttribute('aria-selected', 'false');
+
+      nameGroup.classList.remove('hidden');
+      nameGroup.classList.add('flex');
+      btnText.innerText = "Register New AgriSync Workspace";
+    } else {
+      tabSignin.className = "flex-1 py-2 px-space-md rounded-md font-title-md text-title-md text-center transition-all bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center gap-space-xs";
+      tabSignin.setAttribute('aria-selected', 'true');
+
+      tabSignup.className = "flex-1 py-2 px-space-md rounded-md font-title-md text-title-md text-center transition-all text-on-surface-variant hover:text-primary flex items-center justify-center gap-space-xs";
+      tabSignup.setAttribute('aria-selected', 'false');
+
+      nameGroup.classList.add('hidden');
+      nameGroup.classList.remove('flex');
+      btnText.innerText = "Sign In to AgriSync Workspace";
+    }
+  }
+
+  function fillCredentials(email, pwd) {
+    document.getElementById('work-email').value = email;
+    document.getElementById('password-input').value = pwd;
+    const alertBox = document.getElementById('auth-alert');
+    const alertMsg = document.getElementById('auth-alert-message');
+    alertMsg.innerText = "Preloaded test credentials for " + email.split('@')[0].toUpperCase();
+    alertBox.classList.remove('hidden');
+    setTimeout(() => {
+      alertBox.classList.add('hidden');
+    }, 3500);
+  }
+
+  function togglePasswordVisibility() {
+    const input = document.getElementById('password-input');
+    const icon = document.getElementById('eye-icon');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.innerText = 'visibility_off';
+    } else {
+      input.type = 'password';
+      icon.innerText = 'visibility';
+    }
+  }
+
+  function simulateSSO(provider) {
+    const alertBox = document.getElementById('auth-alert');
+    const alertMsg = document.getElementById('auth-alert-message');
+    alertMsg.innerText = "Redirecting to " + provider + " SAML 2.0 Identity Broker...";
+    alertBox.classList.remove('hidden');
+    setTimeout(() => {
+      alertMsg.innerText = "Handshake verified with " + provider + ". Entering AgriSync Node...";
+    }, 1500);
+  }
+
+  function handleAuthSubmit() {
+    const alertBox = document.getElementById('auth-alert');
+    const alertMsg = document.getElementById('auth-alert-message');
+    const btn = document.getElementById('submit-btn');
+    const originalText = document.getElementById('btn-text').innerText;
+    
+    document.getElementById('btn-text').innerText = "Verifying Quantum Cryptographic Signatures...";
+    btn.disabled = true;
+
+    setTimeout(() => {
+      alertBox.classList.remove('hidden');
+      alertMsg.innerText = (currentAuthMode === 'signup' ? "Account created! Provisioning agronomy tenant..." : "Authenticated successfully! Initializing GIS layers...");
+      document.getElementById('btn-text').innerText = originalText;
+      btn.disabled = false;
+    }, 1200);
+  }
+</script></main><footer class="relative z-10 w-full px-margin-desktop py-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm border-t border-outline-variant/30 bg-surface-container-low/40 backdrop-blur-sm"><div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[15px] text-secondary">shield</span><span>Autonomous Agronomy Cloud Infrastructure • © 2025 AgriSync Telemetry Ltd.</span></div><div class="flex items-center gap-space-lg text-on-surface-variant font-label-sm text-label-sm"><a class="hover:text-primary transition-colors" href="#">Security Whitepaper</a><a class="hover:text-primary transition-colors" href="#">ISO 27001 Compliance</a><a class="hover:text-primary transition-colors" href="#">Privacy Statement</a><a class="hover:text-primary transition-colors" href="#">System Operations Desk</a></div></footer></body></html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_blank" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-fixed":"#002107","surface-dim":"#cdded5","primary":"#003421","surface-tint":"#366850","on-error":"#ffffff","error-container":"#ffdad6","surface":"#ecfdf4","on-surface-variant":"#404943","error":"#ba1a1a","on-secondary":"#ffffff","outline-variant":"#c0c9c1","surface-container-highest":"#d5e7dd","secondary-container":"#aff3b0","on-primary":"#ffffff","on-tertiary-container":"#99ba44","on-tertiary":"#ffffff","surface-variant":"#d5e7dd","inverse-surface":"#25332e","tertiary-container":"#364800","secondary-fixed":"#aff3b0","surface-bright":"#ecfdf4","primary-container":"#174b35","tertiary-fixed":"#ccf073","secondary":"#2d6b36","surface-container":"#e1f2e9","on-secondary-fixed-variant":"#105220","primary-fixed-dim":"#9dd2b5","on-primary-fixed":"#002113","on-tertiary-fixed-variant":"#3a4d00","on-primary-fixed-variant":"#1c5039","secondary-fixed-dim":"#94d696","on-tertiary-fixed":"#151f00","on-error-container":"#93000a","on-primary-container":"#86ba9e","surface-container-high":"#dbece3","on-surface":"#101e19","on-secondary-container":"#33713b","on-background":"#101e19","surface-container-low":"#e6f8ee","inverse-primary":"#9dd2b5","primary-fixed":"#b8efd0","tertiary-fixed-dim":"#b1d35a","background":"#ecfdf4","outline":"#717973","tertiary":"#233000","inverse-on-surface":"#e3f5ec","surface-container-lowest":"#ffffff"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"gutter-desktop":"1.5rem","margin-tablet":"1.5rem","space-lg":"1.5rem","margin-desktop":"2rem","space-xl":"2rem","space-sm":"0.5rem",gutter:"1rem","space-md":"1rem","space-xs":"0.25rem",margin:"1rem"},fontFamily:{"headline-lg":["Manrope"],"title-md":["Inter"],"data-tabular-md":["JetBrains Mono"],"body-sm":["Inter"],"body-lg":["Inter"],"data-tabular-sm":["JetBrains Mono"],"headline-lg-mobile":["Manrope"],"display-lg":["Manrope"],"body-md":["Inter"],"data-tabular-lg":["JetBrains Mono"],"display-md":["Manrope"],"label-md":["Inter"],"headline-sm":["Manrope"],"label-sm":["Inter"]},fontSize:{"headline-lg":["28px",{lineHeight:"36px",letterSpacing:"-0.01em",fontWeight:"600"}],"title-md":["16px",{lineHeight:"24px",fontWeight:"600"}],"data-tabular-md":["14px",{lineHeight:"20px",fontWeight:"500"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"data-tabular-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"headline-lg-mobile":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],"display-lg":["48px",{lineHeight:"56px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"data-tabular-lg":["22px",{lineHeight:"28px",fontWeight:"600"}],"display-md":["36px",{lineHeight:"44px",letterSpacing:"-0.015em",fontWeight:"700"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}],"headline-sm":["20px",{lineHeight:"28px",letterSpacing:"-0.005em",fontWeight:"600"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"600"}]}}}};</script></head><body class="bg-background text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-secondary-container selection:text-on-secondary-container relative overflow-x-hidden"><div class="pointer-events-none absolute inset-0 opacity-[0.035] bg-[radial-gradient(#174b35_1px,transparent_1px)] [background-size:24px_24px]"></div><div class="pointer-events-none absolute inset-0 opacity-[0.06] [background:radial-gradient(circle_at_20%_20%,#364800_0%,transparent_50%),radial-gradient(circle_at_80%_80%,#174b35_0%,transparent_50%)]"></div><header class="relative z-10 w-full px-margin-desktop py-space-md flex items-center justify-between border-b border-outline-variant/30 backdrop-blur-sm"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-tertiary-fixed shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined text-[20px]">eco</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">AgriSync</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">Telemetry Auth</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container border border-outline-variant/40"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface-variant">TLS 1.3 256-bit Secure Node</span></div><div class="flex items-center gap-space-xs text-on-surface-variant cursor-pointer hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">language</span><span class="font-label-md text-label-md">EN-US</span></div></div></header><main class="relative z-10 flex-1 flex items-center justify-center px-gutter-desktop py-space-xl"><div class="flex flex-col w-full max-w-5xl mx-auto items-center py-space-md">
+<!-- Interactive Form Hub Wrapper -->
+<div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- Left Column: Storytelling, Proof & Telemetry Telecast -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg pt-space-xs">
+<!-- Live Micro Telemetry Widget -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Telemetry Mesh Active</span>
+</div>
+<span class="font-data-tabular-sm text-data-tabular-sm text-secondary font-medium">99.98% Latency &lt; 14ms</span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-space-sm shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Active Acreage Monitored</span>
+<span class="font-data-tabular-lg text-data-tabular-lg text-primary font-bold">1,482,900 <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">Acres</span></span>
+</div>
+<div class="h-10 w-24 flex items-end gap-1">
+<div class="flex-1 bg-surface-container-highest h-4 rounded-sm"></div>
+<div class="flex-1 bg-surface-container-highest h-6 rounded-sm"></div>
+<div class="flex-1 bg-secondary-container h-8 rounded-sm"></div>
+<div class="flex-1 bg-secondary h-10 rounded-sm"></div>
+<div class="flex-1 bg-primary-container h-7 rounded-sm"></div>
+</div>
+</div>
+<!-- Inline Visual Image Card -->
+<div class="relative rounded-lg overflow-hidden h-36 bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="High angle cinematic drone view of lush geometric crop rows in Maharashtra India during golden morning mist, deep emerald green soil foliage with subtle data overlay vector lines and sensor pins highlighting precision agriculture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDGr0DcugMWv9xNb4xD8WKyTeYNZA5Jd3J8EgwS8bhwsKBUErOq42QxlEaB9dz9dHpw-47oSva4RlDhxSFxd2URD6LbeAAWATbeFg5CX1ksrVWmivPkYwEIrDY7AIE5z8Bvl0CgM0wJImrgnfbHYDbw94GPFHCg4SnJpLaptCT4v9GrgSPW6_NL3WweVaAJBeHyGm54k2_onn7fhg4y8gUB7d_4_is6WXmuGpsfCyNGOTEN0MoWK8CNg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent flex flex-col justify-end p-space-sm text-on-primary">
+<span class="font-label-sm text-label-sm text-tertiary-fixed tracking-wide uppercase font-semibold">NDVI Precision Sensor Node</span>
+<span class="font-body-sm text-body-sm text-on-primary/90">Real-time nitrogen and chlorophyll spectral reflectance calibrated</span>
+</div>
+</div>
+</div>
+<!-- Testimonial Quote -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm relative">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Warm portrait photograph of an Indian agricultural science director with spectacles smiling outdoors in sunny farmland with lush green cotton crops behind him" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa3VVUn8nz8q7lFqFFZPv2WpCY3uLYpLbX3nec-HP1_leW1QPOnXsWovh8wdDVUHxADjmWt8ZpJbMnmlVVtXfgVD275cfoEjmT9z7abUDwrgYwe2AVvngJyzDNcpxc7oI6UgTd-rCFn__6lEAZC_ch-PMjZqCt6kF7YcJ12efNOdANyztihQoJanN-oUm7rqlXJQKNOL9bnfA2Ki500-O0HMk0UGOwlJXYZlDd1KmrV6Esi0Fmg14uvg"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-primary leading-tight truncate">Dr. Rajeshwari Joshi</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Chief Agronomist • Sahyadri Agro Cluster</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic leading-relaxed">
+          “AgriSync delivered autonomous pest forecast 72 hours before local blight hit Nashik valley. Saved over ₹42 Lakhs in fungicide spray overhead.”
+        </p>
+<div class="flex items-center gap-space-xs text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>Verified Enterprise Deployment (1,840 Acres)</span>
+</div>
+</div>
+<!-- Key Guarantees Bento -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="bg-surface-container-lowest p-space-sm rounded-lg shadow-sm flex flex-col gap-space-xs">
+<div class="w-7 h-7 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">lock_reset</span>
+</div>
+<span class="font-title-md text-title-md text-primary">Data Sovereignty</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Zero farmer telemetry resale. You hold 100% encryption keys.</span>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg shadow-sm flex flex-col gap-space-xs">
+<div class="w-7 h-7 rounded bg-tertiary-fixed text-on-tertiary-fixed-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+</div>
+<span class="font-title-md text-title-md text-primary">Immediate Ingestion</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Instant sync with IMD radar, Soil Health Cards &amp; Mandi feeds.</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Registration Card -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-xl shadow-md p-space-lg sm:p-space-xl relative flex flex-col">
+<!-- Switch Tab Header: Sign In vs Create Account -->
+<div class="w-full bg-surface-container-low p-1 rounded-lg flex items-center mb-space-lg" id="authTabGroup">
+<button class="flex-1 py-2 rounded-md font-label-md text-label-md transition-all duration-150 text-center font-semibold bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center gap-1.5" id="tabCreateAccount" type="button">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>Create Account</span>
+<span class="ml-1 px-1.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">Free</span>
+</button>
+<button class="flex-1 py-2 rounded-md font-label-md text-label-md transition-all duration-150 text-center font-medium text-on-surface-variant hover:text-on-surface flex items-center justify-center gap-1.5" id="tabSignIn" type="button">
+<span class="material-symbols-outlined text-[18px]">login</span>
+<span>Sign In</span>
+</button>
+</div>
+<!-- Header Copy -->
+<div class="flex flex-col gap-space-xs mb-space-lg">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold tracking-wide uppercase">Phase 1 Induction</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">• 14-Day Full Platform Access</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Deploy Precision Ag Intelligence for Your Acreage</h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          14-day free trial across all 4 sub-sectors. No credit card required. Connect satellite feeds, IoT nodes, and mandi telemetry in minutes.
+        </p>
+</div>
+<!-- Registration Form -->
+<form class="flex flex-col gap-space-md" id="agriRegistrationForm" onsubmit="event.preventDefault();">
+<!-- Row 1: Full Name & Farm Email -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- Full Name -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-primary font-medium flex items-center justify-between" for="fullNameInput">
+<span>Full Name</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Required</span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-[18px] text-on-surface-variant pointer-events-none">badge</span>
+<input class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md pl-10 pr-3 py-2.5 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-container transition-all placeholder:text-outline/70" id="fullNameInput" placeholder="Dr. Rajesh Patel" required="" type="text"/>
+</div>
+</div>
+<!-- Email Address -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-primary font-medium flex items-center justify-between" for="farmEmailInput">
+<span>Work / Farm Email Address</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Official or Domain</span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-[18px] text-on-surface-variant pointer-events-none">mail</span>
+<input class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md pl-10 pr-3 py-2.5 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-container transition-all placeholder:text-outline/70" id="farmEmailInput" placeholder="rajesh@patelfarms.in" required="" type="email"/>
+</div>
+</div>
+</div>
+<!-- Row 2: Organization / Farm Cluster & Acreage Size -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-primary font-medium flex items-center justify-between" for="clusterInput">
+<span>Organization, Farm Cluster &amp; Acreage Size</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Auto-calibrates NDVI boundary</span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-[18px] text-on-surface-variant pointer-events-none">landscape</span>
+<input class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md pl-10 pr-3 py-2.5 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-container transition-all placeholder:text-outline/70" id="clusterInput" placeholder="e.g. 120 Acres • Nashik Western Zone (Mahindra Khed FPO)" required="" type="text"/>
+</div>
+</div>
+<!-- Row 3: Operational Role Selector -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-primary font-medium flex items-center justify-between">
+<span>Primary Operational Role</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Select profile configuration</span>
+</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="roleSelectorGroup">
+<button class="role-pill p-2.5 rounded-lg bg-surface-container-low text-left hover:bg-surface-container flex items-start gap-2.5 transition-all focus:outline-none ring-2 ring-transparent" data-role="agronomist" type="button">
+<span class="material-symbols-outlined text-[20px] text-secondary mt-0.5">science</span>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-primary leading-snug">Enterprise Agronomist</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Soil analytics &amp; multi-field yield models</span>
+</div>
+</button>
+<button class="role-pill p-2.5 rounded-lg bg-surface-container text-left flex items-start gap-2.5 transition-all focus:outline-none ring-2 ring-primary" data-role="farmer" type="button">
+<span class="material-symbols-outlined text-[20px] text-secondary mt-0.5">agriculture</span>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-primary leading-snug">Independent Grower / Farmer</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Direct acreage weather, pest alerts &amp; spray logs</span>
+</div>
+</button>
+<button class="role-pill p-2.5 rounded-lg bg-surface-container-low text-left hover:bg-surface-container flex items-start gap-2.5 transition-all focus:outline-none ring-2 ring-transparent" data-role="trader" type="button">
+<span class="material-symbols-outlined text-[20px] text-secondary mt-0.5">storefront</span>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-primary leading-snug">APMC Mandi Trader</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Volume arbitrage, arrival forecasting &amp; bids</span>
+</div>
+</button>
+<button class="role-pill p-2.5 rounded-lg bg-surface-container-low text-left hover:bg-surface-container flex items-start gap-2.5 transition-all focus:outline-none ring-2 ring-transparent" data-role="fpo" type="button">
+<span class="material-symbols-outlined text-[20px] text-secondary mt-0.5">groups</span>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-primary leading-snug">Input Dealer / FPO Lead</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Bulk seeds, fertilizer quotas &amp; collective sales</span>
+</div>
+</button>
+</div>
+</div>
+<!-- Row 4: Password & Dynamic 4-Point Security Meter -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-primary font-medium flex items-center justify-between" for="passwordInput">
+<span>Secure Access Password</span>
+<span class="font-data-tabular-sm text-data-tabular-sm text-on-surface-variant" id="strengthText">Strength: Evaluated</span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-[18px] text-on-surface-variant pointer-events-none">key</span>
+<input class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md pl-10 pr-10 py-2.5 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-container transition-all placeholder:text-outline/70" id="passwordInput" placeholder="••••••••••••" required="" type="password"/>
+<button class="absolute right-3 text-on-surface-variant hover:text-primary focus:outline-none" id="togglePasswordBtn" type="button">
+<span class="material-symbols-outlined text-[18px]" id="toggleIcon">visibility</span>
+</button>
+</div>
+<!-- 4-point Dynamic Segmented Meter -->
+<div class="grid grid-cols-4 gap-1.5 mt-1" id="strengthBars">
+<div class="h-1.5 rounded-full bg-surface-container-highest transition-colors duration-200" id="bar1"></div>
+<div class="h-1.5 rounded-full bg-surface-container-highest transition-colors duration-200" id="bar2"></div>
+<div class="h-1.5 rounded-full bg-surface-container-highest transition-colors duration-200" id="bar3"></div>
+<div class="h-1.5 rounded-full bg-surface-container-highest transition-colors duration-200" id="bar4"></div>
+</div>
+<!-- Dynamic 4 Check Items -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-1 mt-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-1" id="ruleLen">
+<span class="material-symbols-outlined text-[14px] text-outline">check_circle</span>
+<span>8+ chars</span>
+</span>
+<span class="flex items-center gap-1" id="ruleCase">
+<span class="material-symbols-outlined text-[14px] text-outline">check_circle</span>
+<span>Mixed case</span>
+</span>
+<span class="flex items-center gap-1" id="ruleNum">
+<span class="material-symbols-outlined text-[14px] text-outline">check_circle</span>
+<span>1+ number</span>
+</span>
+<span class="flex items-center gap-1" id="ruleSym">
+<span class="material-symbols-outlined text-[14px] text-outline">check_circle</span>
+<span>Special symbol</span>
+</span>
+</div>
+</div>
+<!-- Row 5: Data Charter & Privacy Sovereign Checkbox -->
+<div class="flex items-start gap-space-sm pt-1">
+<input checked="" class="mt-1 h-4 w-4 rounded accent-primary text-on-primary cursor-pointer focus:ring-primary-container" id="dataCharterCheck" required="" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-on-surface-variant cursor-pointer select-none leading-relaxed" for="dataCharterCheck">
+            I agree to the <a class="text-primary font-semibold hover:underline" href="#">AgriSync Agricultural Data Charter</a> &amp; <a class="text-primary font-semibold hover:underline" href="#">Privacy Policy</a>. My soil telemetry, crop moisture indexes, and mandi price logs remain <strong class="text-on-surface font-semibold">100% private and sovereign</strong> to my organization.
+          </label>
+</div>
+<!-- Primary CTA Button -->
+<div class="pt-2 flex flex-col gap-space-xs">
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary py-3.5 px-space-md rounded-xl font-headline-sm text-headline-sm tracking-normal shadow-md hover:shadow-lg active:scale-[0.99] transition-all flex items-center justify-center gap-space-sm relative group overflow-hidden" id="submitRegisterBtn" type="submit">
+<!-- Lime accent decorative pill -->
+<span class="absolute left-2 top-2 bottom-2 w-1 bg-tertiary-fixed rounded-full"></span>
+<span>Create AgriSync Account</span>
+<span class="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+<div class="flex items-center justify-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm text-center">
+<span class="material-symbols-outlined text-[14px] text-secondary">verified_user</span>
+<span>Immediate API activation key • No hardware lockout</span>
+</div>
+</div>
+</form>
+<!-- Direct Toggle to Sign In State -->
+<div class="mt-space-lg pt-space-md bg-surface-container-low/60 -mx-space-lg sm:-mx-space-xl -mb-space-lg sm:-mb-space-xl p-space-md rounded-b-xl flex items-center justify-center gap-1.5">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Already have an AgriSync telemetry account?</span>
+<button class="font-title-md text-title-md text-primary font-semibold hover:underline hover:text-secondary flex items-center gap-0.5" id="linkToSignIn" type="button">
+<span>Sign in here</span>
+<span class="material-symbols-outlined text-[16px]">north_east</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Trust & Social Proof Bar -->
+<div class="w-full mt-space-xl bg-surface-container-lowest p-space-md sm:p-space-lg rounded-xl shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm text-center md:text-left">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">public</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-primary font-bold">Trusted by 42,000+ growers and 180+ FPOs</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Active deployments across Maharashtra, Gujarat, Punjab &amp; Madhya Pradesh</span>
+</div>
+</div>
+<!-- Integrations Badges -->
+<div class="flex flex-wrap items-center justify-center gap-space-xs">
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">IMD Radar Integrated</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Agmarknet Direct Synced</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Soil Health Card Compatible</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Client-side Logic: Role selection, Password Strength Analyzer & Tab switching -->
+<script>
+  (function() {
+    // 1. Primary Operational Role selection
+    const roleButtons = document.querySelectorAll('#roleSelectorGroup .role-pill');
+    roleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        roleButtons.forEach(b => {
+          b.classList.remove('ring-primary', 'bg-surface-container');
+          b.classList.add('ring-transparent', 'bg-surface-container-low');
+        });
+        btn.classList.add('ring-primary', 'bg-surface-container');
+        btn.classList.remove('ring-transparent', 'bg-surface-container-low');
+      });
+    });
+
+    // 2. Dynamic Password Strength Evaluation
+    const passwordInput = document.getElementById('passwordInput');
+    const bar1 = document.getElementById('bar1');
+    const bar2 = document.getElementById('bar2');
+    const bar3 = document.getElementById('bar3');
+    const bar4 = document.getElementById('bar4');
+    const strengthText = document.getElementById('strengthText');
+    const ruleLen = document.getElementById('ruleLen');
+    const ruleCase = document.getElementById('ruleCase');
+    const ruleNum = document.getElementById('ruleNum');
+    const ruleSym = document.getElementById('ruleSym');
+
+    function updateRule(elem, met) {
+      const icon = elem.querySelector('.material-symbols-outlined');
+      if (met) {
+        icon.innerText = 'check_circle';
+        icon.classList.remove('text-outline');
+        icon.classList.add('text-secondary');
+        elem.classList.remove('text-on-surface-variant');
+        elem.classList.add('text-primary', 'font-medium');
+      } else {
+        icon.innerText = 'radio_button_unchecked';
+        icon.classList.remove('text-secondary');
+        icon.classList.add('text-outline');
+        elem.classList.remove('text-primary', 'font-medium');
+        elem.classList.add('text-on-surface-variant');
+      }
+    }
+
+    if (passwordInput) {
+      passwordInput.addEventListener('input', (e) => {
+        const val = e.target.value;
+        const hasLen = val.length >= 8;
+        const hasCase = /[a-z]/.test(val) && /[A-Z]/.test(val);
+        const hasNum = /[0-9]/.test(val);
+        const hasSym = /[^A-Za-z0-9]/.test(val);
+
+        updateRule(ruleLen, hasLen);
+        updateRule(ruleCase, hasCase);
+        updateRule(ruleNum, hasNum);
+        updateRule(ruleSym, hasSym);
+
+        const score = [hasLen, hasCase, hasNum, hasSym].filter(Boolean).length;
+        const bars = [bar1, bar2, bar3, bar4];
+
+        bars.forEach((b, idx) => {
+          b.className = 'h-1.5 rounded-full transition-colors duration-200 ' + 
+            (idx < score 
+              ? (score <= 1 ? 'bg-error' : score <= 2 ? 'bg-tertiary-container' : score === 3 ? 'bg-secondary' : 'bg-primary') 
+              : 'bg-surface-container-highest');
+        });
+
+        if (score === 0) {
+          strengthText.innerText = 'Strength: Empty';
+          strengthText.className = 'font-data-tabular-sm text-data-tabular-sm text-on-surface-variant';
+        } else if (score === 1) {
+          strengthText.innerText = 'Strength: Weak';
+          strengthText.className = 'font-data-tabular-sm text-data-tabular-sm text-error font-medium';
+        } else if (score === 2) {
+          strengthText.innerText = 'Strength: Fair';
+          strengthText.className = 'font-data-tabular-sm text-data-tabular-sm text-secondary font-medium';
+        } else if (score === 3) {
+          strengthText.innerText = 'Strength: Good';
+          strengthText.className = 'font-data-tabular-sm text-data-tabular-sm text-secondary font-semibold';
+        } else {
+          strengthText.innerText = 'Strength: Enterprise Grade';
+          strengthText.className = 'font-data-tabular-sm text-data-tabular-sm text-primary font-bold';
+        }
+      });
+    }
+
+    // 3. Password Show/Hide Toggle
+    const toggleBtn = document.getElementById('togglePasswordBtn');
+    const toggleIcon = document.getElementById('toggleIcon');
+    if (toggleBtn && passwordInput && toggleIcon) {
+      toggleBtn.addEventListener('click', () => {
+        const isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+        toggleIcon.innerText = isPassword ? 'visibility_off' : 'visibility';
+      });
+    }
+
+    // 4. Tab Header Switching (Create Account <-> Sign In)
+    const tabCreate = document.getElementById('tabCreateAccount');
+    const tabSign = document.getElementById('tabSignIn');
+    const linkToSignIn = document.getElementById('linkToSignIn');
+    const submitBtn = document.getElementById('submitRegisterBtn');
+
+    function setTab(activeTab) {
+      if (activeTab === 'signIn') {
+        tabSign.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-semibold');
+        tabSign.classList.remove('text-on-surface-variant', 'font-medium');
+        tabCreate.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-semibold');
+        tabCreate.classList.add('text-on-surface-variant', 'font-medium');
+        if (submitBtn) {
+          submitBtn.querySelector('span:nth-child(2)').innerText = 'Sign In to Telemetry Console';
+        }
+      } else {
+        tabCreate.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-semibold');
+        tabCreate.classList.remove('text-on-surface-variant', 'font-medium');
+        tabSign.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-semibold');
+        tabSign.classList.add('text-on-surface-variant', 'font-medium');
+        if (submitBtn) {
+          submitBtn.querySelector('span:nth-child(2)').innerText = 'Create AgriSync Account';
+        }
+      }
+    }
+
+    if (tabCreate && tabSign) {
+      tabCreate.addEventListener('click', () => setTab('create'));
+      tabSign.addEventListener('click', () => setTab('signIn'));
+    }
+    if (linkToSignIn) {
+      linkToSignIn.addEventListener('click', () => {
+        setTab('signIn');
+        document.getElementById('farmEmailInput')?.focus();
+      });
+    }
+  })();
+</script></main><footer class="relative z-10 w-full px-margin-desktop py-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm border-t border-outline-variant/30 bg-surface-container-low/40 backdrop-blur-sm"><div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[15px] text-secondary">shield</span><span>Autonomous Agronomy Cloud Infrastructure • © 2025 AgriSync Telemetry Ltd.</span></div><div class="flex items-center gap-space-lg text-on-surface-variant font-label-sm text-label-sm"><a class="hover:text-primary transition-colors" href="#">Security Whitepaper</a><a class="hover:text-primary transition-colors" href="#">ISO 27001 Compliance</a><a class="hover:text-primary transition-colors" href="#">Privacy Statement</a><a class="hover:text-primary transition-colors" href="#">System Operations Desk</a></div></footer></body></html>

@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"tertiary-container":"#364800","on-tertiary-fixed-variant":"#3a4d00","outline":"#717973","background":"#ecfdf4","surface-container-lowest":"#ffffff","primary-fixed":"#b8efd0","on-secondary-container":"#33713b","error":"#ba1a1a","secondary-fixed":"#aff3b0","surface-container":"#e1f2e9","tertiary-fixed-dim":"#b1d35a","surface-container-highest":"#d5e7dd","inverse-on-surface":"#e3f5ec","surface-tint":"#366850","surface-container-low":"#e6f8ee","secondary":"#2d6b36","surface-bright":"#ecfdf4","surface-container-high":"#dbece3","on-error-container":"#93000a","on-tertiary-container":"#99ba44","primary-container":"#174b35","on-primary-container":"#86ba9e","on-primary-fixed-variant":"#1c5039","on-secondary":"#ffffff","on-secondary-fixed-variant":"#105220","secondary-container":"#aff3b0","on-surface":"#101e19","surface":"#ecfdf4","on-background":"#101e19","on-tertiary-fixed":"#151f00","inverse-primary":"#9dd2b5","inverse-surface":"#25332e","outline-variant":"#c0c9c1","error-container":"#ffdad6","on-primary":"#ffffff","on-error":"#ffffff","surface-variant":"#d5e7dd","secondary-fixed-dim":"#94d696","on-surface-variant":"#404943","tertiary-fixed":"#ccf073","on-primary-fixed":"#002113","on-secondary-fixed":"#002107","primary-fixed-dim":"#9dd2b5","on-tertiary":"#ffffff","surface-dim":"#cdded5","tertiary":"#233000","primary":"#003421"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-lg":"1.5rem","space-xl":"2rem","space-md":"1rem","space-xs":"0.25rem","gutter-desktop":"1.5rem","margin-desktop":"2rem","margin-tablet":"1.5rem",gutter:"1rem",margin:"1rem","space-sm":"0.5rem"},fontFamily:{"body-lg":["Inter"],"label-md":["Inter"],"data-tabular-md":["JetBrains Mono"],"body-md":["Inter"],"headline-lg":["Manrope"],"data-tabular-sm":["JetBrains Mono"],"body-sm":["Inter"],"data-tabular-lg":["JetBrains Mono"],"title-md":["Inter"],"headline-lg-mobile":["Manrope"],"display-lg":["Manrope"],"headline-sm":["Manrope"],"label-sm":["Inter"],"display-md":["Manrope"]},fontSize:{"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}],"data-tabular-md":["14px",{lineHeight:"20px",fontWeight:"500"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"headline-lg":["28px",{lineHeight:"36px",letterSpacing:"-0.01em",fontWeight:"600"}],"data-tabular-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"data-tabular-lg":["22px",{lineHeight:"28px",fontWeight:"600"}],"title-md":["16px",{lineHeight:"24px",fontWeight:"600"}],"headline-lg-mobile":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],"display-lg":["48px",{lineHeight:"56px",letterSpacing:"-0.02em",fontWeight:"700"}],"headline-sm":["20px",{lineHeight:"28px",letterSpacing:"-0.005em",fontWeight:"600"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"600"}],"display-md":["36px",{lineHeight:"44px",letterSpacing:"-0.015em",fontWeight:"700"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-md"><div class="px-space-md flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="AgriSync Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XUJZDe0Ox7H_ir4JqLASkRH5SHOnEEJLSAyx5EnQbeRqw_jMXlzHZ5inVSXxluCO-rPjOz0JhX_aeg5QIPhfm7AuWSGKM9nh57bn51vKuwjHWXoe-awZE17WCvbLvg_zLdXviuPKe22oBUfugvEBy_k9dPz50CZIoq3BYqx0P6_yeJBBCaeM_TdpH1Pv1fkBr8aaHfD6OPYFLRgR3RB4Y2xXde5inWB1OcACrWBUXNkDEdo7NI5P4z8lFJ"/><span class="font-headline-sm text-headline-sm text-primary tracking-tight">AgriSync</span></div><button aria-label="Collapse sidebar" class="text-on-surface-variant hover:text-on-surface p-space-xs rounded transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">menu_open</span></button></div><div class="px-space-md"><div class="bg-surface-container px-space-sm py-space-xs rounded-xl flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-secondary text-[16px]">verified</span><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Pro AgriFarm</span></div><span class="font-data-tabular-sm text-data-tabular-sm text-on-surface-variant">v3.4</span></div></div><nav class="px-space-sm flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-xl"><a class="flex items-center justify-between px-space-sm py-space-xs rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-title-md text-body-md" data-path="overview" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Overview</span></div></a><a class="flex items-center justify-between px-space-sm py-space-xs rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-title-md text-body-md" data-path="ai-farming-assistant" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">auto_awesome</span><span>AI Farming Assistant</span></div><span class="bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm px-1.5 py-0.5 rounded-full">AI</span></a><a class="flex items-center justify-between px-space-sm py-space-xs rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-title-md text-body-md" data-path="weather-intelligence" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">wb_sunny</span><span>Weather Intelligence</span></div></a><a aria-current="page" class="flex items-center justify-between px-space-sm py-space-xs transition-colors bg-primary-container text-on-primary-container font-semibold rounded-xl" data-path="crop-price-intelligence" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">trending_up</span><span>Crop Price Intelligence</span></div></a><a class="flex items-center justify-between px-space-sm py-space-xs rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-title-md text-body-md" data-path="crop-and-market-explorer" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">explore</span><span>Crop &amp; Market Explorer</span></div></a><a class="flex items-center justify-between px-space-sm py-space-xs rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-title-md text-body-md" data-path="alerts-notifications" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">notifications</span><span>Alerts &amp; Notifications</span></div><span class="bg-error text-on-error font-label-sm text-label-sm px-1.5 py-0.2 rounded-full">2</span></a><a class="flex items-center justify-between px-space-sm py-space-xs rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-title-md text-body-md" data-path="settings" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">tune</span><span>Settings</span></div></a></nav></div><div class="px-space-md"><div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex flex-col gap-space-xs"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-secondary"></span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Telemetry Feed</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Satellite NDVI calibration valid through harvest.</p></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-lowest px-space-sm py-1.5 rounded-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] cursor-pointer"><span class="material-symbols-outlined text-secondary text-[18px]">nature_people</span><div class="flex flex-col text-left"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Active Sector</span><span class="font-title-md text-body-sm text-on-surface font-semibold leading-tight">Green Valley Farms, Nashik Sector 4</span></div><span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span></div><div class="relative flex items-center w-80"><span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[18px]">search</span><input class="w-full pl-9 pr-14 py-1.5 bg-surface-container-lowest rounded-xl font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none shadow-[0_1px_8px_rgba(0,0,0,0.04)]" placeholder="Search crops, weather, mandi rates..." type="text"/><span class="absolute right-2.5 font-data-tabular-sm text-label-sm text-on-surface-variant bg-surface-container px-1.5 py-0.5 rounded">⌘K</span></div></div><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center gap-space-xs bg-surface-container-lowest px-space-sm py-1.5 rounded-full shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-data-tabular-sm text-data-tabular-sm text-on-surface-variant">Live API Connected • Sync 2m ago</span></div><div class="relative"><button aria-label="Notifications" class="w-9 h-9 rounded-xl bg-surface-container-lowest flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors shadow-[0_1px_8px_rgba(0,0,0,0.04)]" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><span class="absolute -top-1 -right-1 w-4 h-4 bg-error text-on-error font-label-sm text-label-sm flex items-center justify-center rounded-full">2</span></div><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXKLxVXC3FcYdqpnWrXP3_ZWRV15CFqeEOH7I1mo9xPLMFg0OBg_Dyyw6cVhx4OOQQlV23-7RX9rRWI7fFCwhT54kwndyUDOqKaPdsjlejnSO2FZ2XZK4MO-CVh3N--kTT0gcTn9atpEg-o7HyZQZ-fAs_0j39FXAr2fhxfalaNP9hOUOB3fWt-NDM8DOc4ohID8Qae2ESMJUTuvlvIVxOUsX11gvb5oyw_9xh9g4DFtseeFluEjITrg"/><div class="flex flex-col"><span class="font-title-md text-body-sm text-on-surface font-semibold leading-tight">Dr. Sunita Sharma</span><span class="font-label-sm text-label-sm text-on-surface-variant">Chief Agronomist</span></div></div></div></header><main class="relative pt-16 bg-surface min-h-screen px-gutter-desktop py-space-md"><div class="w-full mx-auto"><div class="mb-space-md flex items-center justify-between"><div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm"><span class="hover:text-on-surface cursor-pointer">AgriSync Network</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="hover:text-on-surface cursor-pointer">Nashik Zone</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="text-primary font-semibold">Sector 4 Telemetry</span></div><div class="flex items-center gap-space-xs bg-surface-container-lowest p-1 rounded-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><button class="px-space-sm py-1 rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md" type="button">Real-time Telemetry</button><button class="px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors" type="button">Historical Yield</button><button class="px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors" type="button">Agronomic Logs</button></div></div><div class="flex flex-col w-full gap-space-lg pb-space-xl">
+<!-- Interactive Top Control Bar -->
+<div class="w-full bg-surface-container-lowest p-space-md rounded-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<!-- Commodity & Mandi Selector Group -->
+<div class="flex flex-wrap items-center gap-space-md">
+<!-- Commodity Dropdown Trigger -->
+<div class="relative">
+<label class="block font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Commodity</label>
+<button class="flex items-center justify-between gap-space-sm bg-surface-container-low px-space-md py-2 rounded-xl font-title-md text-body-md text-on-surface hover:bg-surface-container-high transition-colors w-64 text-left" id="commodityBtn" type="button">
+<span class="flex items-center gap-2 truncate">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="truncate font-medium" id="selectedCommodityText">Tomato (Hybrid / Local)</span>
+</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span>
+</button>
+<!-- Dropdown List -->
+<div class="hidden absolute top-full left-0 mt-1 w-64 bg-surface-container-lowest shadow-xl rounded-xl p-1.5 z-50 flex flex-col gap-0.5" id="commodityMenu">
+<div class="p-1.5">
+<input class="w-full bg-surface-container-low px-2 py-1 rounded-lg font-body-sm text-body-sm focus:outline-none placeholder:text-on-surface-variant" placeholder="Search commodity..." type="text"/>
+</div>
+<button class="commodity-option text-left px-2.5 py-1.5 rounded-lg bg-surface-container font-body-sm text-body-sm text-primary font-semibold flex items-center justify-between" data-name="Tomato (Hybrid / Local)" type="button">
+<span>Tomato (Hybrid / Local)</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">check</span>
+</button>
+<button class="commodity-option text-left px-2.5 py-1.5 rounded-lg hover:bg-surface-container font-body-sm text-body-sm text-on-surface flex items-center justify-between" data-name="Onion (Nashik Red)" type="button">
+<span>Onion (Nashik Red)</span>
+</button>
+<button class="commodity-option text-left px-2.5 py-1.5 rounded-lg hover:bg-surface-container font-body-sm text-body-sm text-on-surface flex items-center justify-between" data-name="Soybean (Yellow Regular)" type="button">
+<span>Soybean (Yellow Regular)</span>
+</button>
+<button class="commodity-option text-left px-2.5 py-1.5 rounded-lg hover:bg-surface-container font-body-sm text-body-sm text-on-surface flex items-center justify-between" data-name="Wheat (Lokwan / Sharbati)" type="button">
+<span>Wheat (Lokwan / Sharbati)</span>
+</button>
+<button class="commodity-option text-left px-2.5 py-1.5 rounded-lg hover:bg-surface-container font-body-sm text-body-sm text-on-surface flex items-center justify-between" data-name="Cotton (Medium Staple)" type="button">
+<span>Cotton (Medium Staple)</span>
+</button>
+<button class="commodity-option text-left px-2.5 py-1.5 rounded-lg hover:bg-surface-container font-body-sm text-body-sm text-on-surface flex items-center justify-between" data-name="Potato (Jyoti / Chipsona)" type="button">
+<span>Potato (Jyoti / Chipsona)</span>
+</button>
+<button class="commodity-option text-left px-2.5 py-1.5 rounded-lg hover:bg-surface-container font-body-sm text-body-sm text-on-surface flex items-center justify-between" data-name="Chilli (Teja / Guntur)" type="button">
+<span>Chilli (Teja / Guntur)</span>
+</button>
+<button class="commodity-option text-left px-2.5 py-1.5 rounded-lg hover:bg-surface-container font-body-sm text-body-sm text-on-surface flex items-center justify-between" data-name="Pomegranate (Bhagwa)" type="button">
+<span>Pomegranate (Bhagwa)</span>
+</button>
+</div>
+</div>
+<!-- Geographic Mandi Hierarchy Filter -->
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Benchmark Hub / District</label>
+<div class="flex items-center gap-space-xs bg-surface-container-low px-space-md py-2 rounded-xl">
+<span class="material-symbols-outlined text-secondary text-[18px]">location_on</span>
+<span class="font-body-md text-body-md text-on-surface font-medium">Maharashtra &gt; Nashik &gt; Lasalgaon Mandi</span>
+<button class="p-1 rounded-lg hover:bg-surface-container text-on-surface-variant ml-1" title="Change Mandi Context" type="button">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+</button>
+</div>
+</div>
+<!-- Unit Weight Toggle -->
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Pricing Unit</label>
+<div class="flex items-center bg-surface-container-low p-1 rounded-xl">
+<button class="px-3 py-1 rounded-lg bg-surface-container-lowest shadow-sm font-label-md text-label-md text-primary font-semibold transition-all" id="unitQuintalBtn" type="button">₹ / Quintal (100kg)</button>
+<button class="px-3 py-1 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all" id="unitKgBtn" type="button">₹ / kg</button>
+</div>
+</div>
+</div>
+<!-- Live Agmarknet Feed Status Badge -->
+<div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-2 rounded-xl">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
+</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Agmarknet Live Feed</span>
+<span class="font-data-tabular-sm text-data-tabular-sm text-on-surface-variant">Synchronized 12m ago</span>
+</div>
+<button class="p-1 text-on-surface-variant hover:text-on-surface rounded-lg hover:bg-surface-container transition-colors" title="Force Sync APMC Feeds" type="button">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+</button>
+</div>
+</div>
+<!-- Timeline Horizon Selector & Mandi Compare Chips -->
+<div class="flex flex-wrap items-center justify-between gap-space-md pt-2">
+<!-- Date Range Pills -->
+<div class="flex items-center gap-1.5 bg-surface-container-low p-1 rounded-xl">
+<button class="time-range-btn px-3 py-1 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-days="1" type="button">Today</button>
+<button class="time-range-btn px-3 py-1 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-days="7" type="button">7D</button>
+<button class="time-range-btn px-3 py-1 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-days="14" type="button">14D</button>
+<button class="time-range-btn px-3 py-1 rounded-lg bg-surface-container-lowest shadow-sm font-label-md text-label-md text-primary font-semibold transition-colors" data-days="30" type="button">Last 30 Days</button>
+<button class="time-range-btn px-3 py-1 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-days="90" type="button">3M</button>
+<button class="time-range-btn px-3 py-1 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-days="custom" type="button">Custom Season</button>
+</div>
+<!-- Multi-Mandi Overlay Filters -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Active Comparisons:</span>
+<label class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface bg-surface-container-low px-2.5 py-1 rounded-full cursor-pointer hover:bg-surface-container">
+<input checked="" class="w-3.5 h-3.5 accent-primary rounded" type="checkbox"/>
+<span>Pimpalgaon</span>
+</label>
+<label class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface bg-surface-container-low px-2.5 py-1 rounded-full cursor-pointer hover:bg-surface-container">
+<input checked="" class="w-3.5 h-3.5 accent-primary rounded" type="checkbox"/>
+<span>Vashi (Mumbai)</span>
+</label>
+<label class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface bg-surface-container-low px-2.5 py-1 rounded-full cursor-pointer hover:bg-surface-container">
+<input checked="" class="w-3.5 h-3.5 accent-primary rounded" type="checkbox"/>
+<span>Pune Yard</span>
+</label>
+<label class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface bg-surface-container-low px-2.5 py-1 rounded-full cursor-pointer hover:bg-surface-container">
+<input checked="" class="w-3.5 h-3.5 accent-primary rounded" type="checkbox"/>
+<span>Azadpur (Delhi)</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Headline Market KPI Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Card 1: Current Modal Market Price -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block">Current Modal Rate</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Lasalgaon APMC Benchmark</span>
+</div>
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">currency_rupee</span>
+</div>
+</div>
+<div class="my-space-sm">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-data-tabular-lg text-[32px] text-on-surface tracking-tight leading-none font-bold" id="kpiModalPrice">₹3,450</span>
+<span class="font-label-md text-label-md text-on-surface-variant" id="kpiModalUnit">/ quintal</span>
+</div>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="font-data-tabular-sm text-data-tabular-sm text-secondary font-semibold" id="kpiPerKgPrice">₹34.50 / kg</span>
+<span class="text-on-surface-variant text-body-sm">• Standard Grade A</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-2 rounded-lg flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Min: <strong class="font-data-tabular-sm text-on-surface font-semibold" id="kpiMinPrice">₹2,800</strong></span>
+<span class="text-on-surface-variant">Max: <strong class="font-data-tabular-sm text-on-surface font-semibold" id="kpiMaxPrice">₹3,920</strong></span>
+</div>
+</div>
+<!-- Card 2: 24-Hour Day Change -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block">24h Day Change</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Net Mandi Delta</span>
+</div>
+<span class="inline-flex items-center gap-1 bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded-full font-data-tabular-sm text-data-tabular-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+          +14.2%
+        </span>
+</div>
+<div class="my-space-sm">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-data-tabular-lg text-[32px] text-secondary tracking-tight leading-none font-bold">+₹430</span>
+<span class="font-label-md text-label-md text-on-surface-variant">/ q</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">bolt</span>
+<span>High trading velocity across wholesale gates</span>
+</p>
+</div>
+<div class="bg-surface-container-low p-2 rounded-lg flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Prev Close: <strong class="font-data-tabular-sm text-on-surface font-medium">₹3,020</strong></span>
+<span class="text-secondary font-medium">Bullish Breakout</span>
+</div>
+</div>
+<!-- Card 3: Total Daily Mandi Arrivals -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block">Daily APMC Arrivals</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">District Yard Aggregation</span>
+</div>
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">local_shipping</span>
+</div>
+</div>
+<div class="my-space-sm">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-data-tabular-lg text-[32px] text-on-surface tracking-tight leading-none font-bold">1,420</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Tonnes</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5 flex items-center gap-1">
+<span class="font-data-tabular-sm text-secondary font-semibold">+180 t</span>
+<span>vs 7-day average intake</span>
+</p>
+</div>
+<div class="bg-surface-container-low p-2 rounded-lg flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Yard Status:</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase bg-secondary-fixed/40 px-2 py-0.5 rounded">Normal Absorption</span>
+</div>
+</div>
+<!-- Card 4: AI Price Trend Outlook -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute -top-6 -right-6 w-20 h-20 bg-tertiary-fixed rounded-full opacity-30 pointer-events-none blur-lg"></div>
+<div class="flex items-start justify-between relative z-10">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block">AI 7-Day Price Outlook</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Predictive Econometric Model</span>
+</div>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+          91% Conf.
+        </span>
+</div>
+<div class="my-space-sm relative z-10">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-md text-[26px] text-primary tracking-tight leading-none font-bold">Bullish</span>
+<span class="font-data-tabular-md text-secondary font-semibold">(+6% to +10%)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5 line-clamp-2">
+          Festive demand spike &amp; heavy showers disrupting southern tomato harvest belts.
+        </p>
+</div>
+<div class="bg-surface-container-low p-2 rounded-lg flex items-center justify-between text-body-sm font-body-sm relative z-10">
+<span class="text-on-surface-variant">Projected 7D Target:</span>
+<span class="font-data-tabular-sm text-primary font-bold">₹3,680 - ₹3,820</span>
+</div>
+</div>
+</div>
+<!-- Primary Interactive Price Trend & Volume Analytics -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-start">
+<!-- Chart Container (8 cols) -->
+<div class="lg:col-span-8 bg-surface-container-lowest p-space-lg rounded-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Price Trajectory &amp; Mandi Inflow</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">30-day modal price envelope correlated with auction arrivals</p>
+</div>
+<!-- Chart Legend -->
+<div class="flex items-center gap-space-md text-body-sm font-body-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-0.5 bg-primary rounded-full"></span>
+<span class="text-on-surface">Modal Price (₹/q)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-0.5 bg-secondary-fixed-dim border-t-2 border-dashed border-secondary rounded-full"></span>
+<span class="text-on-surface-variant">15-Day SMA</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 bg-surface-container-highest rounded-sm"></span>
+<span class="text-on-surface-variant">Arrivals (t)</span>
+</div>
+</div>
+</div>
+<!-- Interactive SVG Chart with Shaded High/Low Band & Arrival Bars -->
+<div class="relative w-full h-[320px] bg-surface-container-low/40 rounded-xl p-4 flex flex-col justify-between">
+<!-- Live Hover Overlay Tooltip -->
+<div class="absolute hidden bg-inverse-surface text-inverse-on-surface p-3 rounded-xl shadow-xl pointer-events-none z-30 transition-all font-body-sm text-body-sm min-w-[190px]" id="chartTooltip">
+<div class="font-semibold text-primary-fixed mb-1" id="ttDate">Oct 24, 2024</div>
+<div class="flex justify-between gap-4 font-data-tabular-sm">
+<span class="text-surface-container-highest">Modal Price:</span>
+<span class="font-bold text-inverse-on-surface" id="ttPrice">₹3,450 / q</span>
+</div>
+<div class="flex justify-between gap-4 font-data-tabular-sm">
+<span class="text-surface-container-highest">Arrivals:</span>
+<span class="text-inverse-on-surface" id="ttVolume">1,420 t</span>
+</div>
+<div class="flex justify-between gap-4 font-data-tabular-sm text-label-sm pt-1 border-t border-surface-container-highest/20 mt-1">
+<span class="text-surface-container-highest">Top Variety:</span>
+<span class="text-primary-fixed" id="ttVariety">Hybrid No. 10</span>
+</div>
+</div>
+<!-- SVG Rendering Area -->
+<div class="relative w-full h-full">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 900 240">
+<defs>
+<lineargradient id="bandGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#b8efd0" stop-opacity="0.45"></stop>
+<stop offset="100%" stop-color="#b8efd0" stop-opacity="0.05"></stop>
+</lineargradient>
+<lineargradient id="barGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#d5e7dd" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#e6f8ee" stop-opacity="0.3"></stop>
+</lineargradient>
+</defs>
+<!-- Horizontal Grid Guides -->
+<line stroke="#d5e7dd" stroke-dasharray="3 3" stroke-width="1" x1="0" x2="900" y1="20" y2="20"></line>
+<line stroke="#d5e7dd" stroke-dasharray="3 3" stroke-width="1" x1="0" x2="900" y1="75" y2="75"></line>
+<line stroke="#d5e7dd" stroke-dasharray="3 3" stroke-width="1" x1="0" x2="900" y1="130" y2="130"></line>
+<line stroke="#d5e7dd" stroke-dasharray="3 3" stroke-width="1" x1="0" x2="900" y1="185" y2="185"></line>
+<!-- Daily Arrival Volume Bars (Background layer) -->
+<rect fill="url(#barGrad)" height="60" rx="3" width="16" x="25" y="160"></rect>
+<rect fill="url(#barGrad)" height="75" rx="3" width="16" x="85" y="145"></rect>
+<rect fill="url(#barGrad)" height="90" rx="3" width="16" x="145" y="130"></rect>
+<rect fill="url(#barGrad)" height="70" rx="3" width="16" x="205" y="150"></rect>
+<rect fill="url(#barGrad)" height="100" rx="3" width="16" x="265" y="120"></rect>
+<rect fill="url(#barGrad)" height="50" rx="3" width="16" x="325" y="170"></rect>
+<rect fill="url(#barGrad)" height="85" rx="3" width="16" x="385" y="135"></rect>
+<rect fill="url(#barGrad)" height="110" rx="3" width="16" x="445" y="110"></rect>
+<rect fill="url(#barGrad)" height="80" rx="3" width="16" x="505" y="140"></rect>
+<rect fill="url(#barGrad)" height="115" rx="3" width="16" x="565" y="105"></rect>
+<rect fill="url(#barGrad)" height="130" rx="3" width="16" x="625" y="90"></rect>
+<rect fill="url(#barGrad)" height="105" rx="3" width="16" x="685" y="115"></rect>
+<rect fill="url(#barGrad)" height="140" rx="3" width="16" x="745" y="80"></rect>
+<rect fill="url(#barGrad)" height="150" rx="3" width="16" x="805" y="70"></rect>
+<rect fill="url(#barGrad)" height="125" rx="3" width="16" x="855" y="95"></rect>
+<!-- High-Low Band Envelope Shading -->
+<polygon fill="url(#bandGrad)" points="
+              25,185 85,160 145,145 205,150 265,130 325,135 385,115 445,100 505,105 565,85 625,65 685,75 745,50 805,40 865,48
+              865,95 805,82 745,95 685,120 625,110 565,130 505,145 445,145 385,160 325,175 265,170 205,190 145,185 85,200 25,220
+            "></polygon>
+<!-- 15-Day Moving Average Line (Dashed) -->
+<path d="M 25,202 Q 145,175 265,152 T 505,125 T 745,78 T 865,65" fill="none" stroke="#2d6b36" stroke-dasharray="6 4" stroke-width="2"></path>
+<!-- Modal Price Line (Bold Solid) -->
+<path d="M 25,205 L 85,182 L 145,165 L 205,172 L 265,150 L 325,155 L 385,138 L 445,120 L 505,125 L 565,104 L 625,85 L 685,94 L 745,68 L 805,52 L 865,60" fill="none" stroke="#003421" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"></path>
+<!-- Interactive Highlight Points -->
+<g class="cursor-pointer" id="chartPoints">
+<circle cx="25" cy="205" data-date="Sep 25" data-price="₹2,720" data-variety="Desi Local" data-volume="980 t" fill="#ffffff" r="5" stroke="#003421" stroke-width="2.5"></circle>
+<circle cx="145" cy="165" data-date="Oct 01" data-price="₹2,950" data-variety="Hybrid Abhinav" data-volume="1,120 t" fill="#ffffff" r="5" stroke="#003421" stroke-width="2.5"></circle>
+<circle cx="265" cy="150" data-date="Oct 06" data-price="₹3,050" data-variety="Hybrid No. 10" data-volume="1,310 t" fill="#ffffff" r="5" stroke="#003421" stroke-width="2.5"></circle>
+<circle cx="385" cy="138" data-date="Oct 12" data-price="₹3,180" data-variety="Hybrid US-440" data-volume="1,090 t" fill="#ffffff" r="5" stroke="#003421" stroke-width="2.5"></circle>
+<circle cx="505" cy="125" data-date="Oct 17" data-price="₹3,240" data-variety="Hybrid No. 10" data-volume="1,240 t" fill="#ffffff" r="5" stroke="#003421" stroke-width="2.5"></circle>
+<circle cx="625" cy="85" data-date="Oct 20" data-price="₹3,380" data-variety="Hybrid US-440" data-volume="1,390 t" fill="#ffffff" r="5" stroke="#003421" stroke-width="2.5"></circle>
+<circle cx="745" cy="68" data-date="Oct 23" data-price="₹3,410" data-variety="Hybrid No. 10" data-volume="1,460 t" fill="#ffffff" r="5" stroke="#003421" stroke-width="2.5"></circle>
+<circle cx="805" cy="52" data-date="Today (Oct 24)" data-price="₹3,450" data-variety="Hybrid No. 10" data-volume="1,420 t" fill="#aff3b0" r="7" stroke="#003421" stroke-width="3"></circle>
+</g>
+</svg>
+</div>
+<!-- X-Axis Labels -->
+<div class="flex justify-between items-center text-on-surface-variant font-data-tabular-sm text-data-tabular-sm pt-2">
+<span>Sep 25</span>
+<span>Sep 30</span>
+<span>Oct 05</span>
+<span>Oct 10</span>
+<span>Oct 15</span>
+<span>Oct 20</span>
+<span class="text-primary font-bold">Today (Oct 24)</span>
+</div>
+</div>
+<!-- Quick Metrics Summary below chart -->
+<div class="grid grid-cols-3 gap-space-sm pt-1">
+<div class="bg-surface-container-low p-2.5 rounded-lg flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">30D Price Mean</span>
+<span class="font-data-tabular-md text-data-tabular-md text-on-surface font-semibold">₹3,115 / q</span>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded-lg flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Volatility (Std Dev)</span>
+<span class="font-data-tabular-md text-data-tabular-md text-on-surface font-semibold">± 8.4% (Moderate)</span>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded-lg flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Peak Day Volume</span>
+<span class="font-data-tabular-md text-data-tabular-md text-on-surface font-semibold">1,620 t (Oct 19)</span>
+</div>
+</div>
+</div>
+<!-- AI Prescription & Supply Belt Advisory (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- AI Prescription Insight Card -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-l-4 border-l-tertiary-fixed flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm px-2 py-0.5 rounded-full font-bold uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">psychology</span>
+            AgriSync Model v3
+          </span>
+<span class="font-data-tabular-sm text-data-tabular-sm text-on-surface-variant">92% Precision</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Arbitrage Recommendation</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Prices in <strong>Vashi APMC (Mumbai)</strong> are trading at a <strong class="text-secondary">+₹440/q premium</strong> over local Lasalgaon rates. Factoring in logistics (<span class="font-data-tabular-sm">₹350/q</span>), dispatching Grade A lots to Vashi yields a net incremental profit of <strong class="text-primary font-semibold">+₹220/q</strong> today.
+        </p>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1.5 my-1">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Recommended Action:</span>
+<span class="font-bold text-secondary">Route to Vashi Wholesale</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Optimal Dispatch Window:</span>
+<span class="font-data-tabular-sm text-on-surface font-semibold">Tonight 21:00 - 02:00</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Projected Realization:</span>
+<span class="font-data-tabular-sm text-primary font-bold">₹3,540 / q Net</span>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container py-2 rounded-lg font-label-md text-label-md hover:bg-primary transition-colors flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">alt_route</span>
+<span>Book Dedicated Freight Route</span>
+</button>
+</div>
+<!-- Real-Time Supply Sentiment Widget -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<h4 class="font-title-md text-title-md text-on-surface">Supply Channel Pressures</h4>
+<span class="material-symbols-outlined text-secondary text-[20px]">radar</span>
+</div>
+<div class="space-y-2.5">
+<div>
+<div class="flex justify-between font-body-sm text-body-sm mb-1">
+<span class="text-on-surface">Southern Belts (Madanapalle, Kolar)</span>
+<span class="font-data-tabular-sm text-error font-medium">-28% Inflow (Rains)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 25%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-body-sm text-body-sm mb-1">
+<span class="text-on-surface">Nashik &amp; Pune Production Clusters</span>
+<span class="font-data-tabular-sm text-secondary font-medium">Optimal Yield (+8%)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-body-sm text-body-sm mb-1">
+<span class="text-on-surface">Urban Metro Demand (Mumbai / NCR)</span>
+<span class="font-data-tabular-sm text-primary font-semibold">Elevated / Festive Peak</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 90%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Mandi-wise Real-Time Arbitrage & Price Comparison Matrix -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Regional Mandi Arbitrage Matrix</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Direct comparison of wholesale terminal realizations after freight deduction from Nashik farmgate</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm bg-surface-container px-2.5 py-1 rounded-full text-on-surface-variant">Transit Base: Nashik Central Hub (MH)</span>
+</div>
+</div>
+<!-- Comparative Visual Bars & Data Matrix Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-5 gap-space-md">
+<!-- Mandi 1: Lasalgaon APMC -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Local Benchmark</span>
+<h4 class="font-title-md text-title-md text-on-surface font-bold">Lasalgaon APMC</h4>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Nashik District (42 km)</span>
+</div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">storefront</span>
+</div>
+<div class="my-space-md space-y-2">
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Modal Price:</span>
+<span class="font-data-tabular-md font-bold text-on-surface">₹3,450 / q</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Arrival Volume:</span>
+<span class="font-data-tabular-sm text-on-surface">420 t</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Freight / Handling:</span>
+<span class="font-data-tabular-sm text-error">- ₹130 / q</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 78%"></div>
+</div>
+</div>
+<div class="pt-space-sm border-t border-surface-container-highest flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Net Farmgate Realization</span>
+<span class="font-data-tabular-md text-primary font-bold">₹3,320 / q</span>
+</div>
+</div>
+<!-- Mandi 2: Pimpalgaon Baswant -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Regional Hub</span>
+<h4 class="font-title-md text-title-md text-on-surface font-bold">Pimpalgaon Baswant</h4>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Nashik Sub-market (28 km)</span>
+</div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">storefront</span>
+</div>
+<div class="my-space-md space-y-2">
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Modal Price:</span>
+<span class="font-data-tabular-md font-bold text-on-surface">₹3,380 / q</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Arrival Volume:</span>
+<span class="font-data-tabular-sm text-on-surface">560 t</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Freight / Handling:</span>
+<span class="font-data-tabular-sm text-error">- ₹170 / q</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 72%"></div>
+</div>
+</div>
+<div class="pt-space-sm border-t border-surface-container-highest flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Net Farmgate Realization</span>
+<span class="font-data-tabular-md text-primary font-bold">₹3,210 / q</span>
+</div>
+</div>
+<!-- Mandi 3: Vashi APMC (Mumbai) - HIGHEST MARGIN -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-md border-2 border-primary flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-primary text-on-primary font-label-sm text-[10px] uppercase font-bold tracking-wider px-3 py-1 rounded-bl-lg">
+          Optimal Return
+        </div>
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase">Terminal Metro</span>
+<h4 class="font-title-md text-title-md text-on-surface font-bold">Vashi (Mumbai)</h4>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Navi Mumbai APMC (165 km)</span>
+</div>
+</div>
+<div class="my-space-md space-y-2">
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Modal Price:</span>
+<span class="font-data-tabular-md font-bold text-secondary">₹3,890 / q</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Arrival Volume:</span>
+<span class="font-data-tabular-sm text-on-surface">1,850 t</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Freight / Handling:</span>
+<span class="font-data-tabular-sm text-error">- ₹350 / q</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 95%"></div>
+</div>
+</div>
+<div class="pt-space-sm border-t border-surface-container-highest flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary uppercase font-bold">Net Realization</span>
+<span class="font-data-tabular-md text-secondary font-bold text-[16px]">₹3,540 / q</span>
+</div>
+</div>
+<!-- Mandi 4: Pune Market Yard -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Metro APMC</span>
+<h4 class="font-title-md text-title-md text-on-surface font-bold">Pune Market Yard</h4>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Gultekdi Hub (210 km)</span>
+</div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">storefront</span>
+</div>
+<div class="my-space-md space-y-2">
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Modal Price:</span>
+<span class="font-data-tabular-md font-bold text-on-surface">₹3,520 / q</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Arrival Volume:</span>
+<span class="font-data-tabular-sm text-on-surface">710 t</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Freight / Handling:</span>
+<span class="font-data-tabular-sm text-error">- ₹280 / q</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 76%"></div>
+</div>
+</div>
+<div class="pt-space-sm border-t border-surface-container-highest flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Net Farmgate Realization</span>
+<span class="font-data-tabular-md text-primary font-bold">₹3,240 / q</span>
+</div>
+</div>
+<!-- Mandi 5: Azadpur APMC (Delhi) -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">North Interstate</span>
+<h4 class="font-title-md text-title-md text-on-surface font-bold">Azadpur APMC</h4>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Delhi NCR (1,240 km)</span>
+</div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">storefront</span>
+</div>
+<div class="my-space-md space-y-2">
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Modal Price:</span>
+<span class="font-data-tabular-md font-bold text-on-surface">₹4,100 / q</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Arrival Volume:</span>
+<span class="font-data-tabular-sm text-on-surface">2,400 t</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Freight / Handling:</span>
+<span class="font-data-tabular-sm text-error">- ₹780 / q</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 79%"></div>
+</div>
+</div>
+<div class="pt-space-sm border-t border-surface-container-highest flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Net Farmgate Realization</span>
+<span class="font-data-tabular-md text-primary font-bold">₹3,320 / q</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Granular Historical Records Data Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col">
+<!-- Table Controls Toolbar -->
+<div class="p-space-md flex flex-wrap items-center justify-between gap-space-md bg-surface-container-lowest">
+<div class="flex items-center gap-space-sm">
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Granular Transaction Ledger</h2>
+<span class="font-data-tabular-sm text-data-tabular-sm bg-surface-container px-2 py-0.5 rounded-full text-on-surface-variant">148 Records Available</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Search Input -->
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full pl-8 pr-3 py-1.5 bg-surface-container-low rounded-xl font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none" id="tableSearchInput" placeholder="Filter mandi, grade..." type="text"/>
+</div>
+<!-- Export Actions -->
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors" id="exportCsvBtn" type="button">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+<span>CSV / Excel</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors" onclick="window.print()" type="button">
+<span class="material-symbols-outlined text-[16px]">print</span>
+<span>Print</span>
+</button>
+</div>
+</div>
+<!-- Table Element with Clean Row Separation (no borders per style guidelines) -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left" id="mandiDataTable">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider h-10">
+<th class="px-space-md py-2 font-medium">Date</th>
+<th class="px-space-md py-2 font-medium">Mandi / Market</th>
+<th class="px-space-md py-2 font-medium">Commodity Grade</th>
+<th class="px-space-md py-2 font-medium text-right">Min (₹/q)</th>
+<th class="px-space-md py-2 font-medium text-right">Modal (₹/q)</th>
+<th class="px-space-md py-2 font-medium text-right">Max (₹/q)</th>
+<th class="px-space-md py-2 font-medium text-right">Arrivals (q)</th>
+<th class="px-space-md py-2 font-medium text-center">24h Shift</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high/30 text-body-sm font-body-sm">
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-space-md py-3 font-data-tabular-sm text-on-surface">Oct 24, 2024</td>
+<td class="px-space-md py-3 font-medium text-on-surface">Lasalgaon APMC</td>
+<td class="px-space-md py-3 text-on-surface-variant">Hybrid No. 10 (Grade A)</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface-variant">₹2,800</td>
+<td class="px-space-md py-3 font-data-tabular-md font-bold text-right text-primary">₹3,450</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface-variant">₹3,920</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface">4,200</td>
+<td class="px-space-md py-3 text-center">
+<span class="inline-flex items-center gap-1 font-data-tabular-sm text-secondary bg-secondary-fixed/50 px-2 py-0.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[12px]">arrow_upward</span> +14.2%
+              </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-space-md py-3 font-data-tabular-sm text-on-surface">Oct 24, 2024</td>
+<td class="px-space-md py-3 font-medium text-on-surface">Vashi APMC (Mumbai)</td>
+<td class="px-space-md py-3 text-on-surface-variant">Export Grade A+ Boxed</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface-variant">₹3,200</td>
+<td class="px-space-md py-3 font-data-tabular-md font-bold text-right text-secondary">₹3,890</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface-variant">₹4,300</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface">18,500</td>
+<td class="px-space-md py-3 text-center">
+<span class="inline-flex items-center gap-1 font-data-tabular-sm text-secondary bg-secondary-fixed/50 px-2 py-0.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[12px]">arrow_upward</span> +9.5%
+              </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-space-md py-3 font-data-tabular-sm text-on-surface">Oct 24, 2024</td>
+<td class="px-space-md py-3 font-medium text-on-surface">Pimpalgaon Baswant</td>
+<td class="px-space-md py-3 text-on-surface-variant">Hybrid Commercial</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface-variant">₹2,700</td>
+<td class="px-space-md py-3 font-data-tabular-md font-bold text-right text-primary">₹3,380</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface-variant">₹3,750</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface">5,600</td>
+<td class="px-space-md py-3 text-center">
+<span class="inline-flex items-center gap-1 font-data-tabular-sm text-secondary bg-secondary-fixed/50 px-2 py-0.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[12px]">arrow_upward</span> +6.1%
+              </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-space-md py-3 font-data-tabular-sm text-on-surface">Oct 24, 2024</td>
+<td class="px-space-md py-3 font-medium text-on-surface">Pune Market Yard</td>
+<td class="px-space-md py-3 text-on-surface-variant">Standard Crate 25kg</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface-variant">₹2,950</td>
+<td class="px-space-md py-3 font-data-tabular-md font-bold text-right text-primary">₹3,520</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface-variant">₹3,880</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface">7,100</td>
+<td class="px-space-md py-3 text-center">
+<span class="inline-flex items-center gap-1 font-data-tabular-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full font-medium">
+<span class="material-symbols-outlined text-[12px]">horizontal_rule</span> 0.0%
+              </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-space-md py-3 font-data-tabular-sm text-on-surface">Oct 24, 2024</td>
+<td class="px-space-md py-3 font-medium text-on-surface">Azadpur APMC (Delhi)</td>
+<td class="px-space-md py-3 text-on-surface-variant">Long Haul Hybrid 10</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface-variant">₹3,400</td>
+<td class="px-space-md py-3 font-data-tabular-md font-bold text-right text-primary">₹4,100</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface-variant">₹4,600</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface">24,000</td>
+<td class="px-space-md py-3 text-center">
+<span class="inline-flex items-center gap-1 font-data-tabular-sm text-error bg-error-container/70 text-on-error-container px-2 py-0.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[12px]">arrow_downward</span> -2.4%
+              </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-space-md py-3 font-data-tabular-sm text-on-surface">Oct 23, 2024</td>
+<td class="px-space-md py-3 font-medium text-on-surface">Lasalgaon APMC</td>
+<td class="px-space-md py-3 text-on-surface-variant">Hybrid No. 10 (Grade A)</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface-variant">₹2,500</td>
+<td class="px-space-md py-3 font-data-tabular-md font-bold text-right text-primary">₹3,020</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface-variant">₹3,450</td>
+<td class="px-space-md py-3 font-data-tabular-md text-right text-on-surface">4,050</td>
+<td class="px-space-md py-3 text-center">
+<span class="inline-flex items-center gap-1 font-data-tabular-sm text-secondary bg-secondary-fixed/50 px-2 py-0.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[12px]">arrow_upward</span> +3.8%
+              </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination Footer -->
+<div class="px-space-md py-space-sm bg-surface-container-low flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Showing 1 to 6 of 148 recorded market sessions</span>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest flex items-center justify-center text-on-surface-variant hover:text-on-surface disabled:opacity-50" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold" type="button">1</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm text-label-sm hover:bg-surface-container" type="button">2</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm text-label-sm hover:bg-surface-container" type="button">3</button>
+<span class="text-on-surface-variant px-1">...</span>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm text-label-sm hover:bg-surface-container" type="button">25</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest flex items-center justify-center text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Methodology, Data Pipeline Transparency & Disclaimer Card -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col md:flex-row items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center text-on-surface-variant shrink-0">
+<span class="material-symbols-outlined text-[22px]">policy</span>
+</div>
+<div class="flex flex-col gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<span class="font-title-md text-body-md text-on-surface font-semibold">Methodology, Telemetry Sources &amp; Transparency Notice</span>
+<p class="leading-relaxed">
+        Observed prices are ingested directly from <strong>Agmarknet</strong> (Directorate of Marketing &amp; Inspection, Ministry of Agriculture &amp; Farmers Welfare, Govt of India) and verified against authorized APMC electronic auction ledgers (e-NAM gateways). Modal prices indicate the most frequent transaction value occurring during the primary trading session. Projected trends represent AI statistical econometric forecasting based on historical seasonality, supply arrival gradients, and IMD rainfall indices. 
+      </p>
+<p class="text-label-sm font-label-sm text-on-surface-variant/80 mt-1">
+        Disclaimer: AgriSync market intelligence is engineered for operational harvest and dispatch decision support. Not construed as statutory commodity trading or financial advisory.
+      </p>
+</div>
+</div>
+</div>
+<script>
+  // Commodity Dropdown Toggle Interaction
+  const commBtn = document.getElementById('commodityBtn');
+  const commMenu = document.getElementById('commodityMenu');
+  const selectedText = document.getElementById('selectedCommodityText');
+
+  commBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    commMenu.classList.toggle('hidden');
+  });
+
+  document.querySelectorAll('.commodity-option').forEach(item => {
+    item.addEventListener('click', () => {
+      const name = item.getAttribute('data-name');
+      selectedText.innerText = name;
+      commMenu.classList.add('hidden');
+    });
+  });
+
+  document.addEventListener('click', () => {
+    if (!commMenu.classList.contains('hidden')) {
+      commMenu.classList.add('hidden');
+    }
+  });
+
+  // Price Unit Converter Micro-Interaction (₹/Quintal vs ₹/kg)
+  const unitQuintal = document.getElementById('unitQuintalBtn');
+  const unitKg = document.getElementById('unitKgBtn');
+  const kpiModal = document.getElementById('kpiModalPrice');
+  const kpiUnit = document.getElementById('kpiModalUnit');
+  const kpiMin = document.getElementById('kpiMinPrice');
+  const kpiMax = document.getElementById('kpiMaxPrice');
+
+  unitKg?.addEventListener('click', () => {
+    unitKg.classList.add('bg-surface-container-lowest', 'shadow-sm', 'text-primary', 'font-semibold');
+    unitKg.classList.remove('text-on-surface-variant');
+    unitQuintal.classList.remove('bg-surface-container-lowest', 'shadow-sm', 'text-primary', 'font-semibold');
+    unitQuintal.classList.add('text-on-surface-variant');
+
+    kpiModal.innerText = '₹34.50';
+    kpiUnit.innerText = '/ kg';
+    kpiMin.innerText = '₹28.00';
+    kpiMax.innerText = '₹39.20';
+  });
+
+  unitQuintal?.addEventListener('click', () => {
+    unitQuintal.classList.add('bg-surface-container-lowest', 'shadow-sm', 'text-primary', 'font-semibold');
+    unitQuintal.classList.remove('text-on-surface-variant');
+    unitKg.classList.remove('bg-surface-container-lowest', 'shadow-sm', 'text-primary', 'font-semibold');
+    unitKg.classList.add('text-on-surface-variant');
+
+    kpiModal.innerText = '₹3,450';
+    kpiUnit.innerText = '/ quintal';
+    kpiMin.innerText = '₹2,800';
+    kpiMax.innerText = '₹3,920';
+  });
+
+  // Interactive Chart Tooltip
+  const points = document.querySelectorAll('#chartPoints circle');
+  const tooltip = document.getElementById('chartTooltip');
+  const ttDate = document.getElementById('ttDate');
+  const ttPrice = document.getElementById('ttPrice');
+  const ttVolume = document.getElementById('ttVolume');
+  const ttVariety = document.getElementById('ttVariety');
+
+  points.forEach(pt => {
+    pt.addEventListener('mouseenter', (e) => {
+      const date = pt.getAttribute('data-date');
+      const price = pt.getAttribute('data-price');
+      const volume = pt.getAttribute('data-volume');
+      const variety = pt.getAttribute('data-variety');
+
+      ttDate.innerText = date;
+      ttPrice.innerText = price + ' / q';
+      ttVolume.innerText = volume;
+      ttVariety.innerText = variety;
+
+      tooltip.classList.remove('hidden');
+      const rect = pt.getBoundingClientRect();
+      const parentRect = tooltip.parentElement.getBoundingClientRect();
+      
+      let leftPos = rect.left - parentRect.left - 80;
+      let topPos = rect.top - parentRect.top - 95;
+
+      if (leftPos < 10) leftPos = 10;
+      if (leftPos + 180 > parentRect.width) leftPos = parentRect.width - 190;
+
+      tooltip.style.left = leftPos + 'px';
+      tooltip.style.top = topPos + 'px';
+    });
+
+    pt.addEventListener('mouseleave', () => {
+      tooltip.classList.add('hidden');
+    });
+  });
+
+  // Simple Table Search Filter
+  const searchInput = document.getElementById('tableSearchInput');
+  const tableRows = document.querySelectorAll('#mandiDataTable tbody tr');
+
+  searchInput?.addEventListener('input', (e) => {
+    const val = e.target.value.toLowerCase();
+    tableRows.forEach(row => {
+      const txt = row.innerText.toLowerCase();
+      row.style.display = txt.includes(val) ? '' : 'none';
+    });
+  });
+
+  // Date Range Pills Toggle
+  const timeBtns = document.querySelectorAll('.time-range-btn');
+  timeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      timeBtns.forEach(b => {
+        b.classList.remove('bg-surface-container-lowest', 'shadow-sm', 'text-primary', 'font-semibold');
+        b.classList.add('text-on-surface-variant');
+      });
+      btn.classList.add('bg-surface-container-lowest', 'shadow-sm', 'text-primary', 'font-semibold');
+      btn.classList.remove('text-on-surface-variant');
+    });
+  });
+</script></div></main></div></body></html>
