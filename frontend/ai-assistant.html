@@ -38,67 +38,70 @@
 <body class="text-slate-800 antialiased selection:bg-brand-100 selection:text-brand-900">
 
   <!-- SIDEBAR -->
-  <aside class="fixed left-0 top-0 h-full w-64 bg-white border-r border-slate-200 z-50 flex flex-col justify-between py-5">
-    <div class="flex flex-col gap-6 px-4">
-      <div class="flex items-center gap-3 px-2">
-        <div class="w-10 h-10 rounded-xl bg-brand-700 flex items-center justify-center text-white shadow-sm">
-          <span class="material-symbols-outlined text-[24px]">psychiatry</span>
+  <aside class="fixed left-0 top-0 h-full w-52 bg-white border-r border-slate-200 z-50 flex flex-col justify-between py-4">
+    <div class="flex flex-col gap-4 px-3">
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-2.5 px-1.5">
+        <div class="w-8 h-8 rounded-lg bg-brand-700 flex items-center justify-center text-white shadow-sm shrink-0">
+          <span class="material-symbols-outlined text-[18px]">psychiatry</span>
         </div>
         <div>
-          <span class="font-bold text-lg text-slate-900 tracking-tight block">AgriSync</span>
-          <span class="text-xs font-medium text-slate-400 block -mt-0.5">Agricultural Intelligence</span>
+          <span class="font-bold text-sm text-slate-900 tracking-tight block leading-none">AgriSync</span>
+          <span class="text-[10px] font-medium text-slate-400 block mt-0.5">Ag-Intelligence</span>
         </div>
       </div>
 
-      <nav class="flex flex-col gap-1">
-        <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="overview" href="overview.html">
-          <span class="material-symbols-outlined text-[20px] text-slate-400">dashboard</span>
+      <!-- Navigation Links -->
+      <nav class="flex flex-col gap-0.5">
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="overview" href="overview.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">dashboard</span>
           <span>Overview</span>
         </a>
-        <a aria-current="page" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl font-semibold text-sm bg-brand-50 text-brand-800 transition-colors" data-path="ai-farming-assistant" href="ai-assistant.html">
-          <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-[20px] text-brand-700">smart_toy</span>
+        <a aria-current="page" class="flex items-center justify-between px-2.5 py-2 rounded-lg font-semibold text-xs bg-brand-50 text-brand-800 transition-colors" data-path="ai-farming-assistant" href="ai-assistant.html">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] text-brand-700">smart_toy</span>
             <span>AI Assistant</span>
           </div>
-          <span class="bg-brand-100 text-brand-800 text-[11px] font-bold px-2 py-0.5 rounded-full">AI</span>
+          <span class="bg-brand-100 text-brand-800 text-[10px] font-bold px-1.5 py-0.2 rounded-full">AI</span>
         </a>
-        <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-and-market-explorer" href="crop-market-explorer.html">
-          <span class="material-symbols-outlined text-[20px] text-slate-400">travel_explore</span>
-          <span>Crop &amp; Market Explorer</span>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-and-market-explorer" href="crop-market-explorer.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">travel_explore</span>
+          <span>Crop &amp; Markets</span>
         </a>
-        <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-price-intelligence" href="crop-prices.html">
-          <span class="material-symbols-outlined text-[20px] text-slate-400">trending_up</span>
-          <span>Price Intelligence</span>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-price-intelligence" href="crop-prices.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">trending_up</span>
+          <span>Price Intel</span>
         </a>
-        <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="weather-intelligence" href="weather.html">
-          <span class="material-symbols-outlined text-[20px] text-slate-400">partly_cloudy_day</span>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="weather-intelligence" href="weather.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">partly_cloudy_day</span>
           <span>Weather &amp; Soil</span>
         </a>
-        <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="settings" href="settings.html">
-          <span class="material-symbols-outlined text-[20px] text-slate-400">settings</span>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="settings" href="settings.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">settings</span>
           <span>Settings</span>
         </a>
       </nav>
     </div>
 
-    <div class="px-4 border-t border-slate-100 pt-4">
-      <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-brand-700 text-white font-bold flex items-center justify-center text-sm">
+    <!-- Bottom User Profile Card -->
+    <div class="px-3 border-t border-slate-100 pt-3">
+      <div class="flex items-center justify-between p-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full bg-brand-700 text-white font-bold flex items-center justify-center text-[11px] shrink-0">
             SS
           </div>
-          <div class="flex flex-col">
-            <span class="text-sm font-semibold text-slate-900 leading-tight">Dr. Sunita Sharma</span>
-            <span class="text-xs text-slate-500">Chief Agronomist</span>
+          <div class="flex flex-col truncate">
+            <span class="text-xs font-semibold text-slate-900 leading-tight truncate">Dr. S. Sharma</span>
+            <span class="text-[10px] text-slate-400">Agronomist</span>
           </div>
         </div>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500" title="AI Online" id="health-dot"></span>
+        <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0 ml-1" title="System Online" id="health-dot"></span>
       </div>
     </div>
   </aside>
 
   <!-- MAIN WRAPPER -->
-  <div class="pl-64 h-screen flex flex-col">
+  <div class="pl-52 h-screen flex flex-col">
     <!-- TOP HEADER -->
     <header class="h-16 bg-white border-b border-slate-200 px-8 flex items-center justify-between shrink-0">
       <div>
@@ -119,10 +122,10 @@
 
     <!-- CHAT WORKSPACE (2 Columns) -->
     <div class="flex-1 overflow-hidden grid grid-cols-12 bg-slate-50">
-      <!-- Left Consultation History (3 cols) -->
-      <div class="col-span-12 lg:col-span-4 xl:col-span-3 bg-white border-r border-slate-200 flex flex-col p-4 gap-4 h-full overflow-y-auto">
-        <button onclick="document.getElementById('chatInput').focus()" class="w-full py-2.5 px-4 rounded-xl bg-brand-700 text-white font-semibold text-sm hover:bg-brand-800 transition-all flex items-center justify-center gap-2 shadow-sm">
-          <span class="material-symbols-outlined text-[18px]">add</span>
+      <!-- Left Consultation History -->
+      <div class="hidden md:flex md:col-span-4 lg:col-span-3 xl:col-span-3 bg-white border-r border-slate-200 flex-col p-3 gap-3 h-full overflow-y-auto">
+        <button onclick="document.getElementById('chatInput').focus()" class="w-full py-2 px-3 rounded-lg bg-brand-700 text-white font-semibold text-xs hover:bg-brand-800 transition-all flex items-center justify-center gap-1.5 shadow-sm">
+          <span class="material-symbols-outlined text-[16px]">add</span>
           <span>New Consultation</span>
         </button>
 
@@ -174,8 +177,8 @@
         </div>
       </div>
 
-      <!-- Right Chat Conversation (9 cols) -->
-      <div class="col-span-12 lg:col-span-8 xl:col-span-9 flex flex-col h-full bg-slate-50 overflow-hidden">
+      <!-- Right Chat Conversation -->
+      <div class="col-span-12 md:col-span-8 lg:col-span-9 xl:col-span-9 flex flex-col h-full bg-slate-50 overflow-hidden">
         <!-- Messages Area -->
         <div id="chatMessages" class="flex-1 overflow-y-auto p-6 flex flex-col gap-4">
           <!-- Initial Welcome Message from AgriSync -->
