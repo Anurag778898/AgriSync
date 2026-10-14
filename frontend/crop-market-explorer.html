@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>AgriSync – Crop &amp; Market Explorer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background-color: #f8fafc; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20; }
+    .tab-pill.active {
+      background-color: #047857;
+      color: #ffffff;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- SIDEBAR -->
+  <aside class="fixed left-0 top-0 h-full w-64 bg-white border-r border-slate-200 z-50 flex flex-col justify-between py-5">
+    <div class="flex flex-col gap-6 px-4">
+      <div class="flex items-center gap-3 px-2">
+        <div class="w-10 h-10 rounded-xl bg-brand-700 flex items-center justify-center text-white shadow-sm">
+          <span class="material-symbols-outlined text-[24px]">psychiatry</span>
+        </div>
+        <div>
+          <span class="font-bold text-lg text-slate-900 tracking-tight block">AgriSync</span>
+          <span class="text-xs font-medium text-slate-400 block -mt-0.5">Agricultural Intelligence</span>
+        </div>
+      </div>
+
+      <nav class="flex flex-col gap-1">
+        <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="overview" href="overview.html">
+          <span class="material-symbols-outlined text-[20px] text-slate-400">dashboard</span>
+          <span>Overview</span>
+        </a>
+        <a class="flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="ai-farming-assistant" href="ai-assistant.html">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-[20px] text-slate-400">smart_toy</span>
+            <span>AI Assistant</span>
+          </div>
+          <span class="bg-brand-100 text-brand-800 text-[11px] font-bold px-2 py-0.5 rounded-full">AI</span>
+        </a>
+        <a aria-current="page" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-semibold text-sm bg-brand-50 text-brand-800 transition-colors" data-path="crop-and-market-explorer" href="crop-market-explorer.html">
+          <span class="material-symbols-outlined text-[20px] text-brand-700">travel_explore</span>
+          <span>Crop &amp; Market Explorer</span>
+        </a>
+        <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-price-intelligence" href="crop-prices.html">
+          <span class="material-symbols-outlined text-[20px] text-slate-400">trending_up</span>
+          <span>Price Intelligence</span>
+        </a>
+        <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="weather-intelligence" href="weather.html">
+          <span class="material-symbols-outlined text-[20px] text-slate-400">partly_cloudy_day</span>
+          <span>Weather &amp; Soil</span>
+        </a>
+        <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="settings" href="settings.html">
+          <span class="material-symbols-outlined text-[20px] text-slate-400">settings</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="px-4 border-t border-slate-100 pt-4">
+      <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-brand-700 text-white font-bold flex items-center justify-center text-sm">
+            SS
+          </div>
+          <div class="flex flex-col">
+            <span class="text-sm font-semibold text-slate-900 leading-tight">Dr. Sunita Sharma</span>
+            <span class="text-xs text-slate-500">Chief Agronomist</span>
+          </div>
+        </div>
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500" title="Explorer Engine Active" id="health-dot"></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <div class="pl-64">
+    <!-- TOP HEADER -->
+    <header class="sticky top-0 h-16 bg-white/90 backdrop-blur-md border-b border-slate-200 z-40 px-8 flex items-center justify-between">
+      <div>
+        <h1 class="text-base font-bold text-slate-900 leading-tight">Crop &amp; Market Explorer</h1>
+        <p class="text-xs text-slate-500">Crop suitability ranking &bull; 500+ APMC Mandi rates &bull; Selling window analytics</p>
+      </div>
+
+      <!-- Clean Tab Switcher -->
+      <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
+        <button id="tabBtnCrops" onclick="switchExplorerTab('crops')" class="tab-pill active px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all">
+          Crop Suitability
+        </button>
+        <button id="tabBtnMandis" onclick="switchExplorerTab('mandis')" class="tab-pill px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 transition-all">
+          APMC Mandi Rates
+        </button>
+        <button id="tabBtnWindow" onclick="switchExplorerTab('window')" class="tab-pill px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 transition-all">
+          Selling Window
+        </button>
+      </div>
+    </header>
+
+    <main class="p-8 max-w-7xl mx-auto flex flex-col gap-6">
+
+      <!-- ==================== TAB 1: CROP SUITABILITY ==================== -->
+      <div id="tabContentCrops" class="flex flex-col gap-6">
+        <!-- Filter Card -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-base font-bold text-slate-900">Farm Soil &amp; Environmental Criteria</h2>
+              <p class="text-xs text-slate-500">Fine-tune soil parameters to discover highest profit crop varieties</p>
+            </div>
+            <button onclick="calculateCropRecommendations()" class="px-4 py-2 bg-brand-700 text-white font-semibold text-xs rounded-xl hover:bg-brand-800 transition-all shadow-sm flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px]">tune</span>
+              <span>Filter Crops</span>
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Soil Type</label>
+              <select id="cropSoil" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-600">
+                <option value="Black Cotton / Regur">Black Clay / Regur (High Moisture)</option>
+                <option value="Alluvial Loam">Alluvial Loam (Fertile Riverbed)</option>
+                <option value="Red Sandy Loam">Red Sandy Loam (High Drainage)</option>
+                <option value="Laterite">Laterite (Acidic / Hilly)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Season</label>
+              <select id="cropSeason" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-600">
+                <option value="Rabi">Rabi (Winter / Nov – April)</option>
+                <option value="Kharif">Kharif (Monsoon / June – Oct)</option>
+                <option value="Zaid">Zaid (Summer / March – June)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Water Supply</label>
+              <select id="cropWater" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-600">
+                <option value="High">Abundant (Automated Drip / Canal)</option>
+                <option value="Moderate">Moderate (Borewell Interval)</option>
+                <option value="Rainfed">Rainfed / Water-Conserving</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Input Budget (per Acre)</label>
+              <select id="cropBudget" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-600">
+                <option value="Medium">Medium (₹30,000 – ₹60,000)</option>
+                <option value="Low">Low (&lt; ₹30,000)</option>
+                <option value="High">High (&gt; ₹60,000 Commercial)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ranked Cards Grid -->
+        <div id="cropCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Dynamic Cards -->
+        </div>
+      </div>
+
+      <!-- ==================== TAB 2: APMC MANDI RATES ==================== -->
+      <div id="tabContentMandis" class="hidden flex flex-col gap-6">
+        <!-- Mandi Filter Bar -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-3 flex-wrap w-full sm:w-auto">
+            <select id="mandiCommodity" onchange="filterMandiTable()" class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none">
+              <option value="all">All Commodities</option>
+              <option value="Tomato" selected>Tomato (Hybrid)</option>
+              <option value="Onion">Onion (Nashik Red)</option>
+              <option value="Wheat">Wheat (Sharbati/Lokwan)</option>
+              <option value="Soybean">Soybean (Yellow)</option>
+              <option value="Cotton">Cotton (Medium Staple)</option>
+              <option value="Potato">Potato (Jyoti)</option>
+            </select>
+
+            <select id="mandiState" onchange="filterMandiTable()" class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none">
+              <option value="all">All States</option>
+              <option value="Maharashtra" selected>Maharashtra</option>
+              <option value="Madhya Pradesh">Madhya Pradesh</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Delhi">Delhi NCR</option>
+              <option value="Punjab">Punjab</option>
+            </select>
+
+            <div class="relative flex-1 sm:w-64">
+              <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-[18px]">search</span>
+              <input id="mandiSearchInput" oninput="filterMandiTable()" type="text" placeholder="Search terminal or district..." class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:bg-white"/>
+            </div>
+          </div>
+
+          <span id="mandiCountBadge" class="text-xs font-bold text-slate-400 shrink-0">8 Terminals Found</span>
+        </div>
+
+        <!-- Clean Table Card -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50 text-slate-500 text-xs font-bold border-b border-slate-200">
+                <th class="py-3 px-6">Mandi Terminal</th>
+                <th class="py-3 px-6">Location</th>
+                <th class="py-3 px-6">Commodity</th>
+                <th class="py-3 px-6 text-right">Modal Rate</th>
+                <th class="py-3 px-6 text-right">Min - Max</th>
+                <th class="py-3 px-6 text-right">Daily Arrivals</th>
+                <th class="py-3 px-6 text-center">Trend (24h)</th>
+              </tr>
+            </thead>
+            <tbody id="mandiTableBody" class="text-xs divide-y divide-slate-100">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ==================== TAB 3: SELLING WINDOW FORECASTER ==================== -->
+      <div id="tabContentWindow" class="hidden flex flex-col gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Left Parameters -->
+          <div class="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col gap-4">
+            <div>
+              <h2 class="text-base font-bold text-slate-900">Selling Window Calculator</h2>
+              <p class="text-xs text-slate-500">Forecast optimal harvest and market dispatch timing</p>
+            </div>
+
+            <div class="flex flex-col gap-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">Crop Variety</label>
+                <select id="winCommodity" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800">
+                  <option value="Tomato">Tomato (Hybrid)</option>
+                  <option value="Onion">Onion (Garwa / Red)</option>
+                  <option value="Wheat">Wheat (Lokwan)</option>
+                  <option value="Soybean">Soybean (Yellow)</option>
+                </select>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 mb-1">Target Mandi</label>
+                  <select id="winMandi" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800">
+                    <option value="Lasalgaon APMC">Lasalgaon APMC</option>
+                    <option value="Pimpalgaon APMC">Pimpalgaon APMC</option>
+                    <option value="Azadpur (Delhi)">Azadpur (Delhi)</option>
+                    <option value="Vashi (Mumbai)">Vashi (Mumbai)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 mb-1">Current Spot (₹/q)</label>
+                  <input id="winCurrentPrice" type="number" value="1850" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-800"/>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 mb-1">Lot Size (Quintals)</label>
+                  <input id="winQty" type="number" value="250" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-800"/>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 mb-1">Holding Capacity (Days)</label>
+                  <input id="winHorizon" type="number" value="14" min="3" max="45" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-800"/>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">Arrivals &amp; Demand Trend</label>
+                <select id="winDemandShift" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800">
+                  <option value="1.25">High Festival Demand (+25% Premium Expectation)</option>
+                  <option value="1.00">Normal Seasonal Flow (Stable)</option>
+                  <option value="0.80">Market Glut / Heavy Arrivals (-20%)</option>
+                </select>
+              </div>
+
+              <button onclick="calculateSellingWindow()" class="mt-2 w-full py-2.5 bg-brand-700 text-white font-semibold text-xs rounded-xl hover:bg-brand-800 transition-all shadow-sm flex items-center justify-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">bolt</span>
+                <span>Calculate Best Selling Window</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Results -->
+          <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div class="flex flex-col gap-5">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 class="font-bold text-slate-900 text-sm">Projection Results</h3>
+                <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                  88% Confidence Model
+                </span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+                  <span class="text-xs font-medium text-slate-500 block">Recommended Window</span>
+                  <span id="winResultDate" class="text-base font-bold text-brand-800 mt-1 block">Friday to Monday</span>
+                  <span class="text-[11px] text-slate-400">Next 3–5 Days</span>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+                  <span class="text-xs font-medium text-slate-500 block">Projected Peak Rate</span>
+                  <span id="winResultPrice" class="text-xl font-bold font-mono text-slate-900 mt-1 block">₹2,140 /q</span>
+                  <span id="winResultDelta" class="text-[11px] font-semibold text-emerald-700">+₹290 (+15.6%)</span>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+                  <span class="text-xs font-medium text-slate-500 block">Estimated Net Gain</span>
+                  <span id="winResultGain" class="text-xl font-bold font-mono text-emerald-700 mt-1 block">+₹72,500</span>
+                  <span class="text-[11px] text-slate-400">On 250 Quintal Batch</span>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-emerald-50/60 border border-emerald-200/80 flex flex-col gap-1.5">
+                <span class="text-xs font-bold text-emerald-900 flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-[16px]">lightbulb</span> Agronomic Recommendation
+                </span>
+                <p id="winActionText" class="text-xs text-emerald-800 leading-relaxed">
+                  Hold tomato harvest from Plot B until Friday morning. Southern transit arrivals are low due to heavy rainfall, creating supply scarcity at Lasalgaon APMC. Selling between Oct 17–19 captures +15.6% premium over today's spot rate.
+                </p>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+              <span>Backed by 5-year Agmarknet price history &amp; weather risk</span>
+              <a href="ai-assistant.html" class="text-brand-700 font-semibold hover:underline">Consult AI Co-Pilot &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="agrisync.js"></script>
+  <script>
+    function switchExplorerTab(tabId) {
+      document.getElementById('tabContentCrops').classList.add('hidden');
+      document.getElementById('tabContentMandis').classList.add('hidden');
+      document.getElementById('tabContentWindow').classList.add('hidden');
+
+      document.getElementById('tabBtnCrops').classList.remove('active');
+      document.getElementById('tabBtnMandis').classList.remove('active');
+      document.getElementById('tabBtnWindow').classList.remove('active');
+
+      if (tabId === 'crops') {
+        document.getElementById('tabContentCrops').classList.remove('hidden');
+        document.getElementById('tabBtnCrops').classList.add('active');
+      } else if (tabId === 'mandis') {
+        document.getElementById('tabContentMandis').classList.remove('hidden');
+        document.getElementById('tabBtnMandis').classList.add('active');
+        renderMandiTable();
+      } else if (tabId === 'window') {
+        document.getElementById('tabContentWindow').classList.remove('hidden');
+        document.getElementById('tabBtnWindow').classList.add('active');
+      }
+    }
+
+    const CROPS_DB = [
+      { name: "Tomato (Abhinav / S-311)", category: "Horticulture", suitability: 96, duration: "110–120 Days", yield: "280–320 Qtl/Acre", cost: "₹52,000", revenue: "₹1,94,000", profit: "₹1,42,000", mandiPrice: "₹1,850 – ₹2,400 /q", demandTrend: "+14% High Demand", risk: "Moderate" },
+      { name: "Onion (Nashik Red / Garwa)", category: "Cash Crop", suitability: 93, duration: "125–135 Days", yield: "140–160 Qtl/Acre", cost: "₹38,000", revenue: "₹1,56,000", profit: "₹1,18,000", mandiPrice: "₹3,450 /q", demandTrend: "+18% Very High", risk: "Low-Mod" },
+      { name: "Soybean (JS-335 / KDS-726)", category: "Oilseed", suitability: 89, duration: "95–105 Days", yield: "12–14 Qtl/Acre", cost: "₹16,500", revenue: "₹64,400", profit: "₹47,900", mandiPrice: "₹4,600 /q", demandTrend: "Stable Demand", risk: "Low" },
+      { name: "Wheat (Sharbati / Lokwan)", category: "Cereal Grain", suitability: 86, duration: "115–125 Days", yield: "22–26 Qtl/Acre", cost: "₹18,000", revenue: "₹59,150", profit: "₹41,150", mandiPrice: "₹2,275 /q", demandTrend: "Govt MSP Backed", risk: "Very Low" },
+      { name: "Cotton (Bt Hybrid RCH-659)", category: "Commercial Fiber", suitability: 82, duration: "150–165 Days", yield: "10–12 Qtl/Acre", cost: "₹24,000", revenue: "₹85,200", profit: "₹61,200", mandiPrice: "₹7,100 /q", demandTrend: "+6% Export Surge", risk: "Moderate" },
+      { name: "Green Chilli (G-4 Super Hot)", category: "Spice / Cash Crop", suitability: 79, duration: "140–180 Days", yield: "70–85 Qtl/Acre", cost: "₹44,000", revenue: "₹1,48,000", profit: "₹1,04,000", mandiPrice: "₹3,800 – ₹4,200 /q", demandTrend: "High Regional Pull", risk: "Moderate" }
+    ];
+
+    function calculateCropRecommendations() {
+      const container = document.getElementById('cropCardsContainer');
+      container.innerHTML = '';
+      CROPS_DB.forEach(c => {
+        const card = document.createElement('div');
+        card.className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-start justify-between">
+              <div>
+                <h3 class="font-bold text-sm text-slate-900">${c.name}</h3>
+                <span class="text-xs text-slate-500">${c.category} &bull; ${c.duration}</span>
+              </div>
+              <span class="bg-emerald-50 text-emerald-800 font-bold text-xs px-2.5 py-0.5 rounded-full border border-emerald-200 font-mono">
+                ${c.suitability}% Match
+              </span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 my-4 bg-slate-50 p-3 rounded-xl border border-slate-100">
+              <div>
+                <span class="text-[11px] text-slate-500 block">Est. Net Profit</span>
+                <span class="font-bold font-mono text-sm text-emerald-700">${c.profit} <span class="text-[10px] text-slate-500 font-normal">/ac</span></span>
+              </div>
+              <div>
+                <span class="text-[11px] text-slate-500 block">Expected Yield</span>
+                <span class="font-bold font-mono text-sm text-slate-900">${c.yield}</span>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-1 text-xs text-slate-600">
+              <div class="flex justify-between">
+                <span>Input Cost: <strong>${c.cost}</strong></span>
+                <span>Revenue: <strong>${c.revenue}</strong></span>
+              </div>
+              <div class="flex justify-between">
+                <span>Mandi Rate:</span>
+                <span class="font-mono font-bold text-slate-900">${c.mandiPrice}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-xs font-semibold text-emerald-700 flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px]">trending_up</span> ${c.demandTrend}
+            </span>
+            <a href="ai-assistant.html" class="text-xs font-semibold text-brand-700 hover:underline">
+              Advisory &rarr;
+            </a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    const MANDI_DB = [
+      { name: "Lasalgaon APMC", state: "Maharashtra", district: "Nashik", commodity: "Onion", modal: 3450, min: 2800, max: 3950, arrivals: 4200, trend: "+14.2%", positive: true },
+      { name: "Pimpalgaon APMC", state: "Maharashtra", district: "Nashik", commodity: "Tomato", modal: 1850, min: 1400, max: 2150, arrivals: 1850, trend: "+8.5%", positive: true },
+      { name: "Azadpur Mandi", state: "Delhi", district: "North Delhi", commodity: "Tomato", modal: 2420, min: 1900, max: 2800, arrivals: 8400, trend: "+6.1%", positive: true },
+      { name: "Vashi APMC", state: "Maharashtra", district: "Navi Mumbai", commodity: "Onion", modal: 3750, min: 3200, max: 4100, arrivals: 3100, trend: "+4.4%", positive: true },
+      { name: "Pune Gultekdi", state: "Maharashtra", district: "Pune", commodity: "Wheat", modal: 2340, min: 2100, max: 2550, arrivals: 1650, trend: "+3.2%", positive: true },
+      { name: "Gondal Mandi", state: "Gujarat", district: "Rajkot", commodity: "Cotton", modal: 7150, min: 6600, max: 7450, arrivals: 2900, trend: "-0.8%", positive: false },
+      { name: "Indore APMC", state: "Madhya Pradesh", district: "Indore", commodity: "Soybean", modal: 4620, min: 4200, max: 4850, arrivals: 5200, trend: "+1.9%", positive: true },
+      { name: "Khanna Mandi", state: "Punjab", district: "Ludhiana", commodity: "Wheat", modal: 2275, min: 2275, max: 2350, arrivals: 9200, trend: "0.0%", positive: true }
+    ];
+
+    function renderMandiTable(data = MANDI_DB) {
+      const tbody = document.getElementById('mandiTableBody');
+      tbody.innerHTML = '';
+      data.forEach(m => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50 transition-colors";
+        tr.innerHTML = `
+          <td class="py-3.5 px-6 font-bold text-slate-900">${m.name}</td>
+          <td class="py-3.5 px-6 text-slate-500">${m.district}, ${m.state}</td>
+          <td class="py-3.5 px-6 font-medium text-slate-800">${m.commodity}</td>
+          <td class="py-3.5 px-6 text-right font-mono font-bold text-slate-900">₹${m.modal.toLocaleString()}</td>
+          <td class="py-3.5 px-6 text-right font-mono text-slate-500">₹${m.min} – ₹${m.max}</td>
+          <td class="py-3.5 px-6 text-right font-mono text-slate-700">${m.arrivals.toLocaleString()} MT</td>
+          <td class="py-3.5 px-6 text-center font-mono font-bold ${m.positive ? 'text-emerald-700' : 'text-rose-600'}">${m.trend}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+      document.getElementById('mandiCountBadge').textContent = `${data.length} Terminals Found`;
+    }
+
+    function filterMandiTable() {
+      const comm = document.getElementById('mandiCommodity').value.toLowerCase();
+      const st = document.getElementById('mandiState').value.toLowerCase();
+      const q = document.getElementById('mandiSearchInput').value.toLowerCase();
+      const filtered = MANDI_DB.filter(m => {
+        const matchComm = (comm === 'all') || m.commodity.toLowerCase().includes(comm);
+        const matchState = (st === 'all') || m.state.toLowerCase().includes(st);
+        const matchQ = (q === '') || m.name.toLowerCase().includes(q) || m.district.toLowerCase().includes(q);
+        return matchComm && matchState && matchQ;
+      });
+      renderMandiTable(filtered);
+    }
+
+    async function calculateSellingWindow() {
+      const comm = document.getElementById('winCommodity').value;
+      const curPrice = parseFloat(document.getElementById('winCurrentPrice').value) || 1850;
+      const qty = parseFloat(document.getElementById('winQty').value) || 250;
+      const demandShift = parseFloat(document.getElementById('winDemandShift').value) || 1.25;
+
+      try {
+        const res = await fetch(`/api/v1/predictions/best-selling-window?commodity=${comm.toLowerCase()}`);
+        if (res.ok) {
+          const data = await res.json();
+          document.getElementById('winResultDate').textContent = data.window || 'Friday to Monday';
+          if (data.action) document.getElementById('winActionText').textContent = data.action;
+        }
+      } catch (err) {}
+
+      const predictedPrice = Math.round(curPrice * demandShift);
+      const deltaPrice = predictedPrice - curPrice;
+      const pct = ((deltaPrice / curPrice) * 100).toFixed(1);
+      const totalGain = Math.round(deltaPrice * qty);
+
+      document.getElementById('winResultPrice').textContent = `₹${predictedPrice.toLocaleString()} /q`;
+      document.getElementById('winResultDelta').textContent = `+₹${deltaPrice} (+${pct}%)`;
+      document.getElementById('winResultGain').textContent = `+₹${totalGain.toLocaleString()}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      calculateCropRecommendations();
+      renderMandiTable();
+    });
+  </script>
+</body>
+</html>
