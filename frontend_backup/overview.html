@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>AgriSync – Farm Intelligence &amp; Market Advisory</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background-color: #f8fafc; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- SIDEBAR -->
+  <aside class="fixed left-0 top-0 h-full w-52 bg-white border-r border-slate-200 z-50 flex flex-col justify-between py-4">
+    <div class="flex flex-col gap-4 px-3">
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-2.5 px-1.5">
+        <div class="w-8 h-8 rounded-lg bg-brand-700 flex items-center justify-center text-white shadow-sm shrink-0">
+          <span class="material-symbols-outlined text-[18px]">psychiatry</span>
+        </div>
+        <div>
+          <span class="font-bold text-sm text-slate-900 tracking-tight block leading-none">AgriSync</span>
+          <span class="text-[10px] font-medium text-slate-400 block mt-0.5">Ag-Intelligence</span>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="flex flex-col gap-0.5">
+        <a aria-current="page" class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-semibold text-xs bg-brand-50 text-brand-800 transition-colors" data-path="overview" href="overview.html">
+          <span class="material-symbols-outlined text-[18px] text-brand-700">dashboard</span>
+          <span>Overview</span>
+        </a>
+        <a class="flex items-center justify-between px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="ai-farming-assistant" href="ai-assistant.html">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] text-slate-400">smart_toy</span>
+            <span>AI Assistant</span>
+          </div>
+          <span class="bg-brand-100 text-brand-800 text-[10px] font-bold px-1.5 py-0.2 rounded-full">AI</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-and-market-explorer" href="crop-market-explorer.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">travel_explore</span>
+          <span>Crop &amp; Markets</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-price-intelligence" href="crop-prices.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">trending_up</span>
+          <span>Price Intel</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="weather-intelligence" href="weather.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">partly_cloudy_day</span>
+          <span>Weather &amp; Soil</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="settings" href="settings.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">settings</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Bottom User Profile Card -->
+    <div class="px-3 border-t border-slate-100 pt-3">
+      <div class="flex items-center justify-between p-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full bg-brand-700 text-white font-bold flex items-center justify-center text-[11px] shrink-0">
+            SS
+          </div>
+          <div class="flex flex-col truncate">
+            <span class="text-xs font-semibold text-slate-900 leading-tight truncate">Dr. S. Sharma</span>
+            <span class="text-[10px] text-slate-400">Agronomist</span>
+          </div>
+        </div>
+        <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0 ml-1" title="System Online" id="health-dot"></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <div class="pl-52">
+    <!-- TOP HEADER -->
+    <header class="sticky top-0 h-16 bg-white/90 backdrop-blur-md border-b border-slate-200 z-40 px-8 flex items-center justify-between">
+      <div>
+        <h1 class="text-base font-bold text-slate-900 leading-tight">Farm Overview</h1>
+        <p class="text-xs text-slate-500">Green Valley Farms &bull; Nashik Sector 4, Maharashtra</p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Quick Search -->
+        <div class="relative w-64">
+          <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-[18px]">search</span>
+          <input type="text" placeholder="Search crops, mandis..." class="w-full pl-9 pr-3 py-1.5 bg-slate-100 rounded-lg text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-600 transition-all border border-transparent focus:border-brand-600"/>
+        </div>
+
+        <!-- Live Sync Pill -->
+        <div class="flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-full border border-emerald-200/60">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Live Agmarknet &bull; IMD</span>
+        </div>
+
+        <!-- Quick AI Consultation Button -->
+        <a href="ai-assistant.html" class="flex items-center gap-1.5 px-3 py-1.5 bg-brand-700 text-white text-xs font-semibold rounded-lg hover:bg-brand-800 transition-all shadow-sm">
+          <span class="material-symbols-outlined text-[16px]">chat</span>
+          <span>Ask AI</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="p-8 max-w-7xl mx-auto flex flex-col gap-6">
+
+      <!-- KEY METRIC CARDS -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Card 1: Today's Weather -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Farm Weather</span>
+            <span class="material-symbols-outlined text-amber-500 text-[22px]">sunny</span>
+          </div>
+          <div class="my-3">
+            <div class="flex items-baseline gap-2">
+              <span class="text-3xl font-extrabold text-slate-900 tracking-tight font-mono">28.4°C</span>
+              <span class="text-xs text-slate-500 font-medium">Scattered clouds</span>
+            </div>
+            <p class="text-xs text-slate-600 mt-1">Humidity 68% &bull; Wind NW 12 km/h</p>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="text-emerald-700 font-semibold flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px]">check_circle</span> Spray Condition Optimal
+            </span>
+            <span class="text-slate-400">Today</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Key Mandi Rate -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Top Commodity</span>
+            <span class="material-symbols-outlined text-brand-700 text-[22px]">storefront</span>
+          </div>
+          <div class="my-3">
+            <div class="flex items-baseline gap-2">
+              <span class="text-3xl font-extrabold text-slate-900 tracking-tight font-mono">₹3,450</span>
+              <span class="text-xs text-slate-500 font-medium">/ quintal</span>
+            </div>
+            <div class="flex items-center gap-1.5 mt-1">
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">+14.2% (₹430)</span>
+              <span class="text-xs text-slate-500">Tomato (Hybrid)</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Lasalgaon APMC Benchmark</span>
+            <a href="crop-prices.html" class="text-brand-700 font-semibold hover:underline">Details &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Card 3: Priority Advisory -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Harvest Window</span>
+            <span class="material-symbols-outlined text-emerald-700 text-[22px]">calendar_today</span>
+          </div>
+          <div class="my-3">
+            <span class="text-xl font-bold text-slate-900 block leading-tight">Plot B Harvest Alert</span>
+            <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+              Harvest before Thursday 14:00 to prevent rain split and capture +8% price arbitrage.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="text-emerald-700 font-semibold">Dry Window: 48 hrs</span>
+            <a href="ai-assistant.html" class="text-brand-700 font-semibold hover:underline">Plan &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Card 4: Soil Health -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Soil Moisture</span>
+            <span class="material-symbols-outlined text-blue-600 text-[22px]">water_drop</span>
+          </div>
+          <div class="my-3">
+            <div class="flex items-baseline gap-2">
+              <span class="text-3xl font-extrabold text-slate-900 tracking-tight font-mono">42%</span>
+              <span class="text-xs text-emerald-700 font-semibold">Field Capacity</span>
+            </div>
+            <p class="text-xs text-slate-600 mt-1">Plot A: 42% &bull; Plot B: 38% (Normal)</p>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Next irrigation in 18 hrs</span>
+            <span class="text-brand-700 font-medium">12 Nodes Active</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- MAIN DASHBOARD CONTENT (2 COLUMNS) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Left Column: Price Chart & Recommendations (8 cols) -->
+        <div class="lg:col-span-8 flex flex-col gap-6">
+
+          <!-- Price Trend Chart Card -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col gap-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h2 class="text-base font-bold text-slate-900">Mandi Price Trends &amp; Projection</h2>
+                <p class="text-xs text-slate-500">14-Day daily modal rates at Lasalgaon APMC with forecast model</p>
+              </div>
+
+              <!-- Commodity Selector Pills -->
+              <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
+                <button class="px-3 py-1 rounded-lg text-xs font-bold bg-white text-brand-900 shadow-sm" type="button">Tomato</button>
+                <button class="px-3 py-1 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900" type="button">Onion</button>
+                <button class="px-3 py-1 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900" type="button">Wheat</button>
+                <button class="px-3 py-1 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900" type="button">Soybean</button>
+              </div>
+            </div>
+
+            <!-- SVG Chart -->
+            <div class="w-full bg-slate-50/70 p-4 rounded-xl border border-slate-100">
+              <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+                <span>Current Realized Rate: <strong class="text-slate-800">₹3,450 / quintal</strong></span>
+                <div class="flex items-center gap-4">
+                  <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-brand-700"></span>Realized Mandi Rate</span>
+                  <span class="flex items-center gap-1.5"><span class="w-2.5 h-0.5 bg-slate-400"></span>Govt MSP Reference</span>
+                </div>
+              </div>
+
+              <div class="relative w-full h-48">
+                <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 700 180">
+                  <defs>
+                    <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#059669" stop-opacity="0.25"/>
+                      <stop offset="100%" stop-color="#059669" stop-opacity="0.0"/>
+                    </linearGradient>
+                  </defs>
+                  <!-- Reference Lines -->
+                  <line x1="0" y1="40" x2="700" y2="40" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 4"/>
+                  <line x1="0" y1="90" x2="700" y2="90" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 4"/>
+                  <line x1="0" y1="140" x2="700" y2="140" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 4"/>
+                  <!-- MSP Baseline -->
+                  <line x1="0" y1="125" x2="700" y2="125" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 4"/>
+                  <!-- Area Fill -->
+                  <polygon points="0,150 60,140 120,145 180,120 240,125 300,110 360,105 420,85 480,95 540,70 600,50 660,35 700,20 700,180 0,180" fill="url(#chartGrad)"/>
+                  <!-- Trend Polyline -->
+                  <polyline points="0,150 60,140 120,145 180,120 240,125 300,110 360,105 420,85 480,95 540,70 600,50 660,35 700,20" fill="none" stroke="#047857" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <!-- Points -->
+                  <circle cx="600" cy="50" r="4" fill="#ffffff" stroke="#047857" stroke-width="2.5"/>
+                  <circle cx="700" cy="20" r="5" fill="#047857" stroke="#ffffff" stroke-width="2.5"/>
+                </svg>
+              </div>
+
+              <!-- Time Labels -->
+              <div class="flex justify-between text-[11px] font-mono text-slate-400 mt-2">
+                <span>Oct 08</span>
+                <span>Oct 10</span>
+                <span>Oct 12</span>
+                <span>Oct 14</span>
+                <span>Oct 16</span>
+                <span>Oct 18</span>
+                <span>Today (Live)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Agronomic Advisories -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col gap-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="text-base font-bold text-slate-900">Agronomic Advisory Feed</h2>
+                <p class="text-xs text-slate-500">Contextual actionable directives for Nashik Sector 4</p>
+              </div>
+              <a href="ai-assistant.html" class="text-xs font-semibold text-brand-700 hover:underline flex items-center gap-1">
+                Open AI Co-Pilot &rarr;
+              </a>
+            </div>
+
+            <div class="flex flex-col gap-3">
+              <!-- Advisory 1 -->
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div class="flex items-start gap-3">
+                  <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center shrink-0 mt-0.5">
+                    <span class="material-symbols-outlined text-[20px]">agriculture</span>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="font-bold text-sm text-slate-900">Harvest Advisory: Tomato Plot B</span>
+                      <span class="bg-amber-100 text-amber-800 text-[11px] font-bold px-2 py-0.5 rounded-full">High Priority</span>
+                    </div>
+                    <p class="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                      Complete harvest before Thursday morning. 28mm forecasted rain will lower quality and drop spot realization by ₹120–150/q.
+                    </p>
+                  </div>
+                </div>
+                <a href="crop-market-explorer.html" class="px-3.5 py-1.5 rounded-lg bg-brand-700 text-white font-semibold text-xs hover:bg-brand-800 transition-colors shrink-0 shadow-sm">
+                  Selling Window
+                </a>
+              </div>
+
+              <!-- Advisory 2 -->
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div class="flex items-start gap-3">
+                  <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center shrink-0 mt-0.5">
+                    <span class="material-symbols-outlined text-[20px]">water_drop</span>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="font-bold text-sm text-slate-900">Irrigation Timing: Micro-Drip Schedule</span>
+                      <span class="bg-blue-100 text-blue-800 text-[11px] font-bold px-2 py-0.5 rounded-full">Scheduled</span>
+                    </div>
+                    <p class="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                      Run automated drip cycle on Plot A tomorrow at 06:00 for 45 minutes to maintain 40–45% root-zone moisture.
+                    </p>
+                  </div>
+                </div>
+                <button type="button" class="px-3.5 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 font-semibold text-xs hover:bg-slate-50 transition-colors shrink-0">
+                  Confirmed
+                </button>
+              </div>
+
+              <!-- Advisory 3 -->
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div class="flex items-start gap-3">
+                  <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                    <span class="material-symbols-outlined text-[20px]">science</span>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="font-bold text-sm text-slate-900">Soil Micronutrient Balancing</span>
+                      <span class="bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2 py-0.5 rounded-full">Routine</span>
+                    </div>
+                    <p class="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                      Soil test shows balanced pH 6.8 and adequate nitrogen. Apply potassium humate during next fertigation.
+                    </p>
+                  </div>
+                </div>
+                <a href="settings.html" class="px-3.5 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 font-semibold text-xs hover:bg-slate-50 transition-colors shrink-0">
+                  Soil Profile
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Mandi Watchlist & 7-Day Forecast (4 cols) -->
+        <div class="lg:col-span-4 flex flex-col gap-6">
+
+          <!-- Mandi Watchlist Card -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col gap-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="text-base font-bold text-slate-900">Regional APMC Mandis</h2>
+                <p class="text-xs text-slate-500">Live wholesale market quotes</p>
+              </div>
+              <a href="crop-market-explorer.html" class="text-xs font-semibold text-brand-700 hover:underline">All &rarr;</a>
+            </div>
+
+            <div class="flex flex-col gap-2.5">
+              <!-- Mandi 1 -->
+              <div class="p-3 rounded-xl bg-slate-50 flex items-center justify-between hover:bg-slate-100 transition-colors">
+                <div>
+                  <span class="font-bold text-sm text-slate-900 block">Lasalgaon Mandi</span>
+                  <span class="text-xs text-slate-500">Nashik &bull; Onion &amp; Tomato</span>
+                </div>
+                <div class="text-right font-mono">
+                  <span class="font-bold text-sm text-slate-900 block">₹3,450 /q</span>
+                  <span class="text-xs font-semibold text-emerald-700">+14.2%</span>
+                </div>
+              </div>
+
+              <!-- Mandi 2 -->
+              <div class="p-3 rounded-xl bg-slate-50 flex items-center justify-between hover:bg-slate-100 transition-colors">
+                <div>
+                  <span class="font-bold text-sm text-slate-900 block">Pimpalgaon APMC</span>
+                  <span class="text-xs text-slate-500">Tomato Capital Yard</span>
+                </div>
+                <div class="text-right font-mono">
+                  <span class="font-bold text-sm text-slate-900 block">₹1,850 /q</span>
+                  <span class="text-xs font-semibold text-emerald-700">+8.5%</span>
+                </div>
+              </div>
+
+              <!-- Mandi 3 -->
+              <div class="p-3 rounded-xl bg-slate-50 flex items-center justify-between hover:bg-slate-100 transition-colors">
+                <div>
+                  <span class="font-bold text-sm text-slate-900 block">Azadpur Mandi</span>
+                  <span class="text-xs text-slate-500">Delhi NCR Terminal</span>
+                </div>
+                <div class="text-right font-mono">
+                  <span class="font-bold text-sm text-slate-900 block">₹3,920 /q</span>
+                  <span class="text-xs font-semibold text-emerald-700">+6.1%</span>
+                </div>
+              </div>
+
+              <!-- Mandi 4 -->
+              <div class="p-3 rounded-xl bg-slate-50 flex items-center justify-between hover:bg-slate-100 transition-colors">
+                <div>
+                  <span class="font-bold text-sm text-slate-900 block">Vashi APMC</span>
+                  <span class="text-xs text-slate-500">Navi Mumbai Market</span>
+                </div>
+                <div class="text-right font-mono">
+                  <span class="font-bold text-sm text-slate-900 block">₹3,750 /q</span>
+                  <span class="text-xs font-semibold text-emerald-700">+4.4%</span>
+                </div>
+              </div>
+
+              <!-- Mandi 5 -->
+              <div class="p-3 rounded-xl bg-slate-50 flex items-center justify-between hover:bg-slate-100 transition-colors">
+                <div>
+                  <span class="font-bold text-sm text-slate-900 block">Pune Gultekdi</span>
+                  <span class="text-xs text-slate-500">Western Maharashtra</span>
+                </div>
+                <div class="text-right font-mono">
+                  <span class="font-bold text-sm text-slate-900 block">₹3,380 /q</span>
+                  <span class="text-xs font-semibold text-emerald-700">+3.4%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7-Day Microclimate Card -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col gap-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="text-base font-bold text-slate-900">7-Day Weather</h2>
+                <p class="text-xs text-slate-500">Local IMD agricultural forecast</p>
+              </div>
+              <a href="weather.html" class="text-xs font-semibold text-brand-700 hover:underline">Radar &rarr;</a>
+            </div>
+
+            <div class="flex flex-col gap-2 font-mono text-xs">
+              <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50">
+                <span class="w-16 font-bold text-slate-800">Today</span>
+                <span class="flex items-center gap-1 text-slate-600"><span class="material-symbols-outlined text-[16px] text-amber-500">sunny</span> 28° / 19°</span>
+                <span class="text-emerald-700 font-bold">Clear</span>
+              </div>
+              <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50">
+                <span class="w-16 font-bold text-slate-800">Thu</span>
+                <span class="flex items-center gap-1 text-slate-600"><span class="material-symbols-outlined text-[16px] text-blue-500">rainy</span> 24° / 17°</span>
+                <span class="text-amber-700 font-bold">Rain 78%</span>
+              </div>
+              <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50">
+                <span class="w-16 font-bold text-slate-800">Fri</span>
+                <span class="flex items-center gap-1 text-slate-600"><span class="material-symbols-outlined text-[16px] text-blue-400">cloudy</span> 26° / 18°</span>
+                <span class="text-emerald-700 font-bold">Drying</span>
+              </div>
+              <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50">
+                <span class="w-16 font-bold text-slate-800">Sat</span>
+                <span class="flex items-center gap-1 text-slate-600"><span class="material-symbols-outlined text-[16px] text-amber-500">sunny</span> 29° / 18°</span>
+                <span class="text-emerald-700 font-bold">Optimal</span>
+              </div>
+              <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50">
+                <span class="w-16 font-bold text-slate-800">Sun</span>
+                <span class="flex items-center gap-1 text-slate-600"><span class="material-symbols-outlined text-[16px] text-amber-500">sunny</span> 30° / 19°</span>
+                <span class="text-emerald-700 font-bold">Optimal</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="agrisync.js"></script>
+</body>
+</html>

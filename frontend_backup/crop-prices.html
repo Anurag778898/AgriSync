@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>AgriSync – Crop Price Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background-color: #f8fafc; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- SIDEBAR -->
+  <aside class="fixed left-0 top-0 h-full w-52 bg-white border-r border-slate-200 z-50 flex flex-col justify-between py-4">
+    <div class="flex flex-col gap-4 px-3">
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-2.5 px-1.5">
+        <div class="w-8 h-8 rounded-lg bg-brand-700 flex items-center justify-center text-white shadow-sm shrink-0">
+          <span class="material-symbols-outlined text-[18px]">psychiatry</span>
+        </div>
+        <div>
+          <span class="font-bold text-sm text-slate-900 tracking-tight block leading-none">AgriSync</span>
+          <span class="text-[10px] font-medium text-slate-400 block mt-0.5">Ag-Intelligence</span>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="flex flex-col gap-0.5">
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="overview" href="overview.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">dashboard</span>
+          <span>Overview</span>
+        </a>
+        <a class="flex items-center justify-between px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="ai-farming-assistant" href="ai-assistant.html">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] text-slate-400">smart_toy</span>
+            <span>AI Assistant</span>
+          </div>
+          <span class="bg-brand-100 text-brand-800 text-[10px] font-bold px-1.5 py-0.2 rounded-full">AI</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-and-market-explorer" href="crop-market-explorer.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">travel_explore</span>
+          <span>Crop &amp; Markets</span>
+        </a>
+        <a aria-current="page" class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-semibold text-xs bg-brand-50 text-brand-800 transition-colors" data-path="crop-price-intelligence" href="crop-prices.html">
+          <span class="material-symbols-outlined text-[18px] text-brand-700">trending_up</span>
+          <span>Price Intel</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="weather-intelligence" href="weather.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">partly_cloudy_day</span>
+          <span>Weather &amp; Soil</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="settings" href="settings.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">settings</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Bottom User Profile Card -->
+    <div class="px-3 border-t border-slate-100 pt-3">
+      <div class="flex items-center justify-between p-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full bg-brand-700 text-white font-bold flex items-center justify-center text-[11px] shrink-0">
+            SS
+          </div>
+          <div class="flex flex-col truncate">
+            <span class="text-xs font-semibold text-slate-900 leading-tight truncate">Dr. S. Sharma</span>
+            <span class="text-[10px] text-slate-400">Agronomist</span>
+          </div>
+        </div>
+        <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0 ml-1" title="System Online" id="health-dot"></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT AREA -->
+  <div class="pl-52">
+    <!-- TOP HEADER -->
+    <header class="sticky top-0 h-16 bg-white/90 backdrop-blur-md border-b border-slate-200 z-40 px-8 flex items-center justify-between">
+      <div>
+        <h1 class="text-base font-bold text-slate-900 leading-tight">Crop Price Intelligence</h1>
+        <p class="text-xs text-slate-500">Real-time APMC Mandi trends, pricing forecasts &amp; arbitrage opportunities</p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Search -->
+        <div class="relative w-64">
+          <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-[18px]">search</span>
+          <input type="text" placeholder="Search mandi or commodity..." class="w-full pl-9 pr-3 py-1.5 bg-slate-100 rounded-lg text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-600 transition-all border border-transparent focus:border-brand-600"/>
+        </div>
+
+        <!-- Agmarknet Status Badge -->
+        <div class="flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-full border border-emerald-200/60">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Agmarknet Live Connected</span>
+        </div>
+
+        <button onclick="refreshData()" class="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors" title="Force Refresh Mandi Rates">
+          <span class="material-symbols-outlined text-[20px]">refresh</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN BODY -->
+    <main class="p-8 max-w-7xl mx-auto space-y-6">
+
+      <!-- TOP CONTROL & COMMODITY SELECTOR -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <!-- Commodity & Mandi Controls -->
+          <div class="flex flex-wrap items-center gap-4">
+            <!-- Commodity Selector -->
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Select Commodity</label>
+              <select id="commodity-select" class="bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-brand-600 min-w-[200px] cursor-pointer">
+                <option value="wheat" selected>🌾 Wheat (Lokwan / Sharbati)</option>
+                <option value="tomato">🍅 Tomato (Hybrid / Local)</option>
+                <option value="onion">🧅 Onion (Nashik Red)</option>
+                <option value="soybean">🌱 Soybean (Yellow)</option>
+                <option value="cotton">🧵 Cotton (Medium Staple)</option>
+                <option value="rice">🍚 Paddy / Rice (Basmati / Common)</option>
+                <option value="potato">🥔 Potato (Jyoti)</option>
+                <option value="chilli">🌶️ Chilli (Guntur)</option>
+              </select>
+            </div>
+
+            <!-- Pricing Unit -->
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Pricing Unit</label>
+              <select id="unit-toggle" class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-brand-600 cursor-pointer">
+                <option value="quintal" selected>₹ / Quintal (100 kg)</option>
+                <option value="kg">₹ / Kilogram (kg)</option>
+              </select>
+            </div>
+
+            <!-- Benchmark APMC Mandi -->
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Benchmark APMC Yard</label>
+              <select id="mandi-select" class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-brand-600 cursor-pointer">
+                <option value="lasalgaon" selected>Lasalgaon APMC (Nashik, MH)</option>
+                <option value="pimpalgaon">Pimpalgaon APMC (Nashik, MH)</option>
+                <option value="azadpur">Azadpur Mandi (New Delhi)</option>
+                <option value="vashi">Vashi APMC (Navi Mumbai)</option>
+                <option value="surat">Surat APMC (Surat, GJ)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Time Horizon Selector -->
+          <div>
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Time Horizon</label>
+            <div class="inline-flex rounded-xl bg-slate-100 p-1 border border-slate-200">
+              <button class="px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-slate-900 rounded-lg transition-colors" onclick="setHorizon(7, this)">7 Days</button>
+              <button class="px-3 py-1.5 text-xs font-semibold bg-white text-slate-900 rounded-lg shadow-sm" onclick="setHorizon(14, this)">14 Days</button>
+              <button class="px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-slate-900 rounded-lg transition-colors" onclick="setHorizon(30, this)">30 Days</button>
+              <button class="px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-slate-900 rounded-lg transition-colors" onclick="setHorizon(90, this)">3 Months</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 KEY KPI SUMMARY CARDS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <!-- Card 1: Current Modal Rate -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Current Modal Price</span>
+            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[18px]">currency_rupee</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <span id="current-price" class="text-2xl font-bold font-mono text-slate-900 tracking-tight">₹2,275/quintal</span>
+              <span id="price-change" class="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-mono">+2.4%</span>
+            </div>
+            <p class="text-xs text-slate-500">Benchmark: Lasalgaon APMC yard</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Day Range</span>
+            <span class="font-mono font-medium text-slate-700">₹2,190 – ₹2,350</span>
+          </div>
+        </div>
+
+        <!-- Card 2: AI Optimal Selling Window -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Optimal Selling Window</span>
+            <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <span id="best-selling-window" class="text-lg font-bold text-brand-800">Oct 22 - Oct 28</span>
+              <span id="prediction-confidence" class="text-xs font-bold px-2 py-0.5 rounded-full bg-brand-100 text-brand-800 font-mono">88% conf</span>
+            </div>
+            <p class="text-xs text-slate-500">Peak expected price: ~₹2,420/qtl</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Action</span>
+            <span class="font-semibold text-brand-700">Stagger 60% harvest lot</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Mandi Daily Inflow -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Daily Arrival Volume</span>
+            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[18px]">local_shipping</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <span class="text-2xl font-bold font-mono text-slate-900 tracking-tight">1,420 MT</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 font-mono">+12%</span>
+            </div>
+            <p class="text-xs text-slate-500">14-day rolling avg: 1,280 MT/day</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Market Liquidity</span>
+            <span class="font-semibold text-blue-700">High / Active Trading</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Inter-Mandi Arbitrage -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Max Inter-Mandi Spread</span>
+            <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[18px]">alt_route</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <span class="text-2xl font-bold font-mono text-slate-900 tracking-tight">+₹245/qtl</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-mono">Premium</span>
+            </div>
+            <p class="text-xs text-slate-500">Vashi APMC (165 km) vs Lasalgaon</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Net Freight Margin</span>
+            <span class="font-semibold text-emerald-700">+₹155/qtl profit</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN CHART & FORECAST SECTION -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-base font-bold text-slate-900">Price Trend &amp; Machine Learning Forecast</h2>
+            <p class="text-xs text-slate-500">Historical modal transactions vs 14-day econometric price projection</p>
+          </div>
+          <div class="flex items-center gap-4 text-xs">
+            <div class="flex items-center gap-1.5 text-slate-600">
+              <span class="w-3 h-3 rounded-full bg-brand-600 inline-block"></span>
+              <span>Historical Modal</span>
+            </div>
+            <div class="flex items-center gap-1.5 text-slate-600">
+              <span class="w-3 h-0.5 bg-amber-500 inline-block border-t border-dashed border-amber-500"></span>
+              <span>14D AI Projection</span>
+            </div>
+            <div class="flex items-center gap-1.5 text-slate-600">
+              <span class="w-3 h-0.5 bg-slate-400 inline-block border-t border-dotted border-slate-400"></span>
+              <span>MSP Floor (₹2,125)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart Container -->
+        <div class="relative w-full h-72">
+          <canvas id="priceChartCanvas"></canvas>
+        </div>
+      </div>
+
+      <!-- MULTI-MANDI APMC COMPARATIVE MATRIX -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-5">
+          <div>
+            <h2 class="text-base font-bold text-slate-900">Regional APMC Mandi Comparison</h2>
+            <p class="text-xs text-slate-500">Cross-terminal rate benchmarks for selected commodity within 300 km radius</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" id="mandiTableFilter" placeholder="Filter mandi..." class="text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-brand-600"/>
+            <button class="px-3 py-1.5 text-xs font-semibold bg-brand-50 text-brand-800 rounded-lg border border-brand-200 hover:bg-brand-100 transition-colors flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px]">file_download</span>
+              <span>Export CSV</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 bg-slate-50/60 text-slate-500 font-bold uppercase tracking-wider">
+                <th class="py-3 px-4">APMC Terminal Yard</th>
+                <th class="py-3 px-4">District / State</th>
+                <th class="py-3 px-4 text-right">Modal Rate</th>
+                <th class="py-3 px-4 text-right">Min – Max Range</th>
+                <th class="py-3 px-4 text-right">Arrivals (MT)</th>
+                <th class="py-3 px-4 text-center">24h Change</th>
+                <th class="py-3 px-4 text-right">Distance</th>
+                <th class="py-3 px-4 text-center">Net Margin</th>
+              </tr>
+            </thead>
+            <tbody id="mandiTableBody" class="divide-y divide-slate-100">
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  Lasalgaon APMC (Benchmark)
+                </td>
+                <td class="py-3.5 px-4 text-slate-600">Nashik, Maharashtra</td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-slate-900">₹2,275 / qtl</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-600">₹2,190 – ₹2,350</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-800 font-medium">1,420 MT</td>
+                <td class="py-3.5 px-4 text-center">
+                  <span class="inline-block px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-mono font-semibold">+2.4%</span>
+                </td>
+                <td class="py-3.5 px-4 text-right text-slate-500">Local (18 km)</td>
+                <td class="py-3.5 px-4 text-center">
+                  <span class="text-xs font-semibold text-slate-500">Base</span>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="py-3.5 px-4 font-semibold text-slate-800 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-slate-300"></span>
+                  Pimpalgaon Baswant APMC
+                </td>
+                <td class="py-3.5 px-4 text-slate-600">Nashik, Maharashtra</td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-slate-900">₹2,240 / qtl</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-600">₹2,150 – ₹2,310</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-800 font-medium">890 MT</td>
+                <td class="py-3.5 px-4 text-center">
+                  <span class="inline-block px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-mono font-semibold">+1.1%</span>
+                </td>
+                <td class="py-3.5 px-4 text-right text-slate-500">26 km</td>
+                <td class="py-3.5 px-4 text-center">
+                  <span class="text-xs font-semibold text-slate-400">-₹35 / qtl</span>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="py-3.5 px-4 font-semibold text-slate-800 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  Vashi APMC Terminal
+                </td>
+                <td class="py-3.5 px-4 text-slate-600">Navi Mumbai, Maharashtra</td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-emerald-700">₹2,520 / qtl</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-600">₹2,400 – ₹2,650</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-800 font-medium">3,450 MT</td>
+                <td class="py-3.5 px-4 text-center">
+                  <span class="inline-block px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-mono font-semibold">+4.2%</span>
+                </td>
+                <td class="py-3.5 px-4 text-right text-slate-500">165 km</td>
+                <td class="py-3.5 px-4 text-center">
+                  <span class="inline-block px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-mono font-bold">+₹155 / qtl</span>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="py-3.5 px-4 font-semibold text-slate-800 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-slate-300"></span>
+                  Surat APMC Market
+                </td>
+                <td class="py-3.5 px-4 text-slate-600">Surat, Gujarat</td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-slate-900">₹2,380 / qtl</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-600">₹2,280 – ₹2,450</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-800 font-medium">1,120 MT</td>
+                <td class="py-3.5 px-4 text-center">
+                  <span class="inline-block px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-mono font-semibold">+0.8%</span>
+                </td>
+                <td class="py-3.5 px-4 text-right text-slate-500">220 km</td>
+                <td class="py-3.5 px-4 text-center">
+                  <span class="text-xs font-semibold text-slate-600">+₹10 / qtl</span>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="py-3.5 px-4 font-semibold text-slate-800 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-slate-300"></span>
+                  Indore Mandi Terminal
+                </td>
+                <td class="py-3.5 px-4 text-slate-600">Indore, Madhya Pradesh</td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-slate-900">₹2,210 / qtl</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-600">₹2,120 – ₹2,290</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-800 font-medium">1,780 MT</td>
+                <td class="py-3.5 px-4 text-center">
+                  <span class="inline-block px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 font-mono font-semibold">-0.5%</span>
+                </td>
+                <td class="py-3.5 px-4 text-right text-slate-500">410 km</td>
+                <td class="py-3.5 px-4 text-center">
+                  <span class="text-xs font-semibold text-rose-600">-₹185 / qtl</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MARKET FUNDAMENTALS & ACTIONABLE ADVISORY -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- Advisory 1: Storage & Selling Recommendation -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+          <div class="flex items-center gap-2 mb-3 text-brand-800 font-bold text-sm">
+            <span class="material-symbols-outlined text-[20px] text-brand-700">warehouse</span>
+            <span>Warehousing &amp; Selling Advisory</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-4">
+            Current market arrivals in Nashik cluster are expected to taper by 18% over the next 10 days as Kharif threshing concludes. Holding Grade-A quality in ventilated farm storage for 12–16 days offers an estimated <strong>+8.5% net value gain</strong> after accounting for warehouse shrinkage and finance carrying costs.
+          </p>
+          <div class="bg-slate-50 rounded-xl p-3 border border-slate-100 flex items-center justify-between text-xs">
+            <span class="text-slate-500">Recommended Stagger:</span>
+            <span class="font-bold text-slate-900">40% Immediate Mandi Sale &bull; 60% 3-Week Hold</span>
+          </div>
+        </div>
+
+        <!-- Advisory 2: Government MSP & Policy Outlook -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+          <div class="flex items-center gap-2 mb-3 text-brand-800 font-bold text-sm">
+            <span class="material-symbols-outlined text-[20px] text-brand-700">policy</span>
+            <span>Government MSP &amp; Buffer Stock Watch</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-4">
+            Government Minimum Support Price (MSP) floor provides strong downside safety at ₹2,125/qtl. Active FCI procurement centers in Malegaon and Niphad have commenced operations. Market price currently trades at an active <strong>+7.0% premium over MSP</strong>.
+          </p>
+          <div class="bg-slate-50 rounded-xl p-3 border border-slate-100 flex items-center justify-between text-xs">
+            <span class="text-slate-500">FCI Procurement Counter:</span>
+            <span class="font-bold text-emerald-700">Operational &bull; Niphad APMC Sub-Yard</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="agrisync.js"></script>
+  <script src="crop_prices.js"></script>
+  <script>
+    // Initialize interactive Chart.js on priceChartCanvas
+    let chartInstance = null;
+
+    function initChart() {
+      const ctx = document.getElementById('priceChartCanvas').getContext('2d');
+      const labels = ['Oct 01', 'Oct 03', 'Oct 05', 'Oct 07', 'Oct 09', 'Oct 11', 'Oct 13', 'Oct 15 (F)', 'Oct 18 (F)', 'Oct 21 (F)', 'Oct 24 (F)', 'Oct 28 (F)'];
+      const historicalData = [2180, 2195, 2210, 2240, 2235, 2260, 2275, null, null, null, null, null];
+      const forecastData = [null, null, null, null, null, null, 2275, 2310, 2355, 2390, 2420, 2405];
+      const mspFloor = Array(12).fill(2125);
+
+      chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Historical Modal (₹/qtl)',
+              data: historicalData,
+              borderColor: '#047857',
+              backgroundColor: 'rgba(4, 120, 87, 0.08)',
+              borderWidth: 2.5,
+              tension: 0.3,
+              fill: true,
+              pointBackgroundColor: '#047857',
+              pointRadius: 4,
+            },
+            {
+              label: 'AI 14-Day Projection (₹/qtl)',
+              data: forecastData,
+              borderColor: '#f59e0b',
+              borderWidth: 2,
+              borderDash: [5, 5],
+              tension: 0.3,
+              fill: false,
+              pointBackgroundColor: '#f59e0b',
+              pointRadius: 4,
+            },
+            {
+              label: 'MSP Floor (₹2,125)',
+              data: mspFloor,
+              borderColor: '#94a3b8',
+              borderWidth: 1.5,
+              borderDash: [2, 4],
+              pointRadius: 0,
+              fill: false,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#0f172a',
+              titleFont: { family: 'Plus Jakarta Sans', size: 12 },
+              bodyFont: { family: 'JetBrains Mono', size: 12 },
+              padding: 10,
+              cornerRadius: 8,
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#64748b' }
+            },
+            y: {
+              grid: { color: '#f1f5f9' },
+              ticks: {
+                font: { family: 'JetBrains Mono', size: 11 },
+                color: '#64748b',
+                callback: function(val) { return '₹' + val; }
+              }
+            }
+          }
+        }
+      });
+
+      // Expose to window for crop_prices.js
+      window.priceChart = chartInstance;
+    }
+
+    function setHorizon(days, btn) {
+      btn.parentElement.querySelectorAll('button').forEach(b => {
+        b.className = 'px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-slate-900 rounded-lg transition-colors';
+      });
+      btn.className = 'px-3 py-1.5 text-xs font-semibold bg-white text-slate-900 rounded-lg shadow-sm';
+    }
+
+    function refreshData() {
+      if (typeof loadCropPrices === 'function') {
+        const comm = document.getElementById('commodity-select').value;
+        const unit = document.getElementById('unit-toggle').value;
+        loadCropPrices(comm, unit);
+        loadBestSellingWindow(comm);
+      }
+    }
+
+    // Filter Mandi Table
+    document.addEventListener('DOMContentLoaded', () => {
+      initChart();
+      const filterInput = document.getElementById('mandiTableFilter');
+      if (filterInput) {
+        filterInput.addEventListener('input', (e) => {
+          const q = e.target.value.toLowerCase();
+          document.querySelectorAll('#mandiTableBody tr').forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(q) ? '' : 'none';
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
