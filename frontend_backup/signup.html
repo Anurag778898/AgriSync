@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>AgriSync – Farm Registration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background-color: #f8fafc; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- TOP HEADER -->
+  <header class="w-full px-8 py-5 flex items-center justify-between border-b border-slate-200 bg-white/80 backdrop-blur-md">
+    <a href="overview.html" class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-brand-700 flex items-center justify-center text-white shadow-sm">
+        <span class="material-symbols-outlined text-[24px]">psychiatry</span>
+      </div>
+      <div>
+        <span class="font-bold text-lg text-slate-900 tracking-tight block">AgriSync</span>
+        <span class="text-xs font-medium text-slate-400 block -mt-0.5">Agricultural Intelligence</span>
+      </div>
+    </a>
+
+    <div class="flex items-center gap-3">
+      <a href="login.html" class="text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors">Already registered? Sign In</a>
+    </div>
+  </header>
+
+  <!-- MAIN BODY -->
+  <main class="flex-1 flex items-center justify-center p-6">
+    <div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+
+      <!-- LEFT COLUMN: PLATFORM FEATURES -->
+      <div class="hidden lg:flex flex-col justify-between space-y-6 p-6">
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 text-brand-800 text-xs font-semibold border border-brand-200 mb-4">
+            <span class="material-symbols-outlined text-[16px] text-brand-700">agriculture</span>
+            <span>Grower Onboarding</span>
+          </span>
+          <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight mb-3">
+            Join the AgriSync Agricultural Network
+          </h1>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Gain real-time access to 2,400+ APMC yards, AI disease detection, satellite NDVI indices, and microclimate forecasting calibrated for your fields.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+              <span class="material-symbols-outlined text-[18px]">verified</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-slate-900">Official Agmarknet Live Synchronization</h3>
+              <p class="text-xs text-slate-500">Government APMC rates updated throughout daily auction rounds.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+              <span class="material-symbols-outlined text-[18px]">neurology</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-slate-900">Gemini Pro Multimodal Diagnostic Engine</h3>
+              <p class="text-xs text-slate-500">Instant leaf pathology, pest identification, and dosage recommendations.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+              <span class="material-symbols-outlined text-[18px]">cloud</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-slate-900">Hyper-Local Open-Meteo Radar</h3>
+              <p class="text-xs text-slate-500">Hourly spray windows, dew point alerts, and soil matrix tension readings.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-xs text-slate-400">
+          Free 30-day enterprise evaluation. No credit card required.
+        </p>
+      </div>
+
+      <!-- RIGHT COLUMN: SIGN UP FORM -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+        <div class="mb-6">
+          <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Create Account</h2>
+          <p class="text-xs text-slate-500 mt-1">Set up your agricultural enterprise profile</p>
+        </div>
+
+        <div id="errorBanner" class="hidden mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 font-medium"></div>
+
+        <form id="signupForm" class="space-y-4" onsubmit="handleSignup(event)">
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Full Name</label>
+              <input type="text" id="name" required placeholder="Dr. Sunita Sharma" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-600 focus:border-brand-600 transition-all"/>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Farm Enterprise</label>
+              <input type="text" id="farm" required placeholder="Green Valley Farms" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-600 focus:border-brand-600 transition-all"/>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Email Address</label>
+            <input type="email" id="email" required placeholder="dr.sharma@agrisync.in" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-600 focus:border-brand-600 transition-all"/>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Password</label>
+            <input type="password" id="password" required minlength="6" placeholder="At least 6 characters" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-600 focus:border-brand-600 transition-all"/>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Primary State</label>
+              <select id="state" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-600 focus:border-brand-600 transition-all cursor-pointer">
+                <option value="Maharashtra" selected>Maharashtra</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Role</label>
+              <select id="role" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-600 focus:border-brand-600 transition-all cursor-pointer">
+                <option value="grower" selected>Commercial Grower</option>
+                <option value="agronomist">Chief Agronomist</option>
+                <option value="fpo">FPO Manager</option>
+                <option value="researcher">Ag-Researcher</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" id="submitBtn" class="w-full py-2.5 px-4 bg-brand-700 hover:bg-brand-800 text-white font-semibold text-sm rounded-xl shadow-sm transition-colors flex items-center justify-center gap-2 mt-2">
+            <span>Complete Registration</span>
+            <span class="material-symbols-outlined text-[18px]">check</span>
+          </button>
+        </form>
+
+        <div class="mt-6 pt-5 border-t border-slate-100 text-center">
+          <p class="text-xs text-slate-500">
+            Already have an account? 
+            <a href="login.html" class="font-bold text-brand-700 hover:text-brand-800 transition-colors">Sign In</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="w-full px-8 py-4 border-t border-slate-200 bg-white text-xs text-slate-500 flex flex-wrap items-center justify-between gap-4">
+    <div>&copy; 2026 AgriSync Operations Ltd. All rights reserved.</div>
+    <div class="flex items-center gap-4">
+      <a href="overview.html" class="hover:text-slate-800 transition-colors">Farm Dashboard</a>
+      <a href="weather.html" class="hover:text-slate-800 transition-colors">Weather Telemetry</a>
+      <a href="crop-prices.html" class="hover:text-slate-800 transition-colors">Mandi Intelligence</a>
+    </div>
+  </footer>
+
+  <script>
+    async function handleSignup(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const errorBanner = document.getElementById('errorBanner');
+      const submitBtn = document.getElementById('submitBtn');
+
+      errorBanner.classList.add('hidden');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Registering...';
+
+      try {
+        const res = await fetch('/api/v1/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.access_token) {
+            localStorage.setItem('agrisync_token', data.access_token);
+          }
+          window.location.href = 'overview.html';
+        } else {
+          const errData = await res.json().catch(() => ({}));
+          // If already registered or error, allow user to log in or continue
+          errorBanner.textContent = errData.detail || 'Registration encountered an issue. Redirecting to login...';
+          errorBanner.classList.remove('hidden');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span>Complete Registration</span><span class="material-symbols-outlined text-[18px]">check</span>';
+        }
+      } catch (err) {
+        // Fallback to overview
+        window.location.href = 'overview.html';
+      }
+    }
+  </script>
+</body>
+</html>

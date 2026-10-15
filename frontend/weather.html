@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>AgriSync – Weather &amp; Soil Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background-color: #f8fafc; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- SIDEBAR -->
+  <aside class="fixed left-0 top-0 h-full w-52 bg-white border-r border-slate-200 z-50 flex flex-col justify-between py-4">
+    <div class="flex flex-col gap-4 px-3">
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-2.5 px-1.5">
+        <div class="w-8 h-8 rounded-lg bg-brand-700 flex items-center justify-center text-white shadow-sm shrink-0">
+          <span class="material-symbols-outlined text-[18px]">psychiatry</span>
+        </div>
+        <div>
+          <span class="font-bold text-sm text-slate-900 tracking-tight block leading-none">AgriSync</span>
+          <span class="text-[10px] font-medium text-slate-400 block mt-0.5">Ag-Intelligence</span>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="flex flex-col gap-0.5">
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="overview" href="overview.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">dashboard</span>
+          <span>Overview</span>
+        </a>
+        <a class="flex items-center justify-between px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="ai-farming-assistant" href="ai-assistant.html">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] text-slate-400">smart_toy</span>
+            <span>AI Assistant</span>
+          </div>
+          <span class="bg-brand-100 text-brand-800 text-[10px] font-bold px-1.5 py-0.2 rounded-full">AI</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-and-market-explorer" href="crop-market-explorer.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">travel_explore</span>
+          <span>Crop &amp; Markets</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-price-intelligence" href="crop-prices.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">trending_up</span>
+          <span>Price Intel</span>
+        </a>
+        <a aria-current="page" class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-semibold text-xs bg-brand-50 text-brand-800 transition-colors" data-path="weather-intelligence" href="weather.html">
+          <span class="material-symbols-outlined text-[18px] text-brand-700">partly_cloudy_day</span>
+          <span>Weather &amp; Soil</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="settings" href="settings.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">settings</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Bottom User Profile Card -->
+    <div class="px-3 border-t border-slate-100 pt-3">
+      <div class="flex items-center justify-between p-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full bg-brand-700 text-white font-bold flex items-center justify-center text-[11px] shrink-0">
+            SS
+          </div>
+          <div class="flex flex-col truncate">
+            <span class="text-xs font-semibold text-slate-900 leading-tight truncate">Dr. S. Sharma</span>
+            <span class="text-[10px] text-slate-400">Agronomist</span>
+          </div>
+        </div>
+        <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0 ml-1" title="System Online" id="health-dot"></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <div class="pl-52">
+    <!-- TOP HEADER -->
+    <header class="sticky top-0 h-16 bg-white/90 backdrop-blur-md border-b border-slate-200 z-40 px-8 flex items-center justify-between">
+      <div>
+        <h1 class="text-base font-bold text-slate-900 leading-tight">Weather &amp; Soil Intelligence</h1>
+        <p class="text-xs text-slate-500">In-situ station telemetry, microclimate radar &amp; spray suitability</p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Search -->
+        <div class="relative w-64">
+          <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-[18px]">search</span>
+          <input type="text" placeholder="Search parameters or field..." class="w-full pl-9 pr-3 py-1.5 bg-slate-100 rounded-lg text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-brand-600 transition-all border border-transparent focus:border-brand-600"/>
+        </div>
+
+        <!-- Live Sync Pill -->
+        <div class="flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-full border border-emerald-200/60">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span id="sync-status">Open-Meteo &bull; 20.01°N, 73.79°E</span>
+        </div>
+
+        <button onclick="fetchLiveWeather()" class="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors" title="Force Sync Weather Telemetry">
+          <span class="material-symbols-outlined text-[20px]">refresh</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN BODY -->
+    <main class="p-8 max-w-7xl mx-auto space-y-6">
+
+      <!-- LOCATION & SECTOR SELECTOR BAR -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-wrap items-center justify-between gap-4">
+        <div class="flex flex-wrap items-center gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[22px]">location_on</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-sm font-bold text-slate-900">Nashik Agro-Cluster</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">20.0110° N, 73.7903° E</span>
+              </div>
+              <p class="text-xs text-slate-500">Zone 4A &bull; Elevation: 584m AMSL &bull; Basaltic Soil Basin</p>
+            </div>
+          </div>
+
+          <!-- Plot Tabs -->
+          <div class="inline-flex rounded-xl bg-slate-100 p-1 border border-slate-200 text-xs">
+            <button class="px-3 py-1.5 font-bold bg-white text-brand-800 rounded-lg shadow-sm flex items-center gap-1.5" onclick="selectPlot('A', this)">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              Plot A (North Vineyard)
+            </button>
+            <button class="px-3 py-1.5 font-medium text-slate-600 hover:text-slate-900 rounded-lg transition-colors" onclick="selectPlot('B', this)">
+              Plot B (Tomato &amp; Pepper)
+            </button>
+            <button class="px-3 py-1.5 font-medium text-slate-600 hover:text-slate-900 rounded-lg transition-colors" onclick="selectPlot('C', this)">
+              Plot C (Orchard &amp; Nursery)
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button class="px-3.5 py-2 text-xs font-semibold bg-brand-50 text-brand-800 border border-brand-200 hover:bg-brand-100 rounded-xl transition-colors flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+            <span>Export Agro-Bulletin</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- SEVERE ADVISORY & SPRAY WINDOW CARDS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- Spray Window Safe Notice -->
+        <div class="bg-white border border-emerald-200 rounded-2xl p-5 shadow-sm bg-gradient-to-r from-emerald-50/50 to-white">
+          <div class="flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[22px]">check_circle</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-xs font-bold uppercase tracking-wider text-emerald-800">Optimal Spray Window Active</span>
+                <span class="text-[11px] font-mono text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full">Next 36 Hours</span>
+              </div>
+              <h2 class="text-sm font-bold text-slate-900 mb-1">Ideal conditions for bio-pesticide &amp; foliar nutrition</h2>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Wind speeds remain calm at 9–12 km/h with low cloud cover and 0% rain probability through Wednesday noon. Minimal chemical drift risk across Plot A &amp; B.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upcoming Convective Rain Notice -->
+        <div class="bg-white border border-amber-200 rounded-2xl p-5 shadow-sm bg-gradient-to-r from-amber-50/40 to-white">
+          <div class="flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[22px]">thunderstorm</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-800">Convective Rain Advisory</span>
+                <span class="text-[11px] font-mono text-amber-700 bg-amber-100/80 px-2 py-0.5 rounded-full">Thursday 14:00 - 18:00</span>
+              </div>
+              <h2 class="text-sm font-bold text-slate-900 mb-1">Expect 15–22mm localized precipitation with gusty winds</h2>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Ensure vine trellises are anchored in Plot A. Verify drainage channels are clear of debris to prevent waterlogging around root zones.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 KEY CURRENT TELEMETRY METRICS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <!-- Metric 1: Ambient Temperature -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Ambient Temp</span>
+            <div class="w-8 h-8 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[18px]">thermostat</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <span id="current-temp" class="text-3xl font-bold font-mono text-slate-900 tracking-tight">28.4°C</span>
+              <span class="text-xs font-semibold text-slate-500">Feels 29.6°C</span>
+            </div>
+            <p class="text-xs text-slate-500">Day Range: 19.5°C – 31.8°C</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Thermal Accumulation</span>
+            <span class="font-mono font-medium text-slate-700">14.8 GDD</span>
+          </div>
+        </div>
+
+        <!-- Metric 2: Soil Moisture & Tension -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Root-Zone Moisture</span>
+            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[18px]">water_drop</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <span class="text-3xl font-bold font-mono text-slate-900 tracking-tight">34.2%</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Optimal</span>
+            </div>
+            <p class="text-xs text-slate-500">Field Capacity: 30% – 38%</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Soil Matrix Tension</span>
+            <span class="font-mono font-medium text-slate-700">28 kPa (Good)</span>
+          </div>
+        </div>
+
+        <!-- Metric 3: Humidity & Dew Point -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Relative Humidity</span>
+            <div class="w-8 h-8 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[18px]">humidity_percentage</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <span id="current-humidity" class="text-3xl font-bold font-mono text-slate-900 tracking-tight">64%</span>
+              <span class="text-xs font-semibold text-slate-500">Dew Pt: 18.2°C</span>
+            </div>
+            <p class="text-xs text-slate-500">Vapor Pressure Deficit: 1.2 kPa</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Fungal Risk Index</span>
+            <span class="font-semibold text-emerald-700">Low (Safe)</span>
+          </div>
+        </div>
+
+        <!-- Metric 4: Wind & Atmospheric Pressure -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Wind &amp; Barometer</span>
+            <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[18px]">air</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <span class="text-3xl font-bold font-mono text-slate-900 tracking-tight">11 km/h</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-mono">NW</span>
+            </div>
+            <p class="text-xs text-slate-500">Pressure: 1012.4 hPa (Steady)</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Peak Gusts</span>
+            <span class="font-mono font-medium text-slate-700">18 km/h</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7-DAY AGROMETEOROLOGICAL OUTLOOK -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-base font-bold text-slate-900">7-Day Microclimate Forecast</h2>
+            <p class="text-xs text-slate-500">Calibrated Open-Meteo &amp; IMD model runs for Nashik agro-basin</p>
+          </div>
+          <span class="text-xs font-medium text-slate-500">Updated: Today 11:30 IST</span>
+        </div>
+
+        <div id="forecast-grid" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+          
+          <!-- Day 1: Today -->
+          <div class="bg-brand-50/50 border border-brand-200/80 rounded-xl p-3.5 flex flex-col items-center text-center">
+            <span class="text-xs font-bold text-brand-800 uppercase tracking-wider mb-1">Today</span>
+            <span class="text-[11px] text-slate-500 mb-2">Oct 14</span>
+            <span class="material-symbols-outlined text-[28px] text-amber-500 mb-2">wb_sunny</span>
+            <span class="text-xs font-bold text-slate-800">Clear Sky</span>
+            <div class="mt-2 text-xs font-mono">
+              <span class="font-bold text-slate-900">31°</span> / <span class="text-slate-500">20°</span>
+            </div>
+            <div class="mt-3 w-full pt-2 border-t border-brand-100 flex items-center justify-between text-[11px] text-slate-600">
+              <span>Rain</span>
+              <span class="font-bold text-emerald-700">0 mm (5%)</span>
+            </div>
+            <span class="mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">Optimal Spray</span>
+          </div>
+
+          <!-- Day 2: Wed -->
+          <div class="bg-slate-50/60 border border-slate-200 rounded-xl p-3.5 flex flex-col items-center text-center">
+            <span class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Wed</span>
+            <span class="text-[11px] text-slate-500 mb-2">Oct 15</span>
+            <span class="material-symbols-outlined text-[28px] text-amber-500 mb-2">partly_cloudy_day</span>
+            <span class="text-xs font-bold text-slate-800">Scattered</span>
+            <div class="mt-2 text-xs font-mono">
+              <span class="font-bold text-slate-900">30°</span> / <span class="text-slate-500">21°</span>
+            </div>
+            <div class="mt-3 w-full pt-2 border-t border-slate-200 flex items-center justify-between text-[11px] text-slate-600">
+              <span>Rain</span>
+              <span class="font-bold text-emerald-700">1 mm (15%)</span>
+            </div>
+            <span class="mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">Good Spray</span>
+          </div>
+
+          <!-- Day 3: Thu (Rain) -->
+          <div class="bg-amber-50/40 border border-amber-200 rounded-xl p-3.5 flex flex-col items-center text-center">
+            <span class="text-xs font-bold text-amber-800 uppercase tracking-wider mb-1">Thu</span>
+            <span class="text-[11px] text-slate-500 mb-2">Oct 16</span>
+            <span class="material-symbols-outlined text-[28px] text-blue-600 mb-2">thunderstorm</span>
+            <span class="text-xs font-bold text-slate-800">Showers</span>
+            <div class="mt-2 text-xs font-mono">
+              <span class="font-bold text-slate-900">27°</span> / <span class="text-slate-500">19°</span>
+            </div>
+            <div class="mt-3 w-full pt-2 border-t border-amber-200 flex items-center justify-between text-[11px] text-slate-600">
+              <span>Rain</span>
+              <span class="font-bold text-blue-700">18 mm (80%)</span>
+            </div>
+            <span class="mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800">No Spraying</span>
+          </div>
+
+          <!-- Day 4: Fri -->
+          <div class="bg-slate-50/60 border border-slate-200 rounded-xl p-3.5 flex flex-col items-center text-center">
+            <span class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Fri</span>
+            <span class="text-[11px] text-slate-500 mb-2">Oct 17</span>
+            <span class="material-symbols-outlined text-[28px] text-slate-400 mb-2">cloud</span>
+            <span class="text-xs font-bold text-slate-800">Overcast</span>
+            <div class="mt-2 text-xs font-mono">
+              <span class="font-bold text-slate-900">28°</span> / <span class="text-slate-500">18°</span>
+            </div>
+            <div class="mt-3 w-full pt-2 border-t border-slate-200 flex items-center justify-between text-[11px] text-slate-600">
+              <span>Rain</span>
+              <span class="font-bold text-slate-700">2 mm (25%)</span>
+            </div>
+            <span class="mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">Caution</span>
+          </div>
+
+          <!-- Day 5: Sat -->
+          <div class="bg-slate-50/60 border border-slate-200 rounded-xl p-3.5 flex flex-col items-center text-center">
+            <span class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Sat</span>
+            <span class="text-[11px] text-slate-500 mb-2">Oct 18</span>
+            <span class="material-symbols-outlined text-[28px] text-amber-500 mb-2">wb_sunny</span>
+            <span class="text-xs font-bold text-slate-800">Sunny</span>
+            <div class="mt-2 text-xs font-mono">
+              <span class="font-bold text-slate-900">30°</span> / <span class="text-slate-500">19°</span>
+            </div>
+            <div class="mt-3 w-full pt-2 border-t border-slate-200 flex items-center justify-between text-[11px] text-slate-600">
+              <span>Rain</span>
+              <span class="font-bold text-emerald-700">0 mm (10%)</span>
+            </div>
+            <span class="mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">Optimal Spray</span>
+          </div>
+
+          <!-- Day 6: Sun -->
+          <div class="bg-slate-50/60 border border-slate-200 rounded-xl p-3.5 flex flex-col items-center text-center">
+            <span class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Sun</span>
+            <span class="text-[11px] text-slate-500 mb-2">Oct 19</span>
+            <span class="material-symbols-outlined text-[28px] text-amber-500 mb-2">wb_sunny</span>
+            <span class="text-xs font-bold text-slate-800">Clear</span>
+            <div class="mt-2 text-xs font-mono">
+              <span class="font-bold text-slate-900">31°</span> / <span class="text-slate-500">20°</span>
+            </div>
+            <div class="mt-3 w-full pt-2 border-t border-slate-200 flex items-center justify-between text-[11px] text-slate-600">
+              <span>Rain</span>
+              <span class="font-bold text-emerald-700">0 mm (5%)</span>
+            </div>
+            <span class="mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">Optimal Spray</span>
+          </div>
+
+          <!-- Day 7: Mon -->
+          <div class="bg-slate-50/60 border border-slate-200 rounded-xl p-3.5 flex flex-col items-center text-center">
+            <span class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Mon</span>
+            <span class="text-[11px] text-slate-500 mb-2">Oct 20</span>
+            <span class="material-symbols-outlined text-[28px] text-amber-500 mb-2">partly_cloudy_day</span>
+            <span class="text-xs font-bold text-slate-800">Fair</span>
+            <div class="mt-2 text-xs font-mono">
+              <span class="font-bold text-slate-900">31°</span> / <span class="text-slate-500">21°</span>
+            </div>
+            <div class="mt-3 w-full pt-2 border-t border-slate-200 flex items-center justify-between text-[11px] text-slate-600">
+              <span>Rain</span>
+              <span class="font-bold text-emerald-700">0 mm (5%)</span>
+            </div>
+            <span class="mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">Optimal Spray</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- IN-SITU SENSOR NODES & IRRIGATION ADVISORY -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        
+        <!-- Sensor Node 1 -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              <span class="text-xs font-bold text-slate-900">Station Node #01</span>
+            </div>
+            <span class="text-[11px] font-mono text-slate-500">Plot A &bull; Vineyard</span>
+          </div>
+          <div class="space-y-2.5 text-xs">
+            <div class="flex justify-between items-center py-1.5 border-b border-slate-100">
+              <span class="text-slate-500">Moisture (20 cm)</span>
+              <span class="font-mono font-bold text-slate-800">32.4%</span>
+            </div>
+            <div class="flex justify-between items-center py-1.5 border-b border-slate-100">
+              <span class="text-slate-500">Moisture (45 cm)</span>
+              <span class="font-mono font-bold text-slate-800">36.1%</span>
+            </div>
+            <div class="flex justify-between items-center py-1.5 border-b border-slate-100">
+              <span class="text-slate-500">Soil Temperature</span>
+              <span class="font-mono font-bold text-slate-800">22.8°C</span>
+            </div>
+            <div class="flex justify-between items-center py-1.5 border-b border-slate-100">
+              <span class="text-slate-500">Electrical Conductivity</span>
+              <span class="font-mono font-bold text-slate-800">1.12 dS/m (Normal)</span>
+            </div>
+            <div class="flex justify-between items-center pt-1 text-[11px] text-slate-400">
+              <span>Battery: 94% &bull; Solar OK</span>
+              <span>Signal: -64 dBm</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sensor Node 2 -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              <span class="text-xs font-bold text-slate-900">Station Node #02</span>
+            </div>
+            <span class="text-[11px] font-mono text-slate-500">Plot B &bull; Tomato</span>
+          </div>
+          <div class="space-y-2.5 text-xs">
+            <div class="flex justify-between items-center py-1.5 border-b border-slate-100">
+              <span class="text-slate-500">Moisture (20 cm)</span>
+              <span class="font-mono font-bold text-slate-800">38.0%</span>
+            </div>
+            <div class="flex justify-between items-center py-1.5 border-b border-slate-100">
+              <span class="text-slate-500">Moisture (45 cm)</span>
+              <span class="font-mono font-bold text-slate-800">41.2%</span>
+            </div>
+            <div class="flex justify-between items-center py-1.5 border-b border-slate-100">
+              <span class="text-slate-500">Soil Temperature</span>
+              <span class="font-mono font-bold text-slate-800">23.4°C</span>
+            </div>
+            <div class="flex justify-between items-center py-1.5 border-b border-slate-100">
+              <span class="text-slate-500">Electrical Conductivity</span>
+              <span class="font-mono font-bold text-slate-800">1.34 dS/m (Normal)</span>
+            </div>
+            <div class="flex justify-between items-center pt-1 text-[11px] text-slate-400">
+              <span>Battery: 88% &bull; Solar OK</span>
+              <span>Signal: -71 dBm</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Irrigation Advisory -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 mb-3 text-brand-800 font-bold text-sm">
+              <span class="material-symbols-outlined text-[20px] text-brand-700">water</span>
+              <span>Irrigation Scheduling</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+              Daily Evapotranspiration (<strong class="font-mono">ET₀ = 4.6 mm</strong>). With adequate basalt subsoil water retention, Plot A and C require no drip pulse today.
+            </p>
+            <div class="space-y-2 text-xs">
+              <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex items-center justify-between">
+                <span class="text-slate-600 font-medium">Plot B Drip Schedule:</span>
+                <span class="font-bold text-brand-700">Tomorrow 06:00 (1h 45m)</span>
+              </div>
+              <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex items-center justify-between">
+                <span class="text-slate-600 font-medium">Water Volume Target:</span>
+                <span class="font-mono font-bold text-slate-900">22,000 Liters</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="mt-4 w-full py-2 bg-brand-700 hover:bg-brand-800 text-white font-semibold text-xs rounded-xl shadow-sm transition-colors flex items-center justify-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">tune</span>
+            <span>Adjust Automation Parameters</span>
+          </button>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="agrisync.js"></script>
+  <script>
+    function selectPlot(plotLetter, btn) {
+      btn.parentElement.querySelectorAll('button').forEach(b => {
+        b.className = 'px-3 py-1.5 font-medium text-slate-600 hover:text-slate-900 rounded-lg transition-colors';
+      });
+      btn.className = 'px-3 py-1.5 font-bold bg-white text-brand-800 rounded-lg shadow-sm flex items-center gap-1.5';
+    }
+
+    async function fetchLiveWeather() {
+      const syncStatus = document.getElementById('sync-status');
+      if (syncStatus) syncStatus.textContent = 'Syncing Open-Meteo...';
+
+      try {
+        const res = await fetch('/api/v1/weather/forecast?lat=20.01&lon=73.79');
+        if (!res.ok) throw new Error('Status: ' + res.status);
+        const data = await res.json();
+        
+        if (data.daily && data.daily.temperature_2m_max && data.daily.temperature_2m_max.length > 0) {
+          const maxTemp = data.daily.temperature_2m_max[0];
+          const minTemp = data.daily.temperature_2m_min[0];
+          const precip = data.daily.precipitation_sum ? data.daily.precipitation_sum[0] : 0;
+
+          const tempEl = document.getElementById('current-temp');
+          if (tempEl) tempEl.textContent = `${maxTemp}°C`;
+
+          if (syncStatus) syncStatus.textContent = `Open-Meteo Synced (${maxTemp}°C / ${minTemp}°C)`;
+        }
+      } catch (e) {
+        console.warn('Weather sync warning:', e);
+        if (syncStatus) syncStatus.textContent = 'Open-Meteo (Cached Model Active)';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchLiveWeather();
+    });
+  </script>
+</body>
+</html>

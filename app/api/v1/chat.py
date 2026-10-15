@@ -4,16 +4,21 @@ from app.schemas.schemas import ChatRequest, ChatResponse
 from google import genai
 from google.genai.errors import APIError
 
-router = APIRouter(prefix="/chat", tags=["AI Chat"])
+router = APIRouter(prefix="/api/v1/chat", tags=["AI Chat"])
 
+@router.post("", response_model=ChatResponse)
 @router.post("/", response_model=ChatResponse)
 async def chat_with_assistant(request: ChatRequest):
     api_key = os.getenv("GEMINI_API_KEY")
     
     if not api_key or api_key == "your_actual_api_key_here":
-        raise HTTPException(
-            status_code=500, 
-            detail="The Gemini API key is missing or not configured correctly in the .env file."
+        return ChatResponse(
+            response="🌾 <strong>AgriSync Agronomic AI Assistant (Demo Mode)</strong><br><br>"
+                     "Your chat connection is working! To activate live Gemini AI responses, add your <code>GEMINI_API_KEY</code> to the <code>.env</code> file.<br><br>"
+                     "<em>Advisory Preview for '" + request.message + "':</em><br>"
+                     "• Check soil moisture levels and ensure drainage before upcoming rain.<br>"
+                     "• Monitor local APMC mandi arrivals for favorable price windows.<br>"
+                     "• Apply scheduled micronutrients during cooler evening hours."
         )
 
     try:

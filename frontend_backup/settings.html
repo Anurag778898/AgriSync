@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>AgriSync – Platform &amp; Farm Settings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background-color: #f8fafc; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20; }
+    .settings-tab-btn.active {
+      background-color: #047857;
+      color: #ffffff;
+      font-weight: 600;
+    }
+    #saveToast {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    #saveToast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- SIDEBAR -->
+  <aside class="fixed left-0 top-0 h-full w-52 bg-white border-r border-slate-200 z-50 flex flex-col justify-between py-4">
+    <div class="flex flex-col gap-4 px-3">
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-2.5 px-1.5">
+        <div class="w-8 h-8 rounded-lg bg-brand-700 flex items-center justify-center text-white shadow-sm shrink-0">
+          <span class="material-symbols-outlined text-[18px]">psychiatry</span>
+        </div>
+        <div>
+          <span class="font-bold text-sm text-slate-900 tracking-tight block leading-none">AgriSync</span>
+          <span class="text-[10px] font-medium text-slate-400 block mt-0.5">Ag-Intelligence</span>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="flex flex-col gap-0.5">
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="overview" href="overview.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">dashboard</span>
+          <span>Overview</span>
+        </a>
+        <a class="flex items-center justify-between px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="ai-farming-assistant" href="ai-assistant.html">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] text-slate-400">smart_toy</span>
+            <span>AI Assistant</span>
+          </div>
+          <span class="bg-brand-100 text-brand-800 text-[10px] font-bold px-1.5 py-0.2 rounded-full">AI</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-and-market-explorer" href="crop-market-explorer.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">travel_explore</span>
+          <span>Crop &amp; Markets</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-price-intelligence" href="crop-prices.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">trending_up</span>
+          <span>Price Intel</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="weather-intelligence" href="weather.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">partly_cloudy_day</span>
+          <span>Weather &amp; Soil</span>
+        </a>
+        <a aria-current="page" class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-semibold text-xs bg-brand-50 text-brand-800 transition-colors" data-path="settings" href="settings.html">
+          <span class="material-symbols-outlined text-[18px] text-brand-700">settings</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Bottom User Profile Card -->
+    <div class="px-3 border-t border-slate-100 pt-3">
+      <div class="flex items-center justify-between p-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full bg-brand-700 text-white font-bold flex items-center justify-center text-[11px] shrink-0">
+            SS
+          </div>
+          <div class="flex flex-col truncate">
+            <span class="text-xs font-semibold text-slate-900 leading-tight truncate">Dr. S. Sharma</span>
+            <span class="text-[10px] text-slate-400">Agronomist</span>
+          </div>
+        </div>
+        <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0 ml-1" title="System Online" id="health-dot"></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <div class="pl-52">
+    <!-- TOP HEADER -->
+    <header class="sticky top-0 h-16 bg-white/90 backdrop-blur-md border-b border-slate-200 z-40 px-8 flex items-center justify-between">
+      <div>
+        <h1 class="text-base font-bold text-slate-900 leading-tight">Settings &amp; Preferences</h1>
+        <p class="text-xs text-slate-500">Farm parameters, Gemini AI API integration, and market alert thresholds</p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="resetDefaults()" class="px-3.5 py-1.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-semibold hover:bg-slate-50 transition-colors">
+          Reset
+        </button>
+        <button onclick="saveAllSettings()" class="px-4 py-1.5 rounded-xl bg-brand-700 text-white text-xs font-semibold hover:bg-brand-800 transition-all shadow-sm flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[16px]">save</span>
+          <span>Save Changes</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="p-8 max-w-7xl mx-auto flex flex-col gap-6">
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Left Section Tabs -->
+        <div class="lg:col-span-3 bg-white p-2.5 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-1 h-fit">
+          <button onclick="switchSettingsSection('profile')" id="sTabProfile" class="settings-tab-btn active w-full flex items-center gap-2.5 px-3 py-2 rounded-lg font-semibold text-xs transition-all text-left">
+            <span class="material-symbols-outlined text-[18px]">agriculture</span>
+            <span>Farm &amp; Field Profile</span>
+          </button>
+          <button onclick="switchSettingsSection('ai')" id="sTabAi" class="settings-tab-btn w-full flex items-center gap-2.5 px-3 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 transition-all text-left">
+            <span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+            <span>AI Co-Pilot &amp; Gemini</span>
+          </button>
+          <button onclick="switchSettingsSection('mandi')" id="sTabMandi" class="settings-tab-btn w-full flex items-center gap-2.5 px-3 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 transition-all text-left">
+            <span class="material-symbols-outlined text-[18px]">storefront</span>
+            <span>Mandi &amp; Price Alerts</span>
+          </button>
+          <button onclick="switchSettingsSection('sensors')" id="sTabSensors" class="settings-tab-btn w-full flex items-center gap-2.5 px-3 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 transition-all text-left">
+            <span class="material-symbols-outlined text-[18px]">sensors</span>
+            <span>Sensors &amp; Weather</span>
+          </button>
+          <button onclick="switchSettingsSection('data')" id="sTabData" class="settings-tab-btn w-full flex items-center gap-2.5 px-3 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 transition-all text-left">
+            <span class="material-symbols-outlined text-[18px]">database</span>
+            <span>Data &amp; Security</span>
+          </button>
+        </div>
+
+        <!-- Right Content Panel -->
+        <div class="lg:col-span-9 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+          <!-- SECTION 1: PROFILE -->
+          <div id="secProfile" class="flex flex-col gap-5">
+            <div class="pb-3 border-b border-slate-100">
+              <h2 class="text-base font-bold text-slate-900">Farm &amp; Agronomist Profile</h2>
+              <p class="text-xs text-slate-500">Core agricultural parameters for yield forecasting and field calibration</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">Agronomist Name</label>
+                <input id="setUserName" type="text" value="Dr. Sunita Sharma" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-600"/>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">Farm Cluster</label>
+                <input id="setFarmName" type="text" value="Green Valley Farms, Nashik Sector 4" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-600"/>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">Location &amp; District</label>
+                <input id="setLocation" type="text" value="Nashik, Maharashtra (Pin 422001)" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-600"/>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">Total Cultivated Area (Acres)</label>
+                <input id="setAcreage" type="number" value="140" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-600"/>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">Primary Soil Type</label>
+                <select id="setSoil" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none">
+                  <option value="Black Clay Loam" selected>Black Clay Loam (pH 6.8, Organic Carbon 0.65%)</option>
+                  <option value="Alluvial Silt Loam">Alluvial Silt Loam (pH 7.2)</option>
+                  <option value="Red Sandy Loam">Red Sandy Loam (pH 6.2)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">Irrigation Method</label>
+                <select id="setIrrigation" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none">
+                  <option value="LoRa Drip Automated" selected>LoRa Automated Micro-Drip + Borewell</option>
+                  <option value="Canal Basin">Canal Lift + Basin Flood</option>
+                  <option value="Sprinkler System">High-Pressure Overhead Sprinkler</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: AI CO-PILOT -->
+          <div id="secAi" class="hidden flex flex-col gap-5">
+            <div class="pb-3 border-b border-slate-100">
+              <h2 class="text-base font-bold text-slate-900">Gemini AI Co-Pilot Configuration</h2>
+              <p class="text-xs text-slate-500">Configure your Google Gemini API key and advisory tone</p>
+            </div>
+
+            <div class="flex flex-col gap-4">
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <label class="block text-xs font-bold text-slate-600">Google Gemini API Key</label>
+                  <span id="geminiStatusBadge" class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                    Backend Service Connected
+                  </span>
+                </div>
+                <div class="relative flex items-center">
+                  <input id="setGeminiKey" type="password" placeholder="AIzaSy... (configured in .env or local storage)" value="configured_in_backend" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs font-mono text-slate-800 pr-20 focus:outline-none focus:ring-2 focus:ring-brand-600"/>
+                  <button type="button" onclick="toggleKeyVisibility()" class="absolute right-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 px-2 py-1 bg-slate-200/60 rounded-md">
+                    Show
+                  </button>
+                </div>
+                <div class="flex items-center justify-between text-xs text-slate-500 mt-1.5">
+                  <span>Enter your Google AI Studio Gemini API key to activate live responses.</span>
+                  <button type="button" onclick="testGeminiConnection()" class="text-brand-700 font-bold hover:underline flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[16px]">network_check</span> Test Connection
+                  </button>
+                </div>
+                <div id="testResultMsg" class="hidden p-3 rounded-xl bg-slate-50 text-xs mt-2"></div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 mb-1">Advisory Language</label>
+                  <select id="setLang" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800">
+                    <option value="English" selected>English</option>
+                    <option value="Hindi">हिन्दी (Hindi)</option>
+                    <option value="Marathi">मराठी (Marathi)</option>
+                    <option value="Punjabi">ਪੰਜਾਬੀ (Punjabi)</option>
+                    <option value="Gujarati">ગુજરાતી (Gujarati)</option>
+                    <option value="Telugu">తెలుగు (Telugu)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 mb-1">Advisory Output Detail</label>
+                  <select id="setTone" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800">
+                    <option value="Comprehensive" selected>Comprehensive Agronomic Analysis (RAG Grounded)</option>
+                    <option value="Actionable">Actionable Bullet Checklist Only</option>
+                    <option value="Summary">Concise SMS / WhatsApp Snippets</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 3: MANDI ALERTS -->
+          <div id="secMandi" class="hidden flex flex-col gap-5">
+            <div class="pb-3 border-b border-slate-100">
+              <h2 class="text-base font-bold text-slate-900">Mandi Benchmarks &amp; Price Alert Rules</h2>
+              <p class="text-xs text-slate-500">Set primary terminal watchlists and price jump notification triggers</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">Default Benchmark Mandi</label>
+                <select id="setBenchmarkMandi" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800">
+                  <option value="Lasalgaon APMC" selected>Lasalgaon APMC (Asia's Largest Onion Hub)</option>
+                  <option value="Pimpalgaon APMC">Pimpalgaon APMC (Tomato Capital)</option>
+                  <option value="Azadpur APMC">Azadpur APMC (Delhi NCR)</option>
+                  <option value="Vashi APMC">Vashi APMC (Navi Mumbai Terminal)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">Standard Measure Unit</label>
+                <select id="setUnit" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800">
+                  <option value="quintal" selected>₹ per Quintal (100 kg)</option>
+                  <option value="kg">₹ per Kilogram</option>
+                  <option value="tonne">₹ per Metric Tonne (1,000 kg)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">Price Volatility Trigger</label>
+                <select id="setPriceThreshold" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800">
+                  <option value="5">Notify on &gt; 5% Daily Shift</option>
+                  <option value="10" selected>Notify on &gt; 10% Daily Shift (Recommended)</option>
+                  <option value="15">Notify on &gt; 15% Volatile Jump Only</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">Market Refresh Cadence</label>
+                <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800">
+                  <option value="15" selected>Every 15 Minutes (During Mandi Hours)</option>
+                  <option value="60">Hourly</option>
+                  <option value="manual">Manual Refresh Only</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 4: SENSORS -->
+          <div id="secSensors" class="hidden flex flex-col gap-5">
+            <div class="pb-3 border-b border-slate-100">
+              <h2 class="text-base font-bold text-slate-900">In-Field Sensor &amp; Microclimate Thresholds</h2>
+              <p class="text-xs text-slate-500">Configure irrigation triggers and rainfall safety thresholds</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col gap-2">
+                <span class="text-xs font-bold text-slate-900">Soil Moisture Wilting Threshold</span>
+                <span class="text-xs text-slate-500">Alert triggers when root-zone moisture drops below critical level</span>
+                <div class="flex items-center gap-3 mt-2">
+                  <input id="setWiltingPt" type="range" min="15" max="30" value="20" class="flex-1 accent-emerald-600" oninput="document.getElementById('wiltingVal').textContent = this.value + '%'"/>
+                  <span id="wiltingVal" class="font-mono font-bold text-xs text-emerald-700">20%</span>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col gap-2">
+                <span class="text-xs font-bold text-slate-900">Rain Risk Alert Threshold</span>
+                <span class="text-xs text-slate-500">Warns agronomists if precipitation probability exceeds threshold within 36h</span>
+                <div class="flex items-center gap-3 mt-2">
+                  <input id="setRainPt" type="range" min="40" max="90" value="65" class="flex-1 accent-emerald-600" oninput="document.getElementById('rainVal').textContent = this.value + '%'"/>
+                  <span id="rainVal" class="font-mono font-bold text-xs text-amber-700">65%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <span class="block text-xs font-bold text-slate-600 mb-2">Notification Delivery Channels</span>
+              <div class="flex flex-wrap gap-4 text-xs font-medium text-slate-700">
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" checked class="w-4 h-4 accent-emerald-600 rounded"/>
+                  <span>In-App Dashboard Alerts</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" checked class="w-4 h-4 accent-emerald-600 rounded"/>
+                  <span>WhatsApp Agronomic Briefing</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" class="w-4 h-4 accent-emerald-600 rounded"/>
+                  <span>SMS Urgent Weather Alarms</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 5: DATA & SECURITY -->
+          <div id="secData" class="hidden flex flex-col gap-5">
+            <div class="pb-3 border-b border-slate-100">
+              <h2 class="text-base font-bold text-slate-900">Data Storage &amp; Session Management</h2>
+              <p class="text-xs text-slate-500">Export field records or sign out of your account</p>
+            </div>
+
+            <div class="flex flex-col gap-3">
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between">
+                <div>
+                  <h3 class="text-xs font-bold text-slate-900">Offline Application Storage</h3>
+                  <p class="text-xs text-slate-500">Local mandi cache and soil sensor records (12.4 MB)</p>
+                </div>
+                <button type="button" onclick="clearLocalCache()" class="px-3.5 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-100 transition-colors">
+                  Clear Cache
+                </button>
+              </div>
+
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between">
+                <div>
+                  <h3 class="text-xs font-bold text-slate-900">Export Farm Telemetry</h3>
+                  <p class="text-xs text-slate-500">Download field parameters, crop rotations, and pricing data as JSON</p>
+                </div>
+                <button type="button" onclick="exportData()" class="px-3.5 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-100 transition-colors flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-[16px]">download</span> Export Records
+                </button>
+              </div>
+
+              <div class="p-4 rounded-xl bg-rose-50 border border-rose-100 flex items-center justify-between">
+                <div>
+                  <h3 class="text-xs font-bold text-rose-900">Sign Out of Session</h3>
+                  <p class="text-xs text-rose-700">End your current active agronomist session</p>
+                </div>
+                <button type="button" onclick="handleSignOut()" class="px-4 py-1.5 rounded-lg bg-rose-600 text-white text-xs font-semibold hover:bg-rose-700 transition-colors shadow-sm flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px]">logout</span> Sign Out
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Action Buttons -->
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-xs text-slate-400">Settings are persisted locally and applied instantly.</span>
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="location.reload()" class="px-4 py-2 rounded-xl border border-slate-200 text-slate-700 text-xs font-semibold hover:bg-slate-50 transition-colors">
+                Discard
+              </button>
+              <button type="button" onclick="saveAllSettings()" class="px-4 py-2 rounded-xl bg-brand-700 text-white text-xs font-semibold hover:bg-brand-800 transition-all shadow-sm">
+                Save All Preferences
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- FLOATING SUCCESS TOAST -->
+  <div id="saveToast" class="fixed bottom-6 right-6 z-50 bg-brand-900 text-white px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 border border-brand-700">
+    <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0">
+      <span class="material-symbols-outlined text-[18px]">check</span>
+    </div>
+    <div>
+      <div class="text-xs font-bold">Preferences Saved Successfully</div>
+      <div class="text-[11px] text-emerald-200">Your farm telemetry &amp; AI settings are now updated.</div>
+    </div>
+  </div>
+
+  <script src="agrisync.js"></script>
+  <script>
+    function switchSettingsSection(secId) {
+      const sections = ['profile', 'ai', 'mandi', 'sensors', 'data'];
+      sections.forEach(s => {
+        const el = document.getElementById('sec' + s.charAt(0).toUpperCase() + s.slice(1));
+        const btn = document.getElementById('sTab' + s.charAt(0).toUpperCase() + s.slice(1));
+        if (el) el.classList.add('hidden');
+        if (btn) btn.classList.remove('active');
+      });
+
+      const activeEl = document.getElementById('sec' + secId.charAt(0).toUpperCase() + secId.slice(1));
+      const activeBtn = document.getElementById('sTab' + secId.charAt(0).toUpperCase() + secId.slice(1));
+      if (activeEl) activeEl.classList.remove('hidden');
+      if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    function toggleKeyVisibility() {
+      const input = document.getElementById('setGeminiKey');
+      const btn = event.currentTarget;
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = 'Hide';
+      } else {
+        input.type = 'password';
+        btn.textContent = 'Show';
+      }
+    }
+
+    async function testGeminiConnection() {
+      const msg = document.getElementById('testResultMsg');
+      msg.className = "p-3 rounded-xl bg-slate-50 text-xs flex items-center gap-2 text-slate-700";
+      msg.innerHTML = '<span class="material-symbols-outlined text-brand-700 animate-spin text-[16px]">sync</span> Testing connection to AgriSync Chat API...';
+      msg.classList.remove('hidden');
+
+      try {
+        const res = await fetch('/api/v1/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: "Ping health check" })
+        });
+        if (res.ok) {
+          msg.className = "p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 font-semibold flex items-center gap-2";
+          msg.innerHTML = '<span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span> AgriSync AI connection verified! API is responding normally.';
+        } else {
+          msg.className = "p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-center gap-2";
+          msg.innerHTML = `<span class="material-symbols-outlined text-[16px]">error</span> Response error ${res.status}`;
+        }
+      } catch (err) {
+        msg.className = "p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-center gap-2";
+        msg.innerHTML = `<span class="material-symbols-outlined text-[16px]">wifi_off</span> Network check failed: ${err.message}`;
+      }
+    }
+
+    function saveAllSettings() {
+      const prefs = {
+        userName: document.getElementById('setUserName').value,
+        farmName: document.getElementById('setFarmName').value,
+        location: document.getElementById('setLocation').value,
+        acreage: document.getElementById('setAcreage').value,
+        soil: document.getElementById('setSoil').value,
+        irrigation: document.getElementById('setIrrigation').value,
+        lang: document.getElementById('setLang').value,
+        tone: document.getElementById('setTone').value,
+        mandi: document.getElementById('setBenchmarkMandi').value,
+        unit: document.getElementById('setUnit').value
+      };
+      localStorage.setItem('agrisync_settings', JSON.stringify(prefs));
+
+      const toast = document.getElementById('saveToast');
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    function loadSavedSettings() {
+      const saved = localStorage.getItem('agrisync_settings');
+      if (saved) {
+        try {
+          const p = JSON.parse(saved);
+          if (p.userName) document.getElementById('setUserName').value = p.userName;
+          if (p.farmName) document.getElementById('setFarmName').value = p.farmName;
+          if (p.location) document.getElementById('setLocation').value = p.location;
+          if (p.acreage) document.getElementById('setAcreage').value = p.acreage;
+          if (p.soil) document.getElementById('setSoil').value = p.soil;
+          if (p.irrigation) document.getElementById('setIrrigation').value = p.irrigation;
+          if (p.lang) document.getElementById('setLang').value = p.lang;
+          if (p.tone) document.getElementById('setTone').value = p.tone;
+          if (p.mandi) document.getElementById('setBenchmarkMandi').value = p.mandi;
+          if (p.unit) document.getElementById('setUnit').value = p.unit;
+        } catch (e) {}
+      }
+    }
+
+    function resetDefaults() {
+      localStorage.removeItem('agrisync_settings');
+      location.reload();
+    }
+
+    function clearLocalCache() {
+      localStorage.clear();
+      alert('Local application cache cleared.');
+      location.reload();
+    }
+
+    function exportData() {
+      const data = {
+        farm: document.getElementById('setFarmName').value,
+        agronomist: document.getElementById('setUserName').value,
+        location: document.getElementById('setLocation').value,
+        timestamp: new Date().toISOString()
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `agrisync_farm_profile_${Date.now()}.json`;
+      a.click();
+    }
+
+    function handleSignOut() {
+      localStorage.removeItem('agrisync_user');
+      window.location.href = 'login.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', loadSavedSettings);
+  </script>
+</body>
+</html>

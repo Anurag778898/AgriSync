@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>AgriSync – AI Farming Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background-color: #f8fafc; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- SIDEBAR -->
+  <aside class="fixed left-0 top-0 h-full w-52 bg-white border-r border-slate-200 z-50 flex flex-col justify-between py-4">
+    <div class="flex flex-col gap-4 px-3">
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-2.5 px-1.5">
+        <div class="w-8 h-8 rounded-lg bg-brand-700 flex items-center justify-center text-white shadow-sm shrink-0">
+          <span class="material-symbols-outlined text-[18px]">psychiatry</span>
+        </div>
+        <div>
+          <span class="font-bold text-sm text-slate-900 tracking-tight block leading-none">AgriSync</span>
+          <span class="text-[10px] font-medium text-slate-400 block mt-0.5">Ag-Intelligence</span>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="flex flex-col gap-0.5">
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="overview" href="overview.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">dashboard</span>
+          <span>Overview</span>
+        </a>
+        <a aria-current="page" class="flex items-center justify-between px-2.5 py-2 rounded-lg font-semibold text-xs bg-brand-50 text-brand-800 transition-colors" data-path="ai-farming-assistant" href="ai-assistant.html">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] text-brand-700">smart_toy</span>
+            <span>AI Assistant</span>
+          </div>
+          <span class="bg-brand-100 text-brand-800 text-[10px] font-bold px-1.5 py-0.2 rounded-full">AI</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-and-market-explorer" href="crop-market-explorer.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">travel_explore</span>
+          <span>Crop &amp; Markets</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-price-intelligence" href="crop-prices.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">trending_up</span>
+          <span>Price Intel</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="weather-intelligence" href="weather.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">partly_cloudy_day</span>
+          <span>Weather &amp; Soil</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="settings" href="settings.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">settings</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Bottom User Profile Card -->
+    <div class="px-3 border-t border-slate-100 pt-3">
+      <div class="flex items-center justify-between p-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full bg-brand-700 text-white font-bold flex items-center justify-center text-[11px] shrink-0">
+            SS
+          </div>
+          <div class="flex flex-col truncate">
+            <span class="text-xs font-semibold text-slate-900 leading-tight truncate">Dr. S. Sharma</span>
+            <span class="text-[10px] text-slate-400">Agronomist</span>
+          </div>
+        </div>
+        <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0 ml-1" title="System Online" id="health-dot"></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <div class="pl-52 h-screen flex flex-col">
+    <!-- TOP HEADER -->
+    <header class="h-16 bg-white border-b border-slate-200 px-8 flex items-center justify-between shrink-0">
+      <div>
+        <h1 class="text-base font-bold text-slate-900 leading-tight">Agronomic AI Co-Pilot</h1>
+        <p class="text-xs text-slate-500">Real-time advisory powered by Gemini AI &bull; Grounded in ICAR crop protocols</p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-full border border-emerald-200/60">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Gemini Model Ready</span>
+        </div>
+        <a href="settings.html" class="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors" title="AI Settings">
+          <span class="material-symbols-outlined text-[20px]">tune</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- CHAT WORKSPACE (2 Columns) -->
+    <div class="flex-1 overflow-hidden grid grid-cols-12 bg-slate-50">
+      <!-- Left Consultation History -->
+      <div class="hidden md:flex md:col-span-4 lg:col-span-3 xl:col-span-3 bg-white border-r border-slate-200 flex-col p-3 gap-3 h-full overflow-y-auto">
+        <button onclick="document.getElementById('chatInput').focus()" class="w-full py-2 px-3 rounded-lg bg-brand-700 text-white font-semibold text-xs hover:bg-brand-800 transition-all flex items-center justify-center gap-1.5 shadow-sm">
+          <span class="material-symbols-outlined text-[16px]">add</span>
+          <span>New Consultation</span>
+        </button>
+
+        <!-- Topic Categories -->
+        <div class="flex flex-col gap-1">
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider px-2 mb-1">Recommended Topics</span>
+          
+          <button onclick="setQuery('When should I harvest tomato Plot B given the upcoming rain?')" class="p-2.5 rounded-xl hover:bg-slate-50 text-left transition-colors flex items-start gap-2.5">
+            <span class="material-symbols-outlined text-amber-600 text-[18px] mt-0.5">event</span>
+            <div>
+              <span class="text-xs font-semibold text-slate-800 block">Harvest Window for Tomato</span>
+              <span class="text-[11px] text-slate-500">Plot B rain mitigation advisory</span>
+            </div>
+          </button>
+
+          <button onclick="setQuery('What are today\'s modal price trends across Lasalgaon and Azadpur?')" class="p-2.5 rounded-xl hover:bg-slate-50 text-left transition-colors flex items-start gap-2.5">
+            <span class="material-symbols-outlined text-brand-700 text-[18px] mt-0.5">trending_up</span>
+            <div>
+              <span class="text-xs font-semibold text-slate-800 block">Mandi Price Comparison</span>
+              <span class="text-[11px] text-slate-500">Lasalgaon vs Azadpur APMC</span>
+            </div>
+          </button>
+
+          <button onclick="setQuery('How to treat early blight on tomato vines in clay-loam soil?')" class="p-2.5 rounded-xl hover:bg-slate-50 text-left transition-colors flex items-start gap-2.5">
+            <span class="material-symbols-outlined text-rose-600 text-[18px] mt-0.5">pest_control</span>
+            <div>
+              <span class="text-xs font-semibold text-slate-800 block">Early Blight Treatment</span>
+              <span class="text-[11px] text-slate-500">Chemical &amp; organic fungicides</span>
+            </div>
+          </button>
+
+          <button onclick="setQuery('Recommend best fertilizer dosing for wheat in Rabi season')" class="p-2.5 rounded-xl hover:bg-slate-50 text-left transition-colors flex items-start gap-2.5">
+            <span class="material-symbols-outlined text-blue-600 text-[18px] mt-0.5">water_drop</span>
+            <div>
+              <span class="text-xs font-semibold text-slate-800 block">Wheat Dosing Schedule</span>
+              <span class="text-[11px] text-slate-500">NPK 19:19:19 &amp; zinc application</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Farm Context Box -->
+        <div class="mt-auto p-3.5 rounded-xl bg-slate-50 border border-slate-100 flex flex-col gap-1 text-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-800">Farm Context Attached</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          </div>
+          <span class="text-slate-600">140 Acres &bull; Nashik Sector 4</span>
+          <span class="text-slate-500 text-[11px]">Black Clay Loam &bull; Automated Drip</span>
+        </div>
+      </div>
+
+      <!-- Right Chat Conversation -->
+      <div class="col-span-12 md:col-span-8 lg:col-span-9 xl:col-span-9 flex flex-col h-full bg-slate-50 overflow-hidden">
+        <!-- Messages Area -->
+        <div id="chatMessages" class="flex-1 overflow-y-auto p-6 flex flex-col gap-4">
+          <!-- Initial Welcome Message from AgriSync -->
+          <div class="flex items-start gap-3 max-w-3xl">
+            <div class="w-9 h-9 rounded-xl bg-brand-700 text-white flex items-center justify-center shrink-0 shadow-sm">
+              <span class="material-symbols-outlined text-[20px]">psychiatry</span>
+            </div>
+            <div class="bg-white p-4 rounded-2xl rounded-tl-sm border border-slate-200/80 shadow-sm text-sm text-slate-800 leading-relaxed">
+              <p class="font-semibold text-slate-900 mb-1">Namaste, Dr. Sunita! I am your AgriSync Agronomic Assistant.</p>
+              <p>I have direct access to your <strong>Nashik Sector 4 soil sensors</strong>, real-time <strong>Agmarknet APMC mandi quotes</strong>, and the 7-day <strong>IMD weather radar</strong>.</p>
+              <p class="mt-2 text-slate-600 text-xs">How can I assist your crop management today? You can ask about disease control, optimal harvest dates, fertilizer ratios, or mandi rate forecasts.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Input Form -->
+        <div class="p-4 bg-white border-t border-slate-200 shrink-0">
+          <div class="max-w-4xl mx-auto flex flex-col gap-2">
+            <div class="flex items-center gap-2">
+              <span id="attachedFileBadge" style="display:none;" class="text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-md font-medium"></span>
+            </div>
+
+            <div class="flex items-end gap-2 bg-slate-100 rounded-2xl p-2 border border-slate-200 focus-within:border-brand-600 focus-within:bg-white focus-within:ring-2 focus-within:ring-brand-500/20 transition-all">
+              <!-- Attachment Button -->
+              <button id="attachBtn" type="button" class="p-2 text-slate-400 hover:text-slate-600 transition-colors rounded-xl hover:bg-slate-200/50" title="Attach soil report or crop photo">
+                <span class="material-symbols-outlined text-[22px]">attach_file</span>
+              </button>
+              <input type="file" id="chatFileInput" style="display:none" accept="image/*,.pdf,.txt,.csv"/>
+
+              <!-- Textarea Input -->
+              <textarea id="chatInput" rows="2" placeholder="Ask about crop diseases, mandi price trends, spray schedules, or fertilizer dosing..." class="w-full bg-transparent resize-none text-sm text-slate-800 placeholder-slate-400 focus:outline-none p-1"></textarea>
+
+              <!-- Send Button -->
+              <button id="chatSendBtn" type="button" class="px-4 py-2 bg-brand-700 text-white rounded-xl font-semibold text-sm hover:bg-brand-800 transition-all flex items-center gap-1.5 shadow-sm active:scale-95 shrink-0">
+                <span>Send</span>
+                <span class="material-symbols-outlined text-[18px]">send</span>
+              </button>
+            </div>
+
+            <div class="flex items-center justify-between text-[11px] text-slate-400 px-1">
+              <span>Press <kbd class="font-mono bg-slate-100 px-1 py-0.5 rounded border border-slate-200 text-slate-600">Enter</kbd> to send, <kbd class="font-mono bg-slate-100 px-1 py-0.5 rounded border border-slate-200 text-slate-600">Shift+Enter</kbd> for new line</span>
+              <span>AgriSync Agronomic AI ground-truth verified</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="agrisync.js"></script>
+  <script src="ai_chat.js"></script>
+  <script>
+    function setQuery(text) {
+      const input = document.getElementById('chatInput');
+      if (input) {
+        input.value = text;
+        input.focus();
+      }
+    }
+  </script>
+</body>
+</html>

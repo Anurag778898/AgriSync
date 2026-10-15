@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>AgriSync – Field Telemetry &amp; Alerts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background-color: #f8fafc; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- SIDEBAR -->
+  <aside class="fixed left-0 top-0 h-full w-52 bg-white border-r border-slate-200 z-50 flex flex-col justify-between py-4">
+    <div class="flex flex-col gap-4 px-3">
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-2.5 px-1.5">
+        <div class="w-8 h-8 rounded-lg bg-brand-700 flex items-center justify-center text-white shadow-sm shrink-0">
+          <span class="material-symbols-outlined text-[18px]">psychiatry</span>
+        </div>
+        <div>
+          <span class="font-bold text-sm text-slate-900 tracking-tight block leading-none">AgriSync</span>
+          <span class="text-[10px] font-medium text-slate-400 block mt-0.5">Ag-Intelligence</span>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="flex flex-col gap-0.5">
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="overview" href="overview.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">dashboard</span>
+          <span>Overview</span>
+        </a>
+        <a class="flex items-center justify-between px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="ai-farming-assistant" href="ai-assistant.html">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px] text-slate-400">smart_toy</span>
+            <span>AI Assistant</span>
+          </div>
+          <span class="bg-brand-100 text-brand-800 text-[10px] font-bold px-1.5 py-0.2 rounded-full">AI</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-and-market-explorer" href="crop-market-explorer.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">travel_explore</span>
+          <span>Crop &amp; Markets</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="crop-price-intelligence" href="crop-prices.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">trending_up</span>
+          <span>Price Intel</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="weather-intelligence" href="weather.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">partly_cloudy_day</span>
+          <span>Weather &amp; Soil</span>
+        </a>
+        <a class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg font-medium text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" data-path="settings" href="settings.html">
+          <span class="material-symbols-outlined text-[18px] text-slate-400">settings</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Bottom User Profile Card -->
+    <div class="px-3 border-t border-slate-100 pt-3">
+      <div class="flex items-center justify-between p-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full bg-brand-700 text-white font-bold flex items-center justify-center text-[11px] shrink-0">
+            SS
+          </div>
+          <div class="flex flex-col truncate">
+            <span class="text-xs font-semibold text-slate-900 leading-tight truncate">Dr. S. Sharma</span>
+            <span class="text-[10px] text-slate-400">Agronomist</span>
+          </div>
+        </div>
+        <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0 ml-1" title="System Online" id="health-dot"></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <div class="pl-52">
+    <!-- TOP HEADER -->
+    <header class="sticky top-0 h-16 bg-white/90 backdrop-blur-md border-b border-slate-200 z-40 px-8 flex items-center justify-between">
+      <div>
+        <h1 class="text-base font-bold text-slate-900 leading-tight">Field Telemetry &amp; Alerts</h1>
+        <p class="text-xs text-slate-500">In-situ IoT nodes, root-zone hydrology &amp; satellite NDVI calibration</p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Live Node Count Badge -->
+        <div class="flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-full border border-emerald-200/60">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>12 / 12 Nodes Online</span>
+        </div>
+
+        <button onclick="location.reload()" class="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors" title="Refresh Telemetry">
+          <span class="material-symbols-outlined text-[20px]">refresh</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN BODY -->
+    <main class="p-8 max-w-7xl mx-auto space-y-6">
+
+      <!-- 4 TELEMETRY KPI METRICS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <!-- Metric 1: Node Health -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Node Grid Status</span>
+            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[18px]">sensors</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <span class="text-2xl font-bold font-mono text-slate-900 tracking-tight">100% Uptime</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">12 Active</span>
+            </div>
+            <p class="text-xs text-slate-500">Nashik Agro-Cluster &bull; LoRaWAN Gateway</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Avg RSSI Signal</span>
+            <span class="font-mono font-medium text-slate-700">-67 dBm (Strong)</span>
+          </div>
+        </div>
+
+        <!-- Metric 2: Field Moisture -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Mean Root Moisture</span>
+            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[18px]">water_drop</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <span class="text-2xl font-bold font-mono text-slate-900 tracking-tight">34.8% VWC</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Normal</span>
+            </div>
+            <p class="text-xs text-slate-500">Optimal Field Capacity: 30% - 38%</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Soil Matrix Potential</span>
+            <span class="font-mono font-medium text-slate-700">26 kPa</span>
+          </div>
+        </div>
+
+        <!-- Metric 3: Active Agro-Alerts -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">System Incident Log</span>
+            <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[18px]">notifications_active</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <span class="text-2xl font-bold font-mono text-slate-900 tracking-tight">1 Advisory</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Caution</span>
+            </div>
+            <p class="text-xs text-slate-500">Rain caution active for Thursday</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Critical Hardware Alerts</span>
+            <span class="font-bold text-emerald-700">0 None</span>
+          </div>
+        </div>
+
+        <!-- Metric 4: Satellite NDVI Index -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Canopy Chlorophyll</span>
+            <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[18px]">nature</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <span class="text-2xl font-bold font-mono text-slate-900 tracking-tight">0.78 NDVI</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-brand-100 text-brand-800">Vigorous</span>
+            </div>
+            <p class="text-xs text-slate-500">Sentinel-2 Sentinel Hub Overpass (3d ago)</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>NDRE Red Edge</span>
+            <span class="font-mono font-medium text-slate-700">0.42 (Healthy)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVE ALERTS FEED -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <h2 class="text-base font-bold text-slate-900 mb-4">Agronomic Event &amp; Threshold Log</h2>
+        <div class="space-y-3">
+          
+          <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 flex items-start justify-between gap-4">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-amber-600 text-[22px] mt-0.5">warning</span>
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="text-xs font-bold text-amber-800 uppercase tracking-wider">Meteorological Warning</span>
+                  <span class="text-[11px] font-mono text-slate-500">Today 09:15 IST</span>
+                </div>
+                <p class="text-xs text-slate-700">
+                  Precipitation forecast exceeded 15mm threshold for Thursday afternoon. Automatic recommendation: Suspend scheduled zinc foliar spray on Plot A &amp; B until Friday morning.
+                </p>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-amber-100 text-amber-800 shrink-0">Acknowledged</span>
+          </div>
+
+          <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/30 flex items-start justify-between gap-4">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-emerald-600 text-[22px] mt-0.5">check_circle</span>
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Irrigation Auto-Throttle</span>
+                  <span class="text-[11px] font-mono text-slate-500">Yesterday 18:40 IST</span>
+                </div>
+                <p class="text-xs text-slate-700">
+                  Station Node #02 reported root moisture reaching target threshold of 38% VWC. Drip valve Solenoid #4 closed safely after delivering 18,500 liters.
+                </p>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-emerald-100 text-emerald-800 shrink-0">Automated</span>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex items-start justify-between gap-4">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-slate-500 text-[22px] mt-0.5">battery_charging_full</span>
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Power Subsystem</span>
+                  <span class="text-[11px] font-mono text-slate-500">Yesterday 11:20 IST</span>
+                </div>
+                <p class="text-xs text-slate-700">
+                  Node #04 solar battery cycle completed daily float charge (100%). Solar irradiance at station: 840 W/m².
+                </p>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-200 text-slate-700 shrink-0">Normal</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- IN-SITU SENSOR STATION GRID (TABLE) -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-5">
+          <div>
+            <h2 class="text-base font-bold text-slate-900">In-Situ IoT Node Matrix</h2>
+            <p class="text-xs text-slate-500">Live calibration readings across field zones and soil horizons</p>
+          </div>
+          <button class="px-3 py-1.5 text-xs font-semibold bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors flex items-center gap-1.5 text-slate-700">
+            <span class="material-symbols-outlined text-[16px]">file_download</span>
+            <span>Download Sensor Telemetry CSV</span>
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 bg-slate-50/60 text-slate-500 font-bold uppercase tracking-wider">
+                <th class="py-3 px-4">Node ID &amp; Location</th>
+                <th class="py-3 px-4">Monitored Crop</th>
+                <th class="py-3 px-4 text-right">Moisture 20cm</th>
+                <th class="py-3 px-4 text-right">Moisture 45cm</th>
+                <th class="py-3 px-4 text-right">Soil Temp</th>
+                <th class="py-3 px-4 text-right">Salinity (EC)</th>
+                <th class="py-3 px-4 text-right">Battery</th>
+                <th class="py-3 px-4 text-center">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  Node-01 (Sector 4-A)
+                </td>
+                <td class="py-3.5 px-4 text-slate-600">Table Grape (Thompson)</td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-slate-900">32.4%</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-700">36.1%</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-800">22.8°C</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-800">1.12 dS/m</td>
+                <td class="py-3.5 px-4 text-right font-mono text-emerald-700 font-bold">94%</td>
+                <td class="py-3.5 px-4 text-center">
+                  <span class="inline-block px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold">Active</span>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  Node-02 (Sector 4-B)
+                </td>
+                <td class="py-3.5 px-4 text-slate-600">Tomato (Abhinav Hybrid)</td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-slate-900">38.0%</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-700">41.2%</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-800">23.4°C</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-800">1.34 dS/m</td>
+                <td class="py-3.5 px-4 text-right font-mono text-emerald-700 font-bold">88%</td>
+                <td class="py-3.5 px-4 text-center">
+                  <span class="inline-block px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold">Active</span>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  Node-03 (Sector 4-C)
+                </td>
+                <td class="py-3.5 px-4 text-slate-600">Pomegranate (Bhagwa)</td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-slate-900">29.1%</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-700">33.5%</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-800">21.9°C</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-800">0.95 dS/m</td>
+                <td class="py-3.5 px-4 text-right font-mono text-emerald-700 font-bold">92%</td>
+                <td class="py-3.5 px-4 text-center">
+                  <span class="inline-block px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold">Active</span>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  Node-04 (Sector 4-D)
+                </td>
+                <td class="py-3.5 px-4 text-slate-600">Bell Pepper (Capsicum)</td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-slate-900">35.6%</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-700">38.9%</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-800">22.6°C</td>
+                <td class="py-3.5 px-4 text-right font-mono text-slate-800">1.21 dS/m</td>
+                <td class="py-3.5 px-4 text-right font-mono text-emerald-700 font-bold">100%</td>
+                <td class="py-3.5 px-4 text-center">
+                  <span class="inline-block px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold">Active</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="agrisync.js"></script>
+</body>
+</html>
