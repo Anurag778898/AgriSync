@@ -10,3 +10,5 @@
     
 - Right now it only has light theme
     Its using Bootstrap CSS for Icons and for responsive mobile version
+
+Updates soon... ;(
