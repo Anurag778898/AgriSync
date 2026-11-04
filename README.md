@@ -11,6 +11,18 @@ npm ci
 npm run dev
 ```
 
+### Windows Command Prompt
+
+From Command Prompt, run:
+
+```cmd
+cd /d C:\Users\dhank\Engg-Projects\AgriSync
+npm ci
+npm run dev
+```
+
+Open the local URL printed by Vite in your browser (usually `http://localhost:5173`).
+
 ## Available scripts
 
 - `npm run dev` — start the Vite development server.
