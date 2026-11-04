@@ -4,9 +4,9 @@
 
 - In order to make it work run the following command
 
-    'npm ci'
+    `npm ci`
 
-    'npm run dev'
+    `npm run dev`
     
 - Right now it only has light theme
     Its using Bootstrap CSS for Icons and for responsive mobile version
