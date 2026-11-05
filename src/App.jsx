@@ -154,7 +154,6 @@ function Overview({ onNavigate, sceneRef }) {
       <SectionHeading
         eyebrow="WEDNESDAY · NASHIK, MAHARASHTRA"
         title="Good morning, Prasanna."
-        detail="Your crops, nearby prices, and next steps."
         action={<DemoFlag />}
         farmBackdrop
       />
@@ -255,17 +254,17 @@ function ProducePage({ onNavigate }) {
   const addProduce = (event) => {
     event.preventDefault();
     if (!cropName.trim()) return;
-    setItems([{ crop: cropName.trim(), detail: "Draft listing · Add quantity and price to publish", price: t("Not set"), status: "Draft", color: "gold" }, ...items]);
+    setItems([{ crop: cropName.trim(), price: t("Not set"), status: "Draft", color: "gold" }, ...items]);
     setCropName("");
     setShowForm(false);
     setNotice(t("Draft added to this sample workspace."));
   };
   return (
     <>
-      <SectionHeading eyebrow="YOUR SUPPLY" title="My produce." detail="Your available crops and buyer interest." action={<button className="button button-primary" onClick={() => { setShowForm(!showForm); setNotice(""); }}><Icon name="bi-plus-lg" /> {t("Add produce")}</button>} />
+      <SectionHeading eyebrow="YOUR SUPPLY" title="My produce."action={<button className="button button-primary" onClick={() => { setShowForm(!showForm); setNotice(""); }}><Icon name="bi-plus-lg" /> {t("Add produce")}</button>} />
       {showForm && <form className="inline-form" onSubmit={addProduce}><label htmlFor="crop-name">{t("Crop name")}</label><input id="crop-name" value={cropName} onChange={(event) => setCropName(event.target.value)} placeholder={t("e.g. Green chilli")} required /><button className="button button-primary" type="submit">{t("Save draft")}</button><button className="text-button" type="button" onClick={() => setShowForm(false)}>{t("Cancel")}</button><span className="form-note">{t("This creates a local draft only. Nothing is sent to a server.")}</span></form>}
       {notice && <p className="inline-notice" role="status">{notice}</p>}
-      <section className="surface produce-surface"><div className="surface-heading"><div><p className="eyebrow">{t("LISTINGS")}</p><h2>{t("Available produce")} <span className="count-badge">{items.length}</span></h2></div><span className="sample-tag">{t("Sample workspace")}</span></div>
+      <section className="surface produce-surface"><div className="surface-heading"><div><p className="eyebrow">{t("LISTINGS")}</p><h2>{t("Available produce")} <span className="count-badge">{items.length}</span></h2></div></div>
         <div className="produce-list">{items.map((item, index) => <article className="produce-row" key={`${item.crop}-${index}`}><div className="produce-emblem"><Icon name="bi-basket2" /></div><div className="produce-info"><strong>{t(item.crop)}</strong><span>{t(item.detail)}</span></div><div className="produce-price"><span>{t("Asking price")}</span><strong data-countup>{item.price}</strong></div><span className={`status-label ${item.color}`}><span />{t(item.status)}</span><button className="icon-button" aria-label={`${t("More options for {crop}").replace("{crop}", t(item.crop))}`} onClick={() => setNotice(t("Options for {crop} are a prototype placeholder.").replace("{crop}", t(item.crop)))}><Icon name="bi-three-dots-vertical" /></button></article>)}</div>
         <button className="text-button lower-action" onClick={() => onNavigate("Notifications")}>{t("See buyer activity")} <Icon name="bi-arrow-right" /></button>
       </section>
@@ -509,32 +508,30 @@ function App() {
     <LanguageContext.Provider value={language}>
     <div className={`app-container ${darkMode ? "theme-dark" : ""}`} lang={language}>
       <header className="mobile-header">
-        <button className="mobile-brand" onClick={() => navigate("Overview")} aria-label={translate(language, "Go to overview")}><span className="brand-mark">a</span> AgriSync</button>
+        <button className="mobile-brand" onClick={() => navigate("Overview")} aria-label={translate(language, "Go to overview")}><img src="/public/favicon.svg" alt="AgriSync" className="brand-mark"/> AgriSync</button>
         <button className="menu-toggle" onClick={() => setSidebarOpen((open) => !open)} aria-label={translate(language, sidebarOpen ? "Close navigation" : "Open navigation")} aria-expanded={sidebarOpen} aria-controls="app-sidebar"><Icon name={sidebarOpen ? "bi-x-lg" : "bi-list"} /></button>
       </header>
 
-      {sidebarOpen && <button className="sidebar-overlay" aria-label={translate(language, "Close navigation")} onClick={() => setSidebarOpen(false)} />}
-
       <aside className="sidebar" id="app-sidebar" ref={sidebarRef} inert={!sidebarOpen} tabIndex="-1">
         <button className="sidebar-brand" onClick={() => navigate("Overview")} aria-label={translate(language, "AgriSync overview")}>
-          <span className="brand-mark">a</span><span className="brand-info"><strong>AgriSync</strong><small>{translate(language, "Market, in sync.")}</small></span>
+          <img src="/public/favicon.svg" alt="AgriSync" className="brand-mark"/><span className="brand-info"><strong>AgriSync</strong><small>{translate(language, "Market, in sync.")}</small></span>
         </button>
         <div className="workspace-switch"><span className="workspace-avatar">P</span><span><strong>Prasanna Unde</strong><small>{translate(language, "Farmer workspace")}</small></span><Icon name="bi-chevron-expand" /></div>
         <nav id="app-navigation" className="sidebar-navigation" aria-label={translate(language, "Main navigation")}>
           {navigation.map((group) => <div className="menu-group" key={group.heading}><p className="menu-heading">{translate(language, group.heading)}</p>{group.items.map((item) => <button key={item.label} data-page={item.label} className={`menu-item ${activePage === item.label ? "active" : ""}`} onClick={() => navigate(item.label)} aria-current={activePage === item.label ? "page" : undefined}><Icon name={item.icon} className="menu-icon" /><span>{translate(language, item.label)}</span>{item.badge && <span className="nav-badge">{item.badge}</span>}</button>)}</div>)}
         </nav>
         <div className="sidebar-bottom">
-          <div className="sidebar-help"><Icon name="bi-info-circle" /><span><strong>{translate(language, "Prototype workspace")}</strong><small>{translate(language, "Sample values are clearly marked.")}</small></span></div>
+          
           <div className="theme-switch-row">
-            <span className="theme-switch-label"><Icon name={darkMode ? "bi-moon-stars" : "bi-sun"} /><span><strong>{translate(language, "Night colors")}</strong><small>{translate(language, darkMode ? "On · easy on the eyes" : "A softer evening palette")}</small></span></span>
+            <span className="theme-switch-label"><Icon name={darkMode ? "bi-moon-stars" : "bi-sun"} /><span><strong>{translate(language, "Night colors")}</strong></span></span>
             <button className={`theme-toggle ${darkMode ? "is-on" : ""}`} type="button" role="switch" aria-checked={darkMode} aria-label={translate(language, "Toggle night colors")} onClick={(event) => toggleTheme(event.currentTarget)}><span /></button>
           </div>
           <button className={`menu-item ${activePage === "Settings" ? "active" : ""}`} data-page="Settings" onClick={() => navigate("Settings")} aria-current={activePage === "Settings" ? "page" : undefined}><Icon name="bi-sliders2" className="menu-icon" /><span>{translate(language, "Settings")}</span></button>
-          <div className="sidebar-footer">{translate(language, "Built for better market decisions")}</div>
+          {/* <div className="sidebar-footer"></div> */}
         </div>
       </aside>
 
-      <main className="main-content"><div className="page-topline"><div className="page-topline-start"><button ref={sidebarToggleRef} type="button" className="menu-toggle sidebar-top-toggle" aria-label="Toggle navigation" aria-expanded={sidebarOpen} aria-controls="app-sidebar" onClick={() => setSidebarOpen((open) => !open)}><Icon name="bi-list" className="sidebar-glyph sidebar-glyph-menu" /><Icon name="bi-x-lg" className="sidebar-glyph sidebar-glyph-close" /></button><span><Icon name="bi-geo-alt" /> {translate(language, "Nashik region")}</span></div><span className="preview-status"><span /> {translate(language, "Preview mode · Data is illustrative")}</span></div>{activePage === "Overview" && <><div className="overview-ambient" ref={overviewAmbientRef} aria-hidden="true" /><div className="overview-produce-field" ref={overviewFieldRef} aria-hidden="true" /></>}<div className="page-content"><Page onNavigate={navigate} language={language} onLanguageChange={setLanguage} sceneRef={overviewSceneRef} /></div><footer className="app-footer"><span>AgriSync</span><span>{translate(language, "Know the market. Choose with confidence.")}</span></footer></main>
+      <main className="main-content"><div className="page-topline"><div className="page-topline-start"><span><Icon name="bi-geo-alt" /> {translate(language, "Nashik region")}</span></div><span className="preview-status"><span /> {translate(language, "Preview mode · Data is illustrative")}</span></div>{activePage === "Overview" && <><div className="overview-ambient" ref={overviewAmbientRef} aria-hidden="true" /><div className="overview-produce-field" ref={overviewFieldRef} aria-hidden="true" /></>}<div className="page-content"><Page onNavigate={navigate} language={language} onLanguageChange={setLanguage} sceneRef={overviewSceneRef} /></div><footer className="app-footer"><span>AgriSync</span><span>{translate(language, "Know the market. Choose with confidence.")}</span></footer></main>
     </div>
     </LanguageContext.Provider>
   );
