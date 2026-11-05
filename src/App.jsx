@@ -154,7 +154,7 @@ function Overview({ onNavigate, sceneRef }) {
       <SectionHeading
         eyebrow="WEDNESDAY · NASHIK, MAHARASHTRA"
         title="Good morning, Prasanna."
-        action={<DemoFlag />}
+        // action={<DemoFlag />}
         farmBackdrop
       />
 
@@ -229,7 +229,7 @@ function MarketPage() {
   const filteredCrops = crops.filter((crop) => `${t(crop.name)} ${crop.mandi}`.toLowerCase().includes(query.toLowerCase()));
   return (
     <>
-      <SectionHeading eyebrow="MARKET INTELLIGENCE" title="Know your market." detail="Nearby mandi prices, side by side." action={<DemoFlag />} />
+      <SectionHeading eyebrow="MARKET INTELLIGENCE" title="Know your market." detail="Nearby mandi prices, side by side."  />
       <section className="surface market-table-wrap">
         <div className="surface-heading market-tools">
           <div><p className="eyebrow">{t("NEARBY MANDIS")}</p><h2>{t("Price board")}</h2></div>
@@ -275,7 +275,7 @@ function ProducePage({ onNavigate }) {
 function RecommendationsPage() {
   const t = useT();
   return <>
-    <SectionHeading eyebrow="DECISION SUPPORT" title="Consider your next move." detail="Key points to weigh before choosing when to sell." action={<DemoFlag />} />
+    <SectionHeading eyebrow="DECISION SUPPORT" title="Consider your next move." detail="Key points to weigh before choosing when to sell." />
     <div className="recommendation-layout"><section className="recommendation-feature"><p className="eyebrow light-eyebrow">{t("SAMPLE SELLING WINDOW")}</p><div className="rec-date"><span data-countup>07</span><span>{t("NOV")}</span></div><div><h2>{t("Onion · Lasalgaon")}</h2><p>{t("Illustrative suggestion based on a sample trend. No forecast model or live data is connected.")}</p></div><div className="rec-price"><span>{t("Sample market price")}</span><strong data-countup>₹2,180 <small>/ {t("per quintal")}</small></strong></div></section>
       <section className="surface why-panel"><p className="eyebrow">{t("WHY THIS SUGGESTION?")}</p><h2>{t("What to weigh before selling")}</h2><ul className="reason-list"><li><span className="reason-mark up"><Icon name="bi-arrow-up" /></span><span><strong>{t("Recent market movement")}</strong><small>{t("Sample prices have moved up over the last few market days.")}</small></span></li><li><span className="reason-mark neutral"><Icon name="bi-box-seam" /></span><span><strong>{t("Storage and quality")}</strong><small>{t("Factor in holding costs and how long your produce keeps.")}</small></span></li><li><span className="reason-mark neutral"><Icon name="bi-geo-alt" /></span><span><strong>{t("Compare nearby buyers")}</strong><small>{t("Transport and buyer requirements affect the final return.")}</small></span></li></ul></section></div>
     <div className="info-strip"><Icon name="bi-exclamation-circle" /><p><strong>{t("Illustration only.")}</strong> {t("This sample recommendation is not a price guarantee or a trained model prediction.")}</p></div>
@@ -285,7 +285,7 @@ function RecommendationsPage() {
 function WeatherPage() {
   const t = useT();
   return <>
-    <SectionHeading eyebrow="WEATHER INTELLIGENCE" title="Plan around the conditions." detail="Local conditions for your crops and location." action={<DemoFlag />} />
+    <SectionHeading eyebrow="WEATHER INTELLIGENCE" title="Plan around the conditions." detail="Local conditions for your crops and location."  />
     <section className="weather-panel"><div className="weather-location"><p className="eyebrow light-eyebrow">{t("SAMPLE LOCATION")}</p><h2>{t("Nashik district")}</h2><span>{t("Maharashtra · Location not verified")}</span></div><div className="weather-reading"><Icon name="bi-cloud-sun" /><strong>28°</strong><span>{t("Illustrative only")}</span></div><div className="weather-detail"><span className="weather-detail-label"><Icon name="bi-droplet" />{t("Rainfall")}</span><strong>{t("Not available")}</strong><span>{t("Forecast connection needed")}</span></div><div className="weather-detail"><span className="weather-detail-label"><Icon name="bi-journal-text" />{t("Field note")}</span><strong>{t("Check local conditions")}</strong><span>{t("Before planning harvest or transport")}</span></div></section>
     <div className="info-strip"><Icon name="bi-info-circle" /><p><strong>{t("No weather service is connected.")}</strong> {t("Do not use this placeholder to make planting, spraying, or harvest decisions.")}</p></div>
   </>;
@@ -302,7 +302,7 @@ function AssistantPage() {
     setQuestion("");
   };
   return <>
-    <SectionHeading eyebrow="AGRI ASSISTANT" title="Ask about your next step." detail="Questions about markets and AgriSync, in one place." action={<DemoFlag />} />
+    <SectionHeading eyebrow="AGRI ASSISTANT" title="Ask about your next step." detail="Questions about markets and AgriSync, in one place."  />
     <section className="assistant-shell"><div className="assistant-intro"><div className="assistant-emblem"><Icon name="bi-chat-square-text" /></div><div><p className="eyebrow">{t("AGRI SYNC ASSISTANT")}</p><h2>{t("Good questions start with good data.")}</h2><p>{t("This chat is a visual prototype. It does not connect to an AI service or use live AgriSync data.")}</p></div></div>
       <div className="suggestion-row"><span>{t("Try asking")}</span><button onClick={() => setQuestion(t("How do I compare nearby mandi prices?"))}><Icon name="bi-bar-chart-line" />{t("How do I compare nearby mandi prices?")}</button><button onClick={() => setQuestion(t("What should I check before accepting an offer?"))}><Icon name="bi-check2-square" />{t("What should I check before accepting an offer?")}</button></div>
       {messages.map((message, index) => <div className="local-message" key={`${message}-${index}`}><span>{t("You")}</span><p>{message}</p><small>{t("Saved in this browser session only · No response service connected")}</small></div>)}
@@ -315,13 +315,13 @@ function NotificationsPage() {
   const t = useT();
   const [read, setRead] = useState([]);
   const notifications = [{ id: "interest", icon: "bi-hand-thumbs-up", title: "Buyer interest on your tomato listing", detail: "2 sample buyer enquiries · Today", group: "PRODUCE" }, { id: "market", icon: "bi-graph-up-arrow", title: "Onion prices moved in nearby markets", detail: "Sample market update · Yesterday", group: "MARKET" }, { id: "weather", icon: "bi-cloud-sun", title: "Weather update for Nashik", detail: "Placeholder notification · 2 days ago", group: "WEATHER" }];
-  return <><SectionHeading eyebrow="UPDATES" title="Your activity." detail="Buyer interest and market changes, gathered in one place." action={<DemoFlag />} /><section className="surface notification-list">{notifications.map((item) => <article className={`notification-row ${read.includes(item.id) ? "is-read" : ""}`} key={item.id}><span className="notification-icon"><Icon name={item.icon} /></span><div className="notification-copy"><span className="eyebrow">{t(item.group)} · {t("SAMPLE")}</span><strong>{t(item.title)}</strong><small>{t(item.detail)}</small></div>{!read.includes(item.id) && <button className="text-button" onClick={() => setRead([...read, item.id])}>{t("Mark read")}</button>}</article>)}</section></>;
+  return <><SectionHeading eyebrow="UPDATES" title="Your activity." detail="Buyer interest and market changes, gathered in one place." /><section className="surface notification-list">{notifications.map((item) => <article className={`notification-row ${read.includes(item.id) ? "is-read" : ""}`} key={item.id}><span className="notification-icon"><Icon name={item.icon} /></span><div className="notification-copy"><span className="eyebrow">{t(item.group)} · {t("SAMPLE")}</span><strong>{t(item.title)}</strong><small>{t(item.detail)}</small></div>{!read.includes(item.id) && <button className="text-button" onClick={() => setRead([...read, item.id])}>{t("Mark read")}</button>}</article>)}</section></>;
 }
 
 function SettingsPage({ language, onLanguageChange }) {
   const t = useT();
   return <>
-    <SectionHeading eyebrow="PREFERENCES" title="Make AgriSync yours." detail="Language, location, and profile preferences." action={<DemoFlag />} />
+    <SectionHeading eyebrow="PREFERENCES" title="Make AgriSync yours." detail="Language, location, and profile preferences."  />
     <section className="surface settings-list">
       <div className="setting-row">
         <div className="setting-label"><span className="setting-symbol"><Icon name="bi-geo-alt" /></span><span className="setting-copy"><strong>{t("Workspace location")}</strong><small>{t("Used for nearby market and weather context")}</small></span></div>
@@ -531,7 +531,7 @@ function App() {
         </div>
       </aside>
 
-      <main className="main-content"><div className="page-topline"><div className="page-topline-start"><span><Icon name="bi-geo-alt" /> {translate(language, "Nashik region")}</span></div><span className="preview-status"><span /> {translate(language, "Preview mode · Data is illustrative")}</span></div>{activePage === "Overview" && <><div className="overview-ambient" ref={overviewAmbientRef} aria-hidden="true" /><div className="overview-produce-field" ref={overviewFieldRef} aria-hidden="true" /></>}<div className="page-content"><Page onNavigate={navigate} language={language} onLanguageChange={setLanguage} sceneRef={overviewSceneRef} /></div><footer className="app-footer"><span>AgriSync</span><span>{translate(language, "Know the market. Choose with confidence.")}</span></footer></main>
+      <main className="main-content"><div className="page-topline"><div className="page-topline-start"><span><Icon name="bi-geo-alt" /> {translate(language, "Nashik region")}</span></div><span className="preview-status"><span /> {translate(language, "Preview mode · Data is illustrative")}</span></div>{activePage === "Overview" && <><div className="overview-ambient" ref={overviewAmbientRef} aria-hidden="true" /><div className="overview-produce-field" ref={overviewFieldRef} aria-hidden="true" /></>}<div className="page-content"><Page onNavigate={navigate} language={language} onLanguageChange={setLanguage} sceneRef={overviewSceneRef} /></div><footer className="app-footer"><span>AgriSync</span></footer></main>
     </div>
     </LanguageContext.Provider>
   );
