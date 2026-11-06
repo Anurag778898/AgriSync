@@ -61,7 +61,7 @@ The browser entry flow is `index.html` -> `src/main.jsx` -> `src/App.jsx`. The a
 - `src/overview-illustration.js` mounts the Overview's inline animated SVG harvest illustration and removes its listeners when the user leaves Overview. `src/overview-illustration.css` contains its palette, motion and small-screen layout.
 - `src/floating-produce-field.js` mounts the seeded 18-item crop field on Overview. It looks for cut-outs under `public/assets/produce/` and falls back to inline SVG crop illustrations when files are absent.
 - `src/overview-ambient.js` mounts the Overview-only soft light field, ray, particles, contour lines, and desktop pointer parallax. It cleans up when leaving Overview and respects reduced motion and visibility changes.
-- Original produce downloads are retained under `src/assets/source-models/`; the Overview illustration does not load them.
+- The active Overview uses inline SVG produce artwork; it does not load 3D models or PBR texture files.
 
 Theme, language, and desktop sidebar preferences use the browser's local storage keys `agrisync-theme`, `agrisync-language`, and `agrisync-sidebar`. These preferences are not associated with an account. The produce draft, assistant questions, and notification read state are also local prototype interactions.
 
@@ -78,7 +78,7 @@ Frontend work recorded so far:
 - Added an Overview-only animated SVG harvest illustration, a floating produce field, and the ambient background animation.
 - Replaced the former Overview 3D model scene with a 2D animated SVG illustration.
 
-No crop cut-out files were present under `public/assets/produce/` at the last check. To use image cut-outs, add files named `onion`, `tomato`, `soybean`, `potato`, `chili`, `wheat`, and `leaf` with `.webp` or `.png` extensions under that folder. The SVG fallbacks keep the field available without those assets. Original 3D source downloads are retained under `src/assets/source-models/` and are not loaded by the Overview.
+No crop cut-out files are present under `public/assets/produce/`. The floating produce field uses inline SVG fallbacks without them. Unused GLB/FBX/OBJ model files and their PBR textures have been removed from `src/assets/` because the current Overview does not load them.
 
 ## Verification and limitations
 
