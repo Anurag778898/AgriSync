@@ -178,10 +178,7 @@ input:focus, select:focus, .search-box:focus-within { border-color: currentColor
 :root[data-sidebar="open"] .sidebar-glyph-close,
 :root[data-sidebar="closed"] .sidebar-glyph-menu { opacity: 1; transform: rotate(0) scale(1); }
 
-/* Overview-only Three.js artwork; the canvas never participates in layout. */
-.market-note-art { isolation: isolate; }
-.overview-scene { position: absolute; z-index: 1; inset: 0; overflow: hidden; pointer-events: none; }
-.overview-scene-canvas { display: block; width: 100%; height: 100%; }
+/* Overview harvest artwork has its own isolated SVG and responsive styles. */
 .note-crop-label, .note-index { z-index: 2; }
 
 /* Overview ambient field: CSS-only light field and contours plus JS-seeded particles. */
@@ -437,7 +434,6 @@ input:focus, select:focus, .search-box:focus-within { border-color: currentColor
 }
 
 @media (max-width: 699px) {
-  .overview-scene { display: none; }
 }
 
 @media (max-width: 1100px) {

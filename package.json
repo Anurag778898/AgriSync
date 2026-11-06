@@ -12,9 +12,10 @@
   "dependencies": {
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.2",
+    "i18next": "^26.7.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "three": "0.180.0"
+    "react-i18next": "^17.1.13"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -1,68 +1,13 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { flushSync } from "react-dom";
 import { setupMotion, slideNavIndicator, startPageTransition, startThemeTransition } from "./motion.js";
+import i18n from "./i18n.js";
 
-const translations = {
-  hi: {
-    WORKSPACE: "कार्यस्थल", MORE: "अन्य", Overview: "अवलोकन", Market: "बाज़ार", "My produce": "मेरी उपज", Recommendations: "सुझाव", Weather: "मौसम", Assistant: "सहायक", Notifications: "सूचनाएँ", Settings: "सेटिंग्स", Onion: "प्याज़", Tomato: "टमाटर", Soybean: "सोयाबीन", "Red onion": "लाल प्याज़", "Red · Grade A": "लाल · श्रेणी A", "Hybrid · Grade A": "हाइब्रिड · श्रेणी A", "Yellow · FAQ": "पीला · सामान्य गुणवत्ता", "Grade A · 18 quintals": "श्रेणी A · 18 क्विंटल", "Hybrid · 6 quintals": "हाइब्रिड · 6 क्विंटल",
-    "Sample workspace": "नमूना कार्यस्थल", "Good morning, Prasanna.": "सुप्रभात, प्रसन्ना।", "WEDNESDAY · NASHIK, MAHARASHTRA": "बुधवार · नासिक, महाराष्ट्र", "A clear view of your produce, nearby markets, and what may need your attention.": "अपनी उपज, आस-पास के बाज़ारों और ज़रूरी कामों की साफ़ जानकारी देखें।", "TODAY’S MARKET NOTE": "आज की बाज़ार जानकारी", SAMPLE: "नमूना", "Onion prices are firmer across nearby mandis.": "आस-पास की मंडियों में प्याज़ के भाव मज़बूत हैं।", "Sample trend: Lasalgaon is up 4.2% from the previous market day. Compare nearby prices before deciding where to sell.": "नमूना रुझान: लासलगाँव में पिछले बाज़ार दिन से भाव 4.2% ऊपर हैं। बेचने से पहले आस-पास के भावों की तुलना करें।", "Compare markets": "बाज़ारों की तुलना करें", "LOCAL PRICE WATCH": "स्थानीय भाव", "Crops to keep an eye on": "इन फसलों पर नज़र रखें", "All markets": "सभी बाज़ार", "Illustrative sample values · No live market feed connected": "उदाहरण के भाव · लाइव बाज़ार डेटा उपलब्ध नहीं", "YOUR NEXT STEP": "आपका अगला कदम", "Two buyers showed interest.": "दो खरीदारों ने रुचि दिखाई है।", "There are sample enquiries on your tomato listing waiting for a response.": "आपकी टमाटर की सूची पर दो नमूना पूछताछ का जवाब देना बाकी है।", "Review enquiries": "पूछताछ देखें", "Your produce · Sample activity": "आपकी उपज · नमूना गतिविधि", "Plan a better sale": "बेहतर बिक्री की योजना बनाएँ", "Explore sample selling windows and buyer matches": "बिक्री का नमूना समय और खरीदार मिलान देखें", "Check local conditions": "स्थानीय मौसम देखें", "Weather insights for your growing area": "आपके खेती क्षेत्र के मौसम की जानकारी",
-    "MARKET INTELLIGENCE": "बाज़ार की जानकारी", "Know your market.": "अपने बाज़ार को समझें।", "Compare sample crop prices from nearby mandis before you make a selling decision.": "बिक्री का निर्णय लेने से पहले आस-पास की मंडियों के उदाहरण भावों की तुलना करें।", "NEARBY MANDIS": "आस-पास की मंडियाँ", "Price board": "भाव सूची", "Search crop or mandi": "फसल या मंडी खोजें", "Crop & grade": "फसल और श्रेणी",  "Modal price": "प्रचलित भाव", "Day change": "दिन का बदलाव", "Data type": "डेटा प्रकार", Sample: "नमूना", "per quintal": "प्रति क्विंटल", "No sample crops match “{query}”. Try a crop or mandi name.": "“{query}” से मेल खाती फसल नहीं मिली। फसल या मंडी का नाम खोजें।", "Values are illustrative only. A live market data source is not connected to this prototype.": "ये केवल उदाहरण हैं। इस प्रोटोटाइप में लाइव बाज़ार डेटा उपलब्ध नहीं है।", "Use prices as a guide, not a guarantee.": "भावों को संकेत मानें, गारंटी नहीं।", "Actual prices vary by date, market, variety, grade, and quality.": "वास्तविक भाव तारीख, मंडी, किस्म, श्रेणी और गुणवत्ता के अनुसार बदलते हैं।",
-    "YOUR SUPPLY": "आपकी उपज", "My produce.": "मेरी उपज।", "Keep track of what you have available and who is interested.": "उपलब्ध उपज और उसमें रुचि रखने वाले खरीदारों पर नज़र रखें।", "Add produce": "उपज जोड़ें", "Crop name": "फसल का नाम", "e.g. Green chilli": "जैसे हरी मिर्च", "Save draft": "मसौदा सहेजें", Cancel: "रद्द करें", "This creates a local draft only. Nothing is sent to a server.": "यह केवल इस डिवाइस पर मसौदा बनाएगा। सर्वर पर कुछ नहीं भेजा जाएगा।", "Draft listing · Add quantity and price to publish": "मसौदा सूची · प्रकाशित करने के लिए मात्रा और भाव जोड़ें", "Draft added to this sample workspace.": "इस नमूना कार्यस्थल में मसौदा जोड़ा गया।", "LISTINGS": "सूचियाँ", "Available produce": "उपलब्ध उपज",  "Asking price": "माँगा गया भाव", Active: "सक्रिय", "Buyer interest · 2": "खरीदार की रुचि · 2", "See buyer activity": "खरीदार गतिविधि देखें", "Options for {crop} are a prototype placeholder.": "{crop} के विकल्प अभी प्रोटोटाइप में उपलब्ध नहीं हैं।",
-    "DECISION SUPPORT": "निर्णय में सहायता", "Consider your next move.": "अगला कदम सोच-समझकर चुनें।", "Recommendations should help you compare options, not make the decision for you.": "सुझाव विकल्पों की तुलना में मदद करते हैं; अंतिम निर्णय आपका है।", "SAMPLE SELLING WINDOW": "बिक्री का नमूना समय", "Onion · Lasalgaon": "प्याज़ · लासलगाँव", "Illustrative suggestion based on a sample trend. No forecast model or live data is connected.": "यह नमूना रुझान पर आधारित उदाहरण है। कोई पूर्वानुमान मॉडल या लाइव डेटा जुड़ा नहीं है।", "Sample market price": "बाज़ार का नमूना भाव", "WHY THIS SUGGESTION?": "यह सुझाव क्यों?", "What to weigh before selling": "बेचने से पहले इन बातों पर विचार करें", "Recent market movement": "बाज़ार का हालिया रुझान", "Sample prices have moved up over the last few market days.": "नमूने के भाव पिछले कुछ बाज़ार दिनों में बढ़े हैं।", "Storage and quality": "भंडारण और गुणवत्ता", "Factor in holding costs and how long your produce keeps.": "भंडारण का खर्च और उपज कितने समय तक अच्छी रहेगी, यह भी देखें।", "Compare nearby buyers": "आस-पास के खरीदारों की तुलना करें", "Transport and buyer requirements affect the final return.": "ढुलाई और खरीदार की ज़रूरतों से मिलने वाला कुल भाव बदल सकता है।", "Illustration only.": "केवल उदाहरण।", "This sample recommendation is not a price guarantee or a trained model prediction.": "यह नमूना सुझाव भाव की गारंटी या प्रशिक्षित मॉडल का पूर्वानुमान नहीं है।",
-    "WEATHER INTELLIGENCE": "मौसम की जानकारी", "Plan around the conditions.": "मौसम के अनुसार योजना बनाएँ।", "A weather view belongs alongside crop and location context. A live forecast is not connected yet.": "मौसम की जानकारी फसल और स्थान के संदर्भ में उपयोगी होती है। अभी लाइव पूर्वानुमान जुड़ा नहीं है।", "SAMPLE LOCATION": "नमूना स्थान", "Nashik district": "नासिक ज़िला", "Maharashtra · Location not verified": "महाराष्ट्र · स्थान की पुष्टि नहीं", "Illustrative only": "केवल उदाहरण", Rainfall: "वर्षा", "Not available": "उपलब्ध नहीं", "Forecast connection needed": "पूर्वानुमान सेवा जोड़ना बाकी", "Field note": "खेती के लिए सुझाव",  "Before planning harvest or transport": "कटाई या ढुलाई की योजना से पहले", "No weather service is connected.": "मौसम सेवा जुड़ी नहीं है।", "Do not use this placeholder to make planting, spraying, or harvest decisions.": "बुवाई, छिड़काव या कटाई का निर्णय इस नमूने के आधार पर न लें।",
-    "AGRI ASSISTANT": "कृषि सहायक", "Ask about your next step.": "अगले कदम के बारे में पूछें।", "A simple place to understand market information and AgriSync features.": "बाज़ार की जानकारी और AgriSync की सुविधाएँ समझने की सरल जगह।", "AGRI SYNC ASSISTANT": "एग्रीसिंक सहायक", "Good questions start with good data.": "अच्छे सवालों के लिए सही जानकारी ज़रूरी है।", "This chat is a visual prototype. It does not connect to an AI service or use live AgriSync data.": "यह चैट केवल एक नमूना दृश्य है। यह AI सेवा या AgriSync के लाइव डेटा से जुड़ी नहीं है।", "Try asking": "यह पूछकर देखें", "How do I compare nearby mandi prices?": "आस-पास की मंडियों के भावों की तुलना कैसे करें?", "What should I check before accepting an offer?": "खरीदार का प्रस्ताव स्वीकार करने से पहले क्या जाँचें?", "Saved in this browser session only · No response service connected": "यह सवाल केवल इस ब्राउज़र सत्र में है · जवाब सेवा जुड़ी नहीं", "Ask a question about markets or your produce…": "बाज़ार या अपनी उपज के बारे में पूछें…", "Add question locally": "सवाल जोड़ें", "Questions are displayed locally for this prototype. No advice is generated.": "सवाल केवल इस नमूने में दिखेंगे। कोई सलाह तैयार नहीं होगी।", You: "आप", "UPDATES": "अपडेट", "Your activity.": "आपकी गतिविधि।", "Buyer interest and market changes, gathered in one place.": "खरीदारों की रुचि और बाज़ार के बदलाव एक जगह।", "Buyer interest on your tomato listing": "आपकी टमाटर सूची में खरीदार की रुचि", "2 sample buyer enquiries · Today": "खरीदारों की 2 नमूना पूछताछ · आज", "Onion prices moved in nearby markets": "आस-पास के बाज़ारों में प्याज़ के भाव बदले", "Sample market update · Yesterday": "बाज़ार का नमूना अपडेट · कल", "Weather update for Nashik": "नासिक के मौसम का अपडेट", "Placeholder notification · 2 days ago": "नमूना सूचना · 2 दिन पहले", "Mark read": "पढ़ा हुआ चिह्नित करें",
-    PREFERENCES: "पसंद", "Make AgriSync yours.": "AgriSync को अपने अनुसार बनाएँ।", "Set the basics that help keep your workspace clear and useful.": "अपने कार्यस्थल को उपयोगी बनाने के लिए बुनियादी पसंद चुनें।", "Workspace location": "कार्यस्थल का स्थान", "Used for nearby market and weather context": "आस-पास के बाज़ार और मौसम की जानकारी के लिए", "Sample profile": "नमूना प्रोफ़ाइल", Language: "भाषा", "Choose how information is presented": "जानकारी की भाषा चुनें", English: "English", Hindi: "हिन्दी", Marathi: "मराठी", Profile: "प्रोफ़ाइल", "Personal and farm details": "व्यक्तिगत और खेत की जानकारी", "Sample farmer profile": "नमूना किसान प्रोफ़ाइल", "Account features not connected": "खाता सुविधा जुड़ी नहीं", "Preference changes are local to this prototype and are not saved to an account.": "भाषा की पसंद इस नमूने में ही लागू है, खाते में सहेजी नहीं जाती।",
-    "Nashik region": "नासिक क्षेत्र", "Preview mode · Data is illustrative": "पूर्वावलोकन · डेटा उदाहरण के लिए है", "Built for better market decisions": "बेहतर बाज़ार निर्णयों के लिए", "Market, in sync.": "बाज़ार, तालमेल में।", "Farmer workspace": "किसान कार्यस्थल", "Prototype workspace": "प्रोटोटाइप कार्यस्थल", "Sample values are clearly marked.": "नमूना जानकारी स्पष्ट रूप से चिह्नित है।", "A softer evening palette": "शाम के लिए आरामदायक रंग", "On · easy on the eyes": "चालू · आँखों के लिए आरामदायक", "Night colors": "रात के रंग", "Toggle night colors": "रात के रंग बदलें", "Close navigation": "नेविगेशन बंद करें", "Open navigation": "नेविगेशन खोलें", "Go to overview": "अवलोकन पर जाएँ", "AgriSync overview": "AgriSync अवलोकन", "Main navigation": "मुख्य नेविगेशन",
-  },
-  mr: {
-    WORKSPACE: "कार्यस्थळ", MORE: "अधिक", Overview: "आढावा", Market: "बाजार", "My produce": "माझे उत्पादन", Recommendations: "शिफारसी", Weather: "हवामान", Assistant: "सहाय्यक", Notifications: "सूचना", Settings: "सेटिंग्ज", Onion: "कांदा", Tomato: "टोमॅटो", Soybean: "सोयाबीन", "Red onion": "लाल कांदा", "Red · Grade A": "लाल · दर्जा A", "Hybrid · Grade A": "संकरित · दर्जा A", "Yellow · FAQ": "पिवळा · सर्वसाधारण दर्जा", "Grade A · 18 quintals": "दर्जा A · 18 क्विंटल", "Hybrid · 6 quintals": "संकरित · 6 क्विंटल",
-    "Sample workspace": "नमुना कार्यस्थळ", "Good morning, Prasanna.": "शुभ सकाळ, प्रसन्ना.", "WEDNESDAY · NASHIK, MAHARASHTRA": "बुधवार · नाशिक, महाराष्ट्र", "A clear view of your produce, nearby markets, and what may need your attention.": "तुमचे उत्पादन, जवळचे बाजार आणि लक्ष देण्याच्या गोष्टी एका नजरेत पाहा.", "TODAY’S MARKET NOTE": "आजची बाजार नोंद", SAMPLE: "नमुना", "Onion prices are firmer across nearby mandis.": "जवळच्या बाजारांत कांद्याचे दर मजबूत झाले आहेत.", "Sample trend: Lasalgaon is up 4.2% from the previous market day. Compare nearby prices before deciding where to sell.": "नमुना कल: लासलगावचा दर मागील बाजार दिवसापेक्षा 4.2% वाढला. विक्रीपूर्वी जवळच्या बाजारांचे दर तपासा.", "Compare markets": "बाजारांची तुलना करा", "LOCAL PRICE WATCH": "स्थानिक दर", "Crops to keep an eye on": "या पिकांवर लक्ष ठेवा", "All markets": "सर्व बाजार", "Illustrative sample values · No live market feed connected": "उदाहरणार्थ दर · थेट बाजार माहिती जोडलेली नाही", "YOUR NEXT STEP": "तुमची पुढची कृती", "Two buyers showed interest.": "दोन खरेदीदारांनी रस दाखवला.", "There are sample enquiries on your tomato listing waiting for a response.": "तुमच्या टोमॅटोच्या नोंदीवरील दोन नमुना चौकश्यांना उत्तर देणे बाकी आहे.", "Review enquiries": "चौकश्या पाहा", "Your produce · Sample activity": "तुमचे उत्पादन · नमुना हालचाल", "Plan a better sale": "चांगल्या विक्रीचे नियोजन करा", "Explore sample selling windows and buyer matches": "नमुना विक्री वेळा आणि खरेदीदार जुळणी पाहा", "Check local conditions": "स्थानिक परिस्थिती पाहा", "Weather insights for your growing area": "तुमच्या शेती क्षेत्रातील हवामान माहिती",
-    "MARKET INTELLIGENCE": "बाजार माहिती", "Know your market.": "तुमचा बाजार ओळखा.", "Compare sample crop prices from nearby mandis before you make a selling decision.": "विक्रीचा निर्णय घेण्यापूर्वी जवळच्या बाजारांतील नमुना दरांची तुलना करा.", "NEARBY MANDIS": "जवळचे बाजार", "Price board": "दर फलक", "Search crop or mandi": "पीक किंवा बाजार शोधा", "Crop & grade": "पीक आणि दर्जा",  "Modal price": "प्रचलित दर", "Day change": "दिवसातील बदल", "Data type": "माहितीचा प्रकार", Sample: "नमुना", "per quintal": "प्रति क्विंटल", "No sample crops match “{query}”. Try a crop or mandi name.": "“{query}” शी जुळणारे पीक सापडले नाही. पीक किंवा बाजाराचे नाव शोधा.", "Values are illustrative only. A live market data source is not connected to this prototype.": "हे केवळ उदाहरण आहे. या नमुन्यात थेट बाजार माहिती जोडलेली नाही.", "Use prices as a guide, not a guarantee.": "दरांना दिशा समजा, हमी नाही.", "Actual prices vary by date, market, variety, grade, and quality.": "प्रत्यक्ष दर तारीख, बाजार, वाण, दर्जा आणि गुणवत्तेनुसार बदलतात.",
-    "YOUR SUPPLY": "तुमचे उत्पादन", "My produce.": "माझे उत्पादन.", "Keep track of what you have available and who is interested.": "उपलब्ध उत्पादन आणि त्यात रस असलेल्या खरेदीदारांचा मागोवा ठेवा.", "Add produce": "उत्पादन जोडा", "Crop name": "पिकाचे नाव", "e.g. Green chilli": "उदा. हिरवी मिरची", "Save draft": "मसुदा जतन करा", Cancel: "रद्द करा", "This creates a local draft only. Nothing is sent to a server.": "यामुळे फक्त या उपकरणावर मसुदा तयार होईल. सर्व्हरवर काही पाठवले जाणार नाही.", "Draft listing · Add quantity and price to publish": "मसुदा नोंद · प्रकाशित करण्यासाठी प्रमाण आणि दर जोडा", "Draft added to this sample workspace.": "या नमुना कार्यस्थळात मसुदा जोडला.", "LISTINGS": "नोंदी", "Available produce": "उपलब्ध उत्पादन", "Asking price": "अपेक्षित दर", Active: "सक्रिय", "Buyer interest · 2": "खरेदीदाराची रुची · 2", "See buyer activity": "खरेदीदारांची हालचाल पाहा", "Options for {crop} are a prototype placeholder.": "{crop} साठीचे पर्याय सध्या नमुना आहेत.",
-    "DECISION SUPPORT": "निर्णय सहाय्य", "Consider your next move.": "पुढची चाल विचारपूर्वक ठरवा.", "Recommendations should help you compare options, not make the decision for you.": "शिफारसी पर्यायांची तुलना करण्यास मदत करतात; अंतिम निर्णय तुमचा आहे.", "SAMPLE SELLING WINDOW": "विक्रीची नमुना वेळ", "Onion · Lasalgaon": "कांदा · लासलगाव", "Illustrative suggestion based on a sample trend. No forecast model or live data is connected.": "नमुना कलावर आधारित उदाहरण. अंदाज मॉडेल किंवा थेट माहिती जोडलेली नाही.", "Sample market price": "बाजाराचा नमुना दर", "WHY THIS SUGGESTION?": "ही शिफारस का?", "What to weigh before selling": "विक्रीपूर्वी या गोष्टी तपासा", "Recent market movement": "अलीकडील बाजार कल", "Sample prices have moved up over the last few market days.": "नमुन्यातील दर मागील काही बाजार दिवसांत वाढले आहेत.", "Storage and quality": "साठवण आणि गुणवत्ता", "Factor in holding costs and how long your produce keeps.": "साठवण खर्च आणि उत्पादन किती काळ टिकेल हे लक्षात घ्या.", "Compare nearby buyers": "जवळच्या खरेदीदारांची तुलना करा", "Transport and buyer requirements affect the final return.": "वाहतूक आणि खरेदीदारांच्या गरजांमुळे अंतिम परतावा बदलतो.", "Illustration only.": "केवळ उदाहरण.", "This sample recommendation is not a price guarantee or a trained model prediction.": "ही नमुना शिफारस दराची हमी किंवा प्रशिक्षित मॉडेलचा अंदाज नाही.",
-    "WEATHER INTELLIGENCE": "हवामान माहिती", "Plan around the conditions.": "हवामानानुसार नियोजन करा.", "A weather view belongs alongside crop and location context. A live forecast is not connected yet.": "पीक आणि ठिकाणाच्या माहितीसोबत हवामान समजून घ्या. थेट अंदाज सेवा अद्याप जोडलेली नाही.", "SAMPLE LOCATION": "नमुना ठिकाण", "Nashik district": "नाशिक जिल्हा", "Maharashtra · Location not verified": "महाराष्ट्र · ठिकाणाची खात्री नाही", "Illustrative only": "केवळ उदाहरण", Rainfall: "पाऊस", "Not available": "उपलब्ध नाही", "Forecast connection needed": "अंदाज सेवा जोडणे बाकी", "Field note": "शेतासाठी सूचना",  "Before planning harvest or transport": "कापणी किंवा वाहतुकीचे नियोजन करण्यापूर्वी", "No weather service is connected.": "हवामान सेवा जोडलेली नाही.", "Do not use this placeholder to make planting, spraying, or harvest decisions.": "पेरणी, फवारणी किंवा कापणीचे निर्णय या नमुन्यावर घेऊ नका.",
-    "AGRI ASSISTANT": "कृषी सहाय्यक", "Ask about your next step.": "पुढच्या कृतीबद्दल विचारा.", "A simple place to understand market information and AgriSync features.": "बाजार माहिती आणि AgriSync वैशिष्ट्ये समजून घेण्याची सोपी जागा.", "AGRI SYNC ASSISTANT": "एग्रीसिंक सहाय्यक", "Good questions start with good data.": "चांगल्या प्रश्नांसाठी योग्य माहिती महत्त्वाची.", "This chat is a visual prototype. It does not connect to an AI service or use live AgriSync data.": "ही चॅट फक्त नमुना आहे. AI सेवा किंवा AgriSync ची थेट माहिती जोडलेली नाही.", "Try asking": "हे विचारून पाहा", "How do I compare nearby mandi prices?": "जवळच्या बाजारांचे दर कसे तपासू?", "What should I check before accepting an offer?": "खरेदीदाराचा प्रस्ताव स्वीकारण्यापूर्वी काय तपासावे?", "Saved in this browser session only · No response service connected": "हा प्रश्न फक्त या ब्राउझर सत्रात आहे · उत्तर सेवा जोडलेली नाही", "Ask a question about markets or your produce…": "बाजार किंवा उत्पादनाबद्दल प्रश्न विचारा…", "Add question locally": "प्रश्न जोडा", "Questions are displayed locally for this prototype. No advice is generated.": "प्रश्न फक्त या नमुन्यात दिसतील. कोणताही सल्ला तयार होत नाही.", You: "तुम्ही", "UPDATES": "अद्यतने", "Your activity.": "तुमची हालचाल.", "Buyer interest and market changes, gathered in one place.": "खरेदीदारांची रुची आणि बाजारातील बदल एका ठिकाणी.", "Buyer interest on your tomato listing": "तुमच्या टोमॅटो नोंदीत खरेदीदाराची रुची", "2 sample buyer enquiries · Today": "खरेदीदारांच्या 2 नमुना चौकश्या · आज", "Onion prices moved in nearby markets": "जवळच्या बाजारांत कांद्याचे दर बदलले", "Sample market update · Yesterday": "बाजाराचे नमुना अद्यतन · काल", "Weather update for Nashik": "नाशिकसाठी हवामान अद्यतन", "Placeholder notification · 2 days ago": "नमुना सूचना · 2 दिवसांपूर्वी", "Mark read": "वाचले म्हणून चिन्हांकित करा",
-    PREFERENCES: "प्राधान्ये", "Make AgriSync yours.": "AgriSync तुमच्यानुसार ठेवा.", "Set the basics that help keep your workspace clear and useful.": "तुमचे कार्यस्थळ सोपे आणि उपयोगी ठेवण्यासाठी मूलभूत पसंती निवडा.", "Workspace location": "कार्यस्थळाचे ठिकाण", "Used for nearby market and weather context": "जवळच्या बाजार आणि हवामान माहितीसाठी", "Sample profile": "नमुना प्रोफाइल", Language: "भाषा", "Choose how information is presented": "माहितीची भाषा निवडा", English: "English", Hindi: "हिन्दी", Marathi: "मराठी", Profile: "प्रोफाइल", "Personal and farm details": "वैयक्तिक आणि शेताची माहिती", "Sample farmer profile": "नमुना शेतकरी प्रोफाइल", "Account features not connected": "खाते सुविधा जोडलेली नाही", "Preference changes are local to this prototype and are not saved to an account.": "भाषेची पसंती या नमुन्यापुरती आहे; खात्यात जतन होत नाही.",
-    "Nashik region": "नाशिक परिसर", "Preview mode · Data is illustrative": "पूर्वावलोकन · माहिती नमुन्यासाठी आहे", "Built for better market decisions": "चांगल्या बाजार निर्णयांसाठी", "Market, in sync.": "बाजार, समन्वयात.", "Farmer workspace": "शेतकरी कार्यस्थळ", "Prototype workspace": "नमुना कार्यस्थळ", "Sample values are clearly marked.": "नमुना माहिती स्पष्टपणे दाखवली आहे.", "A softer evening palette": "संध्याकाळसाठी सौम्य रंग", "On · easy on the eyes": "सुरू · डोळ्यांना आरामदायी", "Night colors": "रात्रीचे रंग", "Toggle night colors": "रात्रीचे रंग बदला", "Close navigation": "नेव्हिगेशन बंद करा", "Open navigation": "नेव्हिगेशन उघडा", "Go to overview": "आढाव्यावर जा", "AgriSync overview": "AgriSync आढावा", "Main navigation": "मुख्य नेव्हिगेशन"
-  }
-};
-
-Object.assign(translations.hi, {
-  "Nashik, Maharashtra": "\u0928\u093e\u0938\u093f\u0915, \u092e\u0939\u093e\u0930\u093e\u0937\u094d\u091f\u094d\u0930",
-  PRODUCE: "\u0909\u092a\u091c", MARKET: "\u092c\u093e\u091c\u093c\u093e\u0930", WEATHER: "\u092e\u094c\u0938\u092e", NOV: "\u0928\u0935\u0902\u092c\u0930",
-  "More options for {crop}": "{crop} \u0915\u0947 \u0914\u0930 \u0935\u093f\u0915\u0932\u094d\u092a",
-  "Ask a question": "\u090f\u0915 \u0938\u0935\u093e\u0932 \u092a\u0942\u091b\u0947\u0902",
-  "No matching crops found. Try a crop or mandi name.": "\u0915\u094b\u0908 \u092e\u0947\u0932 \u0916\u093e\u0924\u0940 \u092b\u0938\u0932 \u0928\u0939\u0940\u0902 \u092e\u093f\u0932\u0940\u0964 \u092b\u0938\u0932 \u092f\u093e \u092e\u0902\u0921\u0940 \u0915\u093e \u0928\u093e\u092e \u0916\u094b\u091c\u0947\u0902\u0964",
-  "Not set": "\u0924\u092f \u0928\u0939\u0940\u0902",
-  "Your crops, nearby prices, and next steps.": "आपकी फसलें, पास के भाव और अगले कदम।",
-  "Nearby mandi prices, side by side.": "पास की मंडियों के भाव, एक साथ।",
-  "Your available crops and buyer interest.": "आपकी उपलब्ध फसलें और खरीदारों की रुचि।",
-  "Key points to weigh before choosing when to sell.": "बेचने का समय चुनने से पहले ज़रूरी बातें।",
-  "Local conditions for your crops and location.": "आपकी फसलों और स्थान का स्थानीय मौसम।",
-  "Questions about markets and AgriSync, in one place.": "बाज़ार और AgriSync से जुड़े सवाल, एक जगह।",
-  "Language, location, and profile preferences.": "भाषा, स्थान और प्रोफ़ाइल की पसंद।"
-});
-Object.assign(translations.mr, {
-  "Nashik, Maharashtra": "\u0928\u093e\u0936\u093f\u0915, \u092e\u0939\u093e\u0930\u093e\u0937\u094d\u091f\u094d\u0930",
-  PRODUCE: "\u0909\u0924\u094d\u092a\u093e\u0926\u0928", MARKET: "\u092c\u093e\u091c\u093e\u0930", WEATHER: "\u0939\u0935\u093e\u092e\u093e\u0928", NOV: "\u0928\u094b\u0935\u094d\u0939\u0947\u0902\u092c\u0930",
-  "More options for {crop}": "{crop} \u0938\u093e\u0920\u0940 \u0905\u0927\u093f\u0915 \u092a\u0930\u094d\u092f\u093e\u092f",
-  "Ask a question": "\u090f\u0915 \u092a\u094d\u0930\u0936\u094d\u0928 \u0935\u093f\u091a\u093e\u0930\u093e",
-  "No matching crops found. Try a crop or mandi name.": "\u091c\u0941\u0933\u0923\u093e\u0930\u0947 \u092a\u0940\u0915 \u0938\u093e\u092a\u0921\u0932\u0947 \u0928\u093e\u0939\u0940\u0964 \u092a\u093f\u0915\u093e\u091a\u0947 \u0915\u093f\u0902\u0935\u093e \u092c\u093e\u091c\u093e\u0930\u093e\u091a\u0947 \u0928\u093e\u0935 \u0936\u094b\u0927\u093e\u0964",
-  "Not set": "\u0920\u0930\u0935\u0932\u0947\u0932\u0947 \u0928\u093e\u0939\u0940",
-  "Your crops, nearby prices, and next steps.": "तुमची पिके, जवळचे दर आणि पुढची पावले.",
-  "Nearby mandi prices, side by side.": "जवळच्या बाजारांचे दर, एकाच ठिकाणी.",
-  "Your available crops and buyer interest.": "तुमचे उपलब्ध उत्पादन आणि खरेदीदारांची रुची.",
-  "Key points to weigh before choosing when to sell.": "विक्रीची वेळ ठरवण्यापूर्वी विचारात घ्यायच्या गोष्टी.",
-  "Local conditions for your crops and location.": "तुमच्या पिकांसाठी आणि ठिकाणासाठी स्थानिक हवामान.",
-  "Questions about markets and AgriSync, in one place.": "बाजार आणि AgriSync बद्दलचे प्रश्न, एकाच ठिकाणी.",
-  "Language, location, and profile preferences.": "भाषा, ठिकाण आणि प्रोफाइलच्या पसंती."
-});
-
-const LanguageContext = createContext("en");
-const translate = (language, text) => translations[language]?.[text] ?? text;
+const translate = (language, text) => i18n.t(text, { lng: language });
 function useT() {
-  const language = useContext(LanguageContext);
-  return (text) => translate(language, text);
+  const { t } = useTranslation();
+  return t;
 }
 
 const navigation = [
@@ -142,19 +87,13 @@ function SectionHeading({ eyebrow, title, detail, action, farmBackdrop = false }
   );
 }
 
-function DemoFlag() {
-  const t = useT();
-  return <span className="demo-flag"><span /> {t("Sample workspace")}</span>;
-}
-
-function Overview({ onNavigate, sceneRef }) {
+function Overview({ onNavigate, illustrationRef }) {
   const t = useT();
   return (
     <>
       <SectionHeading
         eyebrow="WEDNESDAY · NASHIK, MAHARASHTRA"
         title="Good morning, Prasanna."
-        // action={<DemoFlag />}
         farmBackdrop
       />
 
@@ -172,10 +111,10 @@ function Overview({ onNavigate, sceneRef }) {
           <div className="field-line field-line-one" />
           <div className="field-line field-line-two" />
           <div className="field-line field-line-three" />
-          <div className="overview-scene" ref={sceneRef} />
+          <div className="market-illustration" ref={illustrationRef} />
           <div className="note-crop-label"><Icon name="bi-graph-up-arrow" /> {t("Onion")} <strong data-countup>+4.2%</strong></div>
+          <span className="note-index">01 / MARKET</span>
         </div>
-        <span className="note-index">01 / MARKET</span>
       </section>
 
       <div className="overview-grid">
@@ -355,10 +294,13 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(() => document.documentElement.dataset.sidebar === "open");
   const [activePage, setActivePage] = useState("Overview");
   const [darkMode, setDarkMode] = useState(() => window.localStorage.getItem("agrisync-theme") === "dark");
-  const [language, setLanguage] = useState(() => window.localStorage.getItem("agrisync-language") || "en");
+  const [language, setLanguage] = useState(() => {
+    const savedLanguage = window.localStorage.getItem("agrisync-language");
+    return ["en", "hi", "mr"].includes(savedLanguage) ? savedLanguage : "en";
+  });
   const sidebarRef = useRef(null);
   const sidebarToggleRef = useRef(null);
-  const overviewSceneRef = useRef(null);
+  const overviewIllustrationRef = useRef(null);
   const overviewFieldRef = useRef(null);
   const overviewAmbientRef = useRef(null);
   const previousSidebarOpen = useRef(sidebarOpen);
@@ -439,6 +381,7 @@ function App() {
   useEffect(() => {
     document.documentElement.lang = language;
     window.localStorage.setItem("agrisync-language", language);
+    i18n.changeLanguage(language);
     document.title = `${translate(language, "AgriSync overview")} — ${translate(language, "Market, in sync.")}`;
   }, [language]);
 
@@ -465,14 +408,14 @@ function App() {
   useEffect(() => {
     if (activePage !== "Overview") return undefined;
     let cancelled = false;
-    let unmountScene;
-    import("./overview-scene.js").then(({ mountOverviewScene }) => {
-      if (cancelled || !overviewSceneRef.current) return;
-      unmountScene = mountOverviewScene(overviewSceneRef.current);
+    let unmountIllustration;
+    import("./overview-illustration.js").then(({ mountOverviewIllustration }) => {
+      if (cancelled || !overviewIllustrationRef.current) return;
+      unmountIllustration = mountOverviewIllustration(overviewIllustrationRef.current);
     }).catch(() => {});
     return () => {
       cancelled = true;
-      unmountScene?.();
+      unmountIllustration?.();
     };
   }, [activePage]);
 
@@ -505,7 +448,6 @@ function App() {
   }, [activePage]);
 
   return (
-    <LanguageContext.Provider value={language}>
     <div className={`app-container ${darkMode ? "theme-dark" : ""}`} lang={language}>
       <header className="mobile-header">
         <button className="mobile-brand" onClick={() => navigate("Overview")} aria-label={translate(language, "Go to overview")}><img src="/public/favicon.svg" alt="AgriSync" className="brand-mark"/> AgriSync</button>
@@ -531,9 +473,8 @@ function App() {
         </div>
       </aside>
 
-      <main className="main-content"><div className="page-topline"><div className="page-topline-start"><span><Icon name="bi-geo-alt" /> {translate(language, "Nashik region")}</span></div><span className="preview-status"><span /> {translate(language, "Preview mode · Data is illustrative")}</span></div>{activePage === "Overview" && <><div className="overview-ambient" ref={overviewAmbientRef} aria-hidden="true" /><div className="overview-produce-field" ref={overviewFieldRef} aria-hidden="true" /></>}<div className="page-content"><Page onNavigate={navigate} language={language} onLanguageChange={setLanguage} sceneRef={overviewSceneRef} /></div><footer className="app-footer"><span>AgriSync</span></footer></main>
+      <main className="main-content"><div className="page-topline"><div className="page-topline-start"><span><Icon name="bi-geo-alt" /> {translate(language, "Nashik region")}</span></div><span className="preview-status"><span /> {translate(language, "Preview mode · Data is illustrative")}</span></div>{activePage === "Overview" && <><div className="overview-ambient" ref={overviewAmbientRef} aria-hidden="true" /><div className="overview-produce-field" ref={overviewFieldRef} aria-hidden="true" /></>}<div className="page-content"><Page onNavigate={navigate} language={language} onLanguageChange={setLanguage} illustrationRef={overviewIllustrationRef} /></div><footer className="app-footer"><span>AgriSync</span></footer></main>
     </div>
-    </LanguageContext.Provider>
   );
 }
 

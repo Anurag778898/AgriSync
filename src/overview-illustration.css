@@ -1,0 +1,166 @@
+/* Overview harvest illustration and its focused responsive layout */
+:root {
+  --illus-onion: #9f4f61;
+  --illus-onion-light: #d68a8e;
+  --illus-onion-highlight: #f1c7b0;
+  --illus-onion-fold: #743c4c;
+  --illus-root: #ddc79a;
+  --illus-tomato: #ad4e42;
+  --illus-tomato-light: #e47d60;
+  --illus-tomato-highlight: #f2b184;
+  --illus-soy: #b4a568;
+  --illus-soy-edge: #ddcc87;
+  --illus-soy-seed: #e3d49d;
+  --illus-wheat: #e0bd6e;
+  --illus-wheat-stem: #caa454;
+  --illus-leaf: #7e9b67;
+  --illus-leaf-light: #a8b77c;
+  --illus-leaf-vein: #ced29b;
+  --illus-chili: #bb5444;
+  --illus-chili-highlight: #ec9871;
+  --illus-sun: #e4cc82;
+  --illus-glow: #dfc27c;
+  --illus-line: #f0d994;
+  --illus-sparkle: #f4e5b1;
+}
+
+:root[data-theme="dark"] {
+  --illus-onion: #874a59;
+  --illus-onion-light: #bb7077;
+  --illus-onion-highlight: #d6aa9c;
+  --illus-onion-fold: #623743;
+  --illus-root: #c4ad7f;
+  --illus-tomato: #97463e;
+  --illus-tomato-light: #c86652;
+  --illus-tomato-highlight: #d99472;
+  --illus-soy: #968955;
+  --illus-soy-edge: #b9a96b;
+  --illus-soy-seed: #c4b77f;
+  --illus-wheat: #c4a45e;
+  --illus-wheat-stem: #a88c50;
+  --illus-leaf: #668056;
+  --illus-leaf-light: #879764;
+  --illus-leaf-vein: #b0b987;
+  --illus-chili: #99483e;
+  --illus-chili-highlight: #c77c60;
+  --illus-sun: #c7ae6c;
+  --illus-glow: #bda76e;
+  --illus-line: #d4c081;
+  --illus-sparkle: #dfd09c;
+}
+
+.market-note-art { isolation: isolate; }
+.market-note-art > .market-illustration { position: absolute; z-index: 1; inset: 0; overflow: hidden; pointer-events: none; }
+.illustration-svg { display: block; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
+.illustration-svg [data-depth] {
+  translate: var(--layer-x, 0px) calc(var(--layer-y, 0px) + var(--compare-lift, 0px));
+  rotate: calc(var(--pointer-tilt, 0deg) + var(--compare-tilt, 0deg));
+  transition: translate 260ms var(--ease-out), rotate 260ms var(--ease-out);
+}
+.market-illustration.is-comparing { --compare-lift: -3px; --compare-tilt: 1deg; }
+.illus-sun-glow { opacity: 0; animation: illus-sun-breathe 6s var(--ease-inout) 2s infinite alternate; }
+.illus-rays { transform-box: fill-box; transform-origin: center; animation: illus-ray-drift 48s linear infinite; }
+.illus-trend-area { opacity: 0; animation: illus-area-in 650ms var(--ease-out) 1.1s both; }
+.illus-trend-line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: illus-line-draw 1.4s var(--ease-out) 350ms forwards; }
+.illus-trend-halo { opacity: 0; animation: illus-dot-pop 420ms var(--ease-out) 1.55s both, illus-dot-pulse 3s ease-in-out 2s infinite; }
+.illus-trend-dot { opacity: 0; transform-box: fill-box; transform-origin: center; animation: illus-dot-pop 420ms var(--ease-out) 1.55s both; }
+.illus-onion-depth, .illus-tomato-depth, .illus-soy-depth, .illus-chili-depth, .illus-wheat-depth, .illus-leaves-depth { opacity: 0; }
+.market-illustration.is-ready .illus-onion-depth { animation: illus-enter 760ms var(--ease-out) 120ms both; }
+.market-illustration.is-ready .illus-tomato-depth { animation: illus-enter 760ms var(--ease-out) 360ms both; }
+.market-illustration.is-ready .illus-soy-depth { animation: illus-enter 760ms var(--ease-out) 220ms both; }
+.market-illustration.is-ready .illus-chili-depth { animation: illus-enter 760ms var(--ease-out) 520ms both; }
+.market-illustration.is-ready .illus-wheat-depth { animation: illus-enter 760ms var(--ease-out) 40ms both; }
+.market-illustration.is-ready .illus-leaves-depth { animation: illus-enter 760ms var(--ease-out) 440ms both; }
+.illus-onion-tilt { transform-box: fill-box; transform-origin: center; animation: illus-onion-tilt 8s ease-in-out infinite alternate; }
+.illus-bob { transform-box: fill-box; transform-origin: center; animation: illus-bob 6.4s ease-in-out var(--illus-delay, 0s) infinite alternate; }
+.illus-wheat-sway { transform-box: fill-box; transform-origin: 50% 100%; animation: illus-wheat-sway 6s ease-in-out var(--illus-delay, 0s) infinite alternate; }
+.illus-leaf-flutter { transform-box: fill-box; transform-origin: 50% 100%; animation: illus-leaf-flutter 5.5s ease-in-out var(--illus-delay, 0s) infinite alternate; }
+.illus-hop { animation: illus-hop 10s ease-in-out var(--illus-delay, -3s) infinite; }
+.illus-tomato-depth .illus-hop { --illus-delay: -7s; }
+.illus-sparkles circle { opacity: .2; animation: illus-twinkle 3.4s ease-in-out infinite alternate; }
+.illus-sparkles circle:nth-child(2) { animation-delay: -1.2s; }
+.illus-sparkles circle:nth-child(3) { animation-delay: -2.1s; }
+.illus-sparkles circle:nth-child(4) { animation-delay: -.7s; }
+.illus-sparkles circle:nth-child(5) { animation-delay: -2.8s; }
+.illus-sparkles circle:nth-child(6) { animation-delay: -1.7s; }
+.market-illustration.is-paused *, .market-illustration.is-static * { animation-play-state: paused !important; }
+.market-illustration.is-static *, .market-illustration.is-static *::before { animation: none !important; }
+.market-illustration.is-static .illus-trend-line { stroke-dashoffset: 0; }
+.market-illustration.is-static .illus-trend-area,
+.market-illustration.is-static .illus-trend-dot { opacity: 1; }
+.market-illustration.is-static .illus-onion-depth,
+.market-illustration.is-static .illus-tomato-depth,
+.market-illustration.is-static .illus-soy-depth,
+.market-illustration.is-static .illus-chili-depth,
+.market-illustration.is-static .illus-wheat-depth,
+.market-illustration.is-static .illus-leaves-depth { opacity: 1; }
+
+@keyframes illus-enter { from { opacity: 0; translate: 0 14px; scale: .9; } 84% { opacity: 1; translate: 0 -2px; scale: 1.025; } to { opacity: 1; translate: 0 0; scale: 1; } }
+@keyframes illus-bob { to { translate: 0 -6px; rotate: 2deg; } }
+@keyframes illus-onion-tilt { from { rotate: -1.5deg; } to { rotate: 1.5deg; } }
+@keyframes illus-wheat-sway { from { rotate: -3deg; } to { rotate: 3deg; } }
+@keyframes illus-leaf-flutter { from { rotate: -2deg; } to { rotate: 3deg; } }
+@keyframes illus-hop { 0%, 78%, 100% { translate: 0 0; } 84% { translate: 0 -7px; } 90% { translate: 0 1px; } 95% { translate: 0 -2px; } }
+@keyframes illus-line-draw { to { stroke-dashoffset: 0; } }
+@keyframes illus-area-in { to { opacity: 1; } }
+@keyframes illus-dot-pop { from { opacity: 0; scale: .7; } to { opacity: 1; scale: 1; } }
+@keyframes illus-dot-pulse { 50% { opacity: .38; scale: 1.3; } }
+@keyframes illus-sun-breathe { to { opacity: .3; scale: 1.18; } }
+@keyframes illus-ray-drift { to { rotate: 360deg; } }
+@keyframes illus-twinkle { from { opacity: .12; } to { opacity: .85; } }
+
+@media (max-width: 760px) {
+  html, body { overflow-x: clip; }
+  .main-content, .page-content, .market-note, .market-note-copy, .overview-grid, .surface { min-width: 0; max-width: 100%; }
+  .main-content, .page-content { width: 100%; }
+  .page-topline { height: auto; min-height: 48px; align-items: flex-start; flex-direction: column; justify-content: center; gap: 3px; padding: 7px 20px; font-size: 12px; line-height: 1.35; }
+  .page-topline > span { min-width: 0; max-width: 100%; }
+  .page-topline .preview-status { overflow: hidden; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+  .market-note { display: grid; min-height: 0; grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .market-note-copy { width: 100%; min-width: 0; padding: 20px; }
+  .market-note-copy > .eyebrow { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; font-size: 12px; letter-spacing: .08em; }
+  .sample-label { margin-left: 0; font-size: 11px; }
+  .market-note h2 { display: block; width: 100%; max-width: 100%; margin: 0 0 12px; font-size: clamp(24px, 6.5vw, 30px); line-height: 1.15; overflow-wrap: anywhere; }
+  .market-note-copy > p:not(.eyebrow) { max-width: 34ch; margin-bottom: 16px; font-size: 15px; line-height: 1.55; }
+  .market-note-copy .button { min-height: 44px; }
+  .market-note-art { position: relative; inset: auto; width: calc(100% - 24px); min-height: 170px; aspect-ratio: 16 / 10; margin: 0 12px 12px; border-radius: 11px; opacity: 1; }
+  .market-note-art .sun-disc { top: 20px; right: 23%; width: 64px; height: 64px; }
+  .market-note-art .field-line { right: -18%; bottom: -64%; width: 140%; height: 100%; }
+  .market-note-art .field-line-two { bottom: -74%; right: -16%; }
+  .market-note-art .field-line-three { bottom: -84%; right: -14%; }
+  .market-note-art .note-index { top: 12px; right: auto; left: 14px; z-index: 3; font-size: 10px; }
+  .market-note-art .note-crop-label { right: 12px; bottom: 12px; z-index: 3; padding: 9px 11px; background: #25422d; opacity: 1; backdrop-filter: none; font-size: 13px; animation: none !important; }
+  .market-illustration { border-radius: inherit; }
+  .market-note-art .field-line { animation: none; }
+  .overview-ambient, .overview-produce-field { display: none; }
+}
+
+@media (max-width: 420px) {
+  .page-topline { padding-right: 16px; padding-left: 16px; }
+  .market-note-copy { padding: 20px; }
+  .market-note-copy .button { width: 100%; }
+  .market-note-art .note-index { display: none; }
+  .market-note-art .note-crop-label { right: 9px; bottom: 9px; }
+  .crop-row { grid-template-columns: 29px minmax(0, 1fr) minmax(0, .8fr) auto; gap: 5px; }
+  .crop-name strong, .crop-market strong { font-size: 10px; }
+  .crop-name span, .crop-market span { font-size: 9px; }
+  .change-pill { white-space: nowrap; }
+}
+
+@media (max-width: 360px) {
+  .page-topline { padding-right: 14px; padding-left: 14px; }
+  .market-note-copy { padding: 18px; }
+  .market-note-art { width: calc(100% - 20px); margin-right: 10px; margin-left: 10px; }
+  .surface-heading { align-items: flex-start; }
+  .crop-row { grid-template-columns: 28px minmax(0, 1fr) minmax(0, .72fr) auto; gap: 4px; }
+  .change-pill { padding: 4px 5px; font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .market-illustration *, .market-illustration *::before, .market-illustration *::after { animation: none !important; transition: none !important; }
+  .market-illustration .illus-trend-line { stroke-dashoffset: 0; }
+  .market-illustration .illus-trend-area, .market-illustration .illus-trend-dot { opacity: 1; }
+  .market-illustration .illus-onion-depth, .market-illustration .illus-tomato-depth,
+  .market-illustration .illus-soy-depth, .market-illustration .illus-chili-depth,
+  .market-illustration .illus-wheat-depth, .market-illustration .illus-leaves-depth { opacity: 1; }
+}
